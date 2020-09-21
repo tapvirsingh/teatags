@@ -1,0 +1,153 @@
+body{
+    font-size: 1.3rem;
+    color: #3b3a5a;
+    /*background-color: #c6c6c6!important;*/
+    /*background-color: #3b3a5a!important;*/
+}
+.navbar, .footer{
+	/*background-color: #444281 !important;*/
+	font-size: 1rem;
+}
+}
+ul li{
+	list-style-type: none;
+}
+
+p a, p a:hover, .ttag_link, .ttag_link:hover{
+	/*color:#8ac3ff;*/
+	text-decoration: none;
+	font-weight: bold;
+}
+
+hr{
+	border-top: 1px solid rgba(255,255,255,.1);
+}
+
+pre{
+	font-size: 65%;
+}
+
+code{
+	/*color: #f381b5;*/
+}
+
+
+.ttag-footer-link ,.ttag-footer-h-link, .ttag-developer-company {
+	color:#8ac3ff;
+
+}
+.ttag-footer-h-link {
+	/*font-weight: bold;*/
+}
+
+.ttag-social-link:hover{
+	text-decoration: none;
+}
+
+footer{
+	font-size: 1rem;
+}
+
+.ttag-footer-sublink-caption{
+	font-weight: bold;
+	color:white;
+}
+
+.ttag-footer-list{
+	list-style-type:none;
+}
+
+.ttag-web-ico, .ttag-web-h-ico{
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.ttag-web-h-ico{
+    background-position: center;
+}
+
+.ttag-footer-link:hover, .ttag-footer-h-link:hover, .ttag-developer-company:hover {
+    color: #c0d9ff;
+    text-decoration: none;
+}
+
+.ttag-founder{
+
+}
+.ttag-code-caption{
+	font-size: 0.75em;
+    text-align: center !important;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+    /*background: #f3f3f3;*/
+    background: #202225;
+    padding: .5rem;
+}
+
+.ttag-nav{
+	font-weight: bold;
+	font-size: .9rem;
+}
+.ttag-nav-item{
+
+}
+.ttag-nav-link{
+	/*color: #457eb1 ;*/
+	/*color: #64a2da ;*/
+	color: #87b6e0;
+	font-size: .8rem;
+}
+.ttag-nav-link:hover{
+	color: #dfeeff
+}
+.ttag-dir{
+    /*color: #e60000;*/
+    color: #7bdaff;
+}
+.ttag-dir-hilight{
+    /*color: #e60000;*/
+    color: #7bdaff;
+}
+
+.ttag-file{
+    /*color:#0738e8;*/
+    /*color:#e60000;*/
+    color: #ff7676;
+}
+.hljs {
+	/*background: #343a40!important;	*/
+	background: #24272b !important;
+}
+.ttag-nav-multi-link-cap{
+	font-size: .8rem;
+}
+.ttag-sub-link{
+	font-weight: normal;
+}
+
+.ttag-active{
+	/*color:yellow;*/
+	/*color:#efef8f !important;*/
+    color: #bdbd84 !important;
+}
+.ttag-doc-row{
+	color: #bbb;
+    background: #2a2e32;
+}
+
+.hljs-name, .hljs-section, .hljs-selector-class, .hljs-selector-id, .hljs-title, .hljs-type {
+    /*color: #efef8f;*/
+    color: #71a5d9 !important;
+}
+
+.hljs-keyword, .hljs-selector-tag, .hljs-tag {
+   /*color: #cad7e0 !important;*/
+   /*color: #ffbb66 !important;*/
+   /*color: #7b7fff !important*/
+   
+}
+
+.badge-dark {
+    color: #cecece;
+}
