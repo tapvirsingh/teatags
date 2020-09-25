@@ -35,35 +35,38 @@ class FooterTTag extends TapvirTagContainer{
 		global $ttag_FooterBSC, $ttag_FooterLinks, $ttag_FooterConf, $ttag_SocialLinks,
 				$ttag_FooterConsts;
 
-		$this->footerConsts = $ttag_FooterConsts;
-		$this->socialLinks = $ttag_SocialLinks;
+		if(isset($ttag_FooterConf['showFooter']) && $ttag_FooterConf['showFooter'] == true){
 
-		$this->setFooterConf($ttag_FooterConf);
+			$this->footerConsts = $ttag_FooterConsts;
+			$this->socialLinks = $ttag_SocialLinks;
 
-		$this->calculateLinks($ttag_FooterLinks);
+			$this->setFooterConf($ttag_FooterConf);
 
-		$this->footerClass =  '';
+			$this->calculateLinks($ttag_FooterLinks);
 
-		// Get the total count of nav links at root level.
-		if($this->orien == 'a'){
+			$this->footerClass =  '';
 
-			if($this->areSmallUniDimensionalLinks()){
-				$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
-			}else{
+			// Get the total count of nav links at root level.
+			if($this->orien == 'a'){
+
+				if($this->areSmallUniDimensionalLinks()){
+					$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
+				}else{
+					$this->footerClass .= $ttag_FooterBSC['footerLink'].'"';
+				}
+			}elseif($this->orien == 'v'){
 				$this->footerClass .= $ttag_FooterBSC['footerLink'].'"';
+			}else{
+				$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
 			}
-		}elseif($this->orien == 'v'){
-			$this->footerClass .= $ttag_FooterBSC['footerLink'].'"';
-		}else{
-			$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
+				
+			$this->footerSubLinkCaption = $ttag_FooterBSC['footerSubCap'];
+
+			$attribute = $this->setFooterClasses($ttag_FooterBSC);
+
+			// $this->createFooter();
+			$this->createFooterInOrder();
 		}
-			
-		$this->footerSubLinkCaption = $ttag_FooterBSC['footerSubCap'];
-
-		$attribute = $this->setFooterClasses($ttag_FooterBSC);
-
-		// $this->createFooter();
-		$this->createFooterInOrder();
 
 		parent::__construct('footer', $attribute, $this->footerInnerHtml);
 

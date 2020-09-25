@@ -32,6 +32,7 @@ class JumboTTag extends TapvirTagContainer{
 							]
 
 		$parameters = [
+						'jumboClasses' : extra classes to be passed along with jombotron class.
 						'make-fluid' : true | false,
 						'head-align' : 'left' | 'center' | 'right' | 'justify',
 						'lead-align' : 'left' | 'center' | 'right' | 'justify',
@@ -54,18 +55,23 @@ class JumboTTag extends TapvirTagContainer{
 			$headAlign = $this->getAlignParameter('head');
 			$leadAlign = $this->getAlignParameter('lead');
 
-			$headClasses = 'display-1';
-			if(isset($parameters['head-size']) && $parameters['head-size'] !== null){
+			/*if(isset($parameters['head-size']) && $parameters['head-size'] !== null){
 				$headClasses = $parameters['head-size'];
-			}
+			}*/
+
+			$headClasses = $this->getParameter('head-size');
+			if($headClasses === null)
+				$headClasses = 'display-1';
 
 			if($headAlign !== null){
 				$headClasses .= ' '.$headAlign;
 			}
 
-			if(isset($parameters['head-class']) && $parameters['head-class'] !== null){
+			/*if(isset($parameters['head-class']) && $parameters['head-class'] !== null){
 				$headClasses .= ' '.$parameters['head-class'];
-			}
+			}*/
+
+			$headClasses .= $this->getParameter('head-class');
 
 			$leadClasses = 'lead';
 			if($leadAlign !== null){
@@ -113,7 +119,10 @@ class JumboTTag extends TapvirTagContainer{
 
 			// continue if true or if the value is not set.
 			if(!(isset($parameters['make-fluid']) && $parameters['make-fluid'] === false)){
-				$jumboInner = new DivTTag('container',$jumboInnerHtml);
+
+				$containerClasses = $this->getClasses('align','container');
+
+				$jumboInner = new DivTTag($containerClasses,$jumboInnerHtml);
 				$jumboInnerHtml = $jumboInner->getThisContainerHtml();
 
 			}
@@ -124,13 +133,29 @@ class JumboTTag extends TapvirTagContainer{
 				$extraAttribute = ' style = "background-image : url('.$bgImg.'); background-size:cover;background-position: center center,center center; background-repeat: no-repeat;"';
 			}
 
-		
+			$jumboClasses = $this->getClasses('jumboClasses','jumbotron');
 
-			$jumbo = new DivTTag('jumbotron',$jumboInnerHtml, $extraAttribute);
+			$jumbo = new DivTTag($jumboClasses,$jumboInnerHtml, $extraAttribute);
 			$this->setContainerCode($jumbo->getThisContainerHtml());
 		// }
         // parent::__construct('h1', $class, $textOrHtml, $echoOnTheGo);
     }
+
+    private function getClasses($parameter, $defaultClass){
+    	$containerClasses = $defaultClass;
+
+    	if($parameter !== 'align')
+    		$additionalClasses = $this->getParameter($parameter);
+    	else
+    		$additionalClasses = $this->getAlignParameter($parameter);
+
+    	if($additionalClasses !== null ){
+    		$containerClasses .= ' '.$additionalClasses;
+    	}
+    	return $containerClasses;
+    }
+
+   
 
     private function getData($content, $globalVal = null){
     	
@@ -158,13 +183,13 @@ class JumboTTag extends TapvirTagContainer{
 
     private function getAlignParameter($subject){
     	if(isset($this->parameters['align'])) {
-    		return 'text-'.$this->parameters['align'];
+    		return ' text-'.$this->parameters['align'].' ';
     	}
 
     	if (isset($this->parameters[$subject.'-align'])){
-    		return 'text-'.$this->parameters[$subject.'-align'];
+    		return ' text-'.$this->parameters[$subject.'-align'].' ';
     	}
-    	return 'left';
+    	return ' left ';
     }
 
 }

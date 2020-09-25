@@ -85,6 +85,8 @@ It can take `null` as a value, if passed, it picks up the default values.
 
 Values which may be passed.
 
+1. **`'jumboClasses'`** => Extra classes to be passed apart from `jombotron` class that is passed internally by default.
+
 1. **`'make-fluid'`** => `true` <span class="badge badge-dark">Default</span>  or `false`, same as that in Bootstrap.
 
 2. **`'head-align'`** => `'left'` <span class="badge badge-dark">Default</span> or `'center'` or `'right'` or `'justify'`,

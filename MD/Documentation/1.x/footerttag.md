@@ -18,6 +18,75 @@ Any changes you wish to make in the footer must be made with the footer settings
 
 The constants for FooterTTag are defined in *footer.php* in `$ttag_FooterConsts` for constants, `$ttag_FooterConf` for configuration, `$ttag_FooterLinks` for footer links and `$ttag_FooterBSC` for Bootstrap and custom classes. These are global variables.
 
+**Toggle Footer's Visibility**
+
+You may toggle footer's visibility on a page by inserting following code on that particular page.
+
+**Not creating footer on a page**
+
+```php
+
+$ttag_FooterConf['showFooter'] = false; 
+
+```
+
+<p class = "ttag-code-caption text-muted"><b>some_page.php</b> will not create the footer</p>
+
+
+**Example**
+
+```php
+<?php
+
+// Include the global TTag's configuration file.
+require_once('../../tta-config.php');
+
+use Src\TTags\{JumboTTag, HtmlTTag};
+
+// Do not show the footer.
+$ttag_FooterConf['showFooter'] = false;
+
+// Create auto divs.
+$jumbo = new JumboTTag( 
+[
+    'head' => '404',
+    'lead' => 'The page you are looking for does not exist.',
+     // Buttons 
+    'buttons' => [
+        'Home' => [ttag_IndexView(),'btn btn-outline-light btn-lg m-4'],
+        'Documentation' => [ttag_View('documentation'),'btn btn-warning btn-lg'],
+    ]
+],
+[//$parameters
+	'jumboClasses' => 'm-0 vh-100',
+    'bg-image' => '404.png',
+    'align' => 'center',
+    'lead-class' => 'col-12 text-light',
+    'head-class' => 'text-light',
+    'head-size' => 'display-1',
+
+] );
+
+// Display.
+new HtmlTTag($jumbo);
+
+```
+
+<p class = "ttag-code-caption text-muted"><b>404.php</b> does not create footer</p>
+
+**Creating footer on a page**
+
+```php
+
+// Default value set in TTagAppSettings/footer.php
+$ttag_FooterConf['showFooter'] = true; 
+
+```
+<p class = "ttag-code-caption text-muted"><b>some_page.php</b> will show the footer</p>
+
+`$ttag_FooterConf['showFooter'] = true;` is the default value that is set in *TTagAppSettings/footer.php*, this means that by default **footer will be created on all pages**.
+
+
 **TTagAppSettings/footer.php** 
 
 The actual settings defined in *footer.php* of this page. Read comments carefully.
