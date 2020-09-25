@@ -10,8 +10,8 @@ $ttag_FooterConf['showFooter'] = false;
 
 // Create auto divs.
 $jumbo = new JumboTTag( [
-                'head' => '404',
-                'lead' => 'The page you are looking for does not exist.',
+                'head' => 'Oh no! 404!',
+                'lead' => 'The page you are looking for does not exist on this planet. You may do either of the following.',
                  // Buttons 
                 'buttons' => [
                     'Home' => [ttag_IndexView(),'btn btn-outline-light btn-lg m-4'],
@@ -22,7 +22,7 @@ $jumbo = new JumboTTag( [
             	'jumboClasses' => 'm-0 vh-100',
                 'bg-image' => '404.png',
                 'align' => 'center',
-                'lead-class' => 'col-12 text-light',
+                'lead-class' => 'col-8 offset-2 text-light mb-5',
                 'head-class' => 'text-light',
                 'head-size' => 'display-1',
 
