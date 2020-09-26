@@ -22,7 +22,10 @@ use Src\TTags\{PassTTag, HtmlTTag};
 $pass = new PassTTag('m-4' ,'Enter Password' ,'name="password"');
 
 // get method returns 
-// <input type = "password" placeholder="Enter Password" name = "password">
+//<input type="password" 
+// 		class="m-4" 
+// 		placeholder="Enter Password" 
+// 		name = "password">
 // and assigns this to $passTTagHtml.
 $passTTagHtml = $pass->get();
 
