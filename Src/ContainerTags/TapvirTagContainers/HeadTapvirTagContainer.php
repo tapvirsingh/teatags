@@ -41,7 +41,7 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 
         $this->overrideBSCSS();
 
-        parent::__construct('head', $attribute, $this->html);
+        parent::__construct('head', null, $this->html);
     }
 
     private function getGFAttribute($key2,$value,$attribute){
