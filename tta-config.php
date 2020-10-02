@@ -3,13 +3,22 @@
 	Donot make any changes to this file.
 */
 
+// // auto load classes.
+// spl_autoload_register(function ($className) {
+//     require_once $className . '.php';
+// });
+	
+// // define("ROOT", __DIR__ ."/");
+// define("ROOT", "http://localhost/tag/");
+
 // auto load classes.
 spl_autoload_register(function ($className) {
-    require_once $className . '.php';
+    require_once  __DIR__ ."/".str_replace("\\","/",$className) . '.php';
 });
-	
-// define("ROOT", __DIR__ ."/");
-define("ROOT", "http://localhost/tag/");
+
+
+define("ROOT", "/");
+define("MD_ROOT", __DIR__ ."/MD/");
 
 // Global Function
 require_once('Src/Functions/global.php');

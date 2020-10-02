@@ -59,7 +59,6 @@ $jumbo = new JumboTTag(
 ],
 [//$parameters
 	'jumboClasses' => 'm-0 vh-100',
-	
     'bg-image' => '404.png',
     'align' => 'center',
     'lead-class' => 'col-12 text-light',
