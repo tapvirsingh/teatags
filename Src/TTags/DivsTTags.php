@@ -111,8 +111,8 @@ $parameters :
 			$colSpan = $this->getColSpan();
 
 			// debugTTag($this->col[$this->rowCount][$this->colCount] );
-			if($offset !== null ){
-				$colSpan .= ' offset-'.$offset;
+			if($this->offset !== null ){
+				$colSpan .= ' offset-'.$this->offset;
 			}
 
 			$class = 'col-'.$colSpan;
