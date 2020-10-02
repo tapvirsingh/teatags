@@ -15,6 +15,10 @@ class JumboTTag extends TapvirTagContainer{
 
 	// private $parameters;
 
+	protected $jumboInnerHtml;
+	protected $jumboInnerContent;
+
+
 	/**
 		$jumboInnerContent = [
 						// Main heading and lead of the jumbotron.
@@ -25,9 +29,9 @@ class JumboTTag extends TapvirTagContainer{
 								'lead'  => 'abc',
 
 								'buttons' => [
-												'Download' => ['#','btn btn-primary'],
-												'xyz' => ['#','btn btn-secondary'],
-												'abc' => ['#','btn btn-secondary'],
+												'Download' => ['#','btn btn-primary','_self'],
+												'xyz' => ['#','btn btn-secondary','_self'],
+												'abc' => ['#','btn btn-secondary','_self'],
 											]
 							]
 
@@ -51,95 +55,139 @@ class JumboTTag extends TapvirTagContainer{
 	function __construct($jumboInnerContent, $parameters = null) {
 
 			$this->parameters = $parameters;
+			$this->jumboInnerHtml = $jumboInnerHtml;
+			$this->jumboInnerContent = $jumboInnerContent;
 
-			$headAlign = $this->getAlignParameter('head');
-			$leadAlign = $this->getAlignParameter('lead');
+			$this->createHead();
 
-			/*if(isset($parameters['head-size']) && $parameters['head-size'] !== null){
-				$headClasses = $parameters['head-size'];
-			}*/
+			$this->createLead();
 
-			$headClasses = $this->getParameter('head-size');
-			if($headClasses === null)
-				$headClasses = 'display-1';
+			$this->createButtons();
 
-			if($headAlign !== null){
-				$headClasses .= ' '.$headAlign;
-			}
+			$this->makeFluid();
 
-			/*if(isset($parameters['head-class']) && $parameters['head-class'] !== null){
-				$headClasses .= ' '.$parameters['head-class'];
-			}*/
-
-			$headClasses .= $this->getParameter('head-class');
-
-			$leadClasses = 'lead';
-			if($leadAlign !== null){
-				$leadClasses .= ' '.	$leadAlign;
-			}
-
-
-			if(isset($parameters['lead-class']) && $parameters['lead-class'] !== null){
-				$leadClasses .= ' '.$parameters['lead-class'];
-			}
-
-			global $ttag_Head;
-			$jumboHead = $this->getData($jumboInnerContent, 'head' , $ttag_Head);
-
-			$h1 = new PageHeadingTTag ($jumboHead,$headClasses);
-			$jumboInnerHtml = $h1->get();
-
-			global $ttag_Lead;
-			$jumboLead = $this->getData($jumboInnerContent, 'lead' ,$ttag_Lead);
-			
-			if($jumboLead !== false){
-				$lead = new ParaTTag($jumboLead,$leadClasses);
-				$jumboInnerHtml .= $lead->get();
-			}
-
-
-			
-			if(isset($jumboInnerContent['buttons']) && is_array($jumboInnerContent['buttons'])){
-
-					$buttonHtml = '';
-
-					foreach ($jumboInnerContent['buttons'] as $key => $value) {
-						$button = new AnchorTTag($value[0],$key,$value[1],'role="button" ') ;
-						if($buttonHtml === null){
-							$buttonHtml = $button->getThisContainerHtml();
-						}else{
-							$buttonHtml .= $button->getThisContainerHtml();
-						}
-						
-					}
-
-
-					$jumboInnerHtml .= $buttonHtml;
-			}
-
-			// continue if true or if the value is not set.
-			if(!(isset($parameters['make-fluid']) && $parameters['make-fluid'] === false)){
-
-				$containerClasses = $this->getClasses('align','container');
-
-				$jumboInner = new DivTTag($containerClasses,$jumboInnerHtml);
-				$jumboInnerHtml = $jumboInner->getThisContainerHtml();
-
-			}
-
-			$extraAttribute = null;
-			$bgImg = $this->getBgImage();
-			if($bgImg !== null){
-				$extraAttribute = ' style = "background-image : url('.$bgImg.'); background-size:cover;background-position: center center,center center; background-repeat: no-repeat;"';
-			}
+			$extraAttribute = $this->setBackgroundImage();
 
 			$jumboClasses = $this->getClasses('jumboClasses','jumbotron');
 
-			$jumbo = new DivTTag($jumboClasses,$jumboInnerHtml, $extraAttribute);
+			$jumbo = new DivTTag($jumboClasses,$this->jumboInnerHtml, $extraAttribute);
+
 			$this->setContainerCode($jumbo->getThisContainerHtml());
 		// }
         // parent::__construct('h1', $class, $textOrHtml, $echoOnTheGo);
     }
+
+    protected function setBackgroundImage(){
+    	$extraAttribute = null;
+			
+		$bgImg = $this->getBgImage();
+		if($bgImg !== null){
+			$extraAttribute = ' style = "background-image : url('.$bgImg.'); background-size:cover;background-position: center center,center center; background-repeat: no-repeat;"';
+		}
+		return $extraAttribute;
+    }
+
+    private function createHead(){
+    	$head = 'head';
+
+    	$headAlign = $this->getAlignParameter($head);
+
+		$headClasses = $this->getParameter('head-size');
+		if($headClasses === null)
+			$headClasses = 'display-1';
+
+		if($headAlign !== null){
+			$headClasses .= ' '.$headAlign;
+		}
+
+		$headClasses .= $this->getParameter('head-class');
+
+		global $ttag_Head;
+		$jumboHead = $this->getData($this->jumboInnerContent, $head , $ttag_Head);
+
+		$h1 = new PageHeadingTTag ($jumboHead,$headClasses);
+		$this->jumboInnerHtml = $h1->get();
+
+    }
+
+    private function createLead(){
+
+    	global $ttag_Lead;
+
+		$leadAlign = $this->getAlignParameter('lead');
+
+		$leadClasses = $lead = 'lead';
+
+		if($leadAlign !== null){
+			$leadClasses .= ' '.$leadAlign;
+		}
+
+		$leadClassParam = $this->getParameter('lead-class');
+		if($leadClassParam !== null){
+			$leadClasses .= ' '.$leadClassParam;
+		}
+
+		$jumboLead = $this->getData($this->jumboInnerContent, $lead ,$ttag_Lead);
+		
+		if($jumboLead !== false){
+			$lead = new ParaTTag($jumboLead,$leadClasses);
+			$this->jumboInnerHtml .= $lead->get();
+		}
+
+    }
+
+    private function makeFluid(){
+    	$value = $this->getParameter('make-fluid');
+
+    	// continue if true or if the value is not set.
+		if($value === null){
+
+			$containerClasses = $this->getClasses('align','container');
+
+			$jumboInner = new DivTTag($containerClasses,$this->jumboInnerHtml);
+			$this->jumboInnerHtml = $jumboInner->getThisContainerHtml();
+
+		}
+    }
+
+
+    // Returns the button properties.
+    private function getButtonValues($value){
+    	$link = $value[0];
+    	$class = isset($value[1]) ? $value[1] : null;
+    	$target = isset($value[2]) ? $value[2] : null;
+    	return [$link, $class, $target];
+    }
+
+    // Creates buttons.
+	private function createButtons(){
+		if(isset($this->jumboInnerContent['buttons']) && 
+			is_array($this->jumboInnerContent['buttons'])){
+
+				$buttonHtml = '';
+
+				foreach ($this->jumboInnerContent['buttons'] as $key => $value) {
+
+					list($link,$class,$target ) = $this->getButtonValues($value);
+
+					$attribute = 'role="button"';
+
+					if($target !== null){
+						$attribute .= ' target ="'.$target.'"';
+					}
+
+					$button = new AnchorTTag($value[0],$key,$value[1],$attribute) ;
+					if($buttonHtml === null){
+						$buttonHtml = $button->getThisContainerHtml();
+					}else{
+						$buttonHtml .= $button->getThisContainerHtml();
+					}
+					
+				}
+
+				$this->jumboInnerHtml .= $buttonHtml;
+			}
+	}
 
     private function getClasses($parameter, $defaultClass){
     	$containerClasses = $defaultClass;

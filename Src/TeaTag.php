@@ -46,7 +46,7 @@ class TeaTag{
         }
     }
 
-
+    // Gets the parameter values, returns null if the value does not exist.
     protected function getParameter($var){
         if(isset($this->parameters[$var]) && $this->parameters[$var] !== null){
             return $this->parameters[$var];
