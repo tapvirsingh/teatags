@@ -47,9 +47,9 @@ function debugTTag($array){
 // Get complete address of MD or its sub directory
 function ttag_MdDir($dir = null){
 	if($dir !== null)
-		return ROOT.'MD/'.$dir.'/';
+		return MD_ROOT.$dir.'/';
 	else
-		return ROOT.'MD/';
+		return MD_ROOT;
 }
 
 
@@ -79,7 +79,7 @@ function ttag_Image($file){
 function ttag_MdFile($file, $doNotPrependDir = false){
 	global $ttag_MDFileExtention;
 	if(!$doNotPrependDir)
-		return ROOT.'MD/'.$file.$ttag_MDFileExtention;
+		return MD_ROOT.$file.$ttag_MDFileExtention;
 	else
 		return $file.$ttag_MDFileExtention;
 }
