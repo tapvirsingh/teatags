@@ -35,7 +35,7 @@ class HtmlTTag extends TapvirTagContainer{
 		// echos <!DOCTYPE>
 		new DOCTYPE();
 
-        parent::__construct('html', $attribute, $htmlData, true);
+        parent::__construct('html', null, $htmlData, true);
 
     }
 
