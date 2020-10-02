@@ -20,7 +20,7 @@ $jumbo = new JumboTTag( [ // Buttons
 							'buttons' => [
 								'Learn more' => [ttag_View('documentation'),
 													'btn btn-primary btn-lg m-4'],
-								'Download from Github' => ['#','btn btn-success btn-lg'],
+								'Download from Github' => ['https://github.com/tapvirsingh/teatags','btn btn-success btn-lg'],
 							]
 						],
 						[//$parameters
