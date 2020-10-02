@@ -106,11 +106,11 @@ class ArticleTTag extends TapvirTagContainer{
         if($return === false || $return === null){
             $this->setArticle($file);
             // the filter fails or the $variable is not set.
-            $this->setTheFilename($this->getDir($file));
+            $this->setTheFilename($file);
         }else{
             $this->setArticle($return);
             // the requested variable on success
-            $this->setTheFilename($this->getDir($return));
+            $this->setTheFilename($return);
         }
     }
 
@@ -133,9 +133,9 @@ class ArticleTTag extends TapvirTagContainer{
 			// global $ttag_MDFilePath, $ttag_MDFileExtention;
 
             if($this->parameters === null )
-                $text = file_get_contents(ttag_MdFile($this->filename));
+                $text = file_get_contents(ttag_MdFile($this->getDir($this->filename)));
             else
-                $text = file_get_contents($this->filename);
+                $text = file_get_contents($this->getDir($this->filename));
 
 
             $articleTag = new TapvirTagContainer('article',null,$prasedown->text($text));
