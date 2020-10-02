@@ -35,7 +35,7 @@ $ttag_PHPFileExtention = '.php';
 // Path for views directory.
 $ttag_ViewsPath = ROOT.'Views/'; 
 
-// Path for views directory.
+// Path for Images directory.
 $ttag_ImagesPath = ROOT.'Images/'; 
 
 // Bootstrap icon's pack.

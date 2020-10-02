@@ -19,7 +19,7 @@ Let us begin with these two simple codes <b>world_loves_tea.html</b> and <b>worl
 ```
 <p class = "ttag-code-caption text-muted"><b>world_loves_tea.html</b> is a html markup that displays The World Loves Tea.</p>
 
-The above html markup is the usual way of writing the html pages. One has to remember to open and close the tags, which sometimes becomes difficult to track. Then include repetitively other files like stylesheets, scripts, footers in all pages, any change becomes literally difficult to track and manage.
+The above html markup is the usual way of writing the html pages. One has to remember to open and close the tags, which sometimes becomes difficult to track. Then repetitively include other files like stylesheets, scripts, footers in all pages, any change becomes literally difficult to track and manage.
 
 Embedding PHP most of the time becomes more messy, and it becomes cumbersome to keep track, handle and understand the code and the markup.
 
@@ -39,7 +39,7 @@ New HtmlTTag('The World Loves Tea!');
 ```
 <p class = "ttag-code-caption text-muted"><b>world_loves_tea.php</b> is a PHP code with TTag’s HtmlTTag class.</p>
 
-The code `new HtmlTTag('The World Loves Tea!');` is responsible for echoing the complete page. We will talk about it in dept later in the documentation.
+The code `new HtmlTTag('The World Loves Tea!');` is responsible for echoing the complete page. We will talk about it in depth later in the documentation.
 
 <p class = "ttag-doc-ques">So what's the difference?</p>
 
@@ -117,7 +117,7 @@ To understand this lets look at the html output of the latter, as for former, th
 ```
 <p class = "ttag-code-caption text-muted">Html output of <b>world_loves_tea.php</b>.</p>
 
-Wow!!! Now, thats what those three lines of code *(technically just one `new HtmlTTag('The World Loves Tea!');`)* did for you. Don't worry its not that complicated as it seems, you will learn as you go through the documentation. For now lets look at some important things. 
+Wow!!! Now, thats what those three lines of code *(technically just one `new HtmlTTag('The World Loves Tea!');`)* did for you. Don't worry it is not that complicated as it seems, you will learn as you go through the documentation. For now lets look at some important things. 
 
 As you can see, it opened `<html>` tag, then it managed to create a `<head>` tag along with the stylesheet `<link>`, `<title>` tag, loaded Google fonts, loaded a TTag Theme, set the `<meta>` tags, even opened set some css using `<style>` directly in the file. Later opened `<body>` tags, printed the message *"The World Loves Tea!"*, created the `<footer>` and was finally able to close all the tags which were opened in the correct order.
 

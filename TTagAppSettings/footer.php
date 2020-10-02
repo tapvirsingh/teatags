@@ -42,7 +42,7 @@ $ttag_FooterConf = [
 $ttag_FooterLinks = [
 	// 'orien' => 'h', // h = horizontal, v = vertical
 	NAVLINKS => ['caption'=>'Navigation','links'=>$ttag_NavigationLinks],
-	'Licence'=> ['caption'=>'Licence','links'=>['GPVL3'=>'#', 'Terms of use'=>'#']],
+	'Licence'=> ['caption'=>'Licence','links'=>['GPLV3'=>'#', 'Terms of use'=>'#']],
 	// 'Themes' => [
 	// 				'caption'=>'Themes',
 	// 				'links'=>[
