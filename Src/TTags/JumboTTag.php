@@ -84,13 +84,13 @@ class JumboTTag extends TapvirTagContainer{
 			}
 
 			global $ttag_Head;
-			$jumboHead = $this->getData($jumboInnerContent['head'], $ttag_Head);
+			$jumboHead = $this->getData($jumboInnerContent, 'head' , $ttag_Head);
 
 			$h1 = new PageHeadingTTag ($jumboHead,$headClasses);
 			$jumboInnerHtml = $h1->get();
 
 			global $ttag_Lead;
-			$jumboLead = $this->getData($jumboInnerContent['lead'], $ttag_Lead);
+			$jumboLead = $this->getData($jumboInnerContent, 'lead' ,$ttag_Lead);
 			
 			if($jumboLead !== false){
 				$lead = new ParaTTag($jumboLead,$leadClasses);
@@ -157,12 +157,12 @@ class JumboTTag extends TapvirTagContainer{
 
    
 
-    private function getData($content, $globalVal = null){
+    private function getData($content, $index ,$globalVal = null){
     	
     	$var = null;
 
-    	if(isset($content) && $content !== null){
-			$var = $content;
+    	if(isset($content[$index]) && $content[$index] !== null){
+			$var = $content[$index];
 		}else{
 			if($globalVal !== null){
 				$var = $globalVal;
