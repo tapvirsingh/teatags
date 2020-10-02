@@ -30,7 +30,7 @@ Following is TTag code for the page with the same desired output to print *"The 
 // Include the global TTag's configuration file.
 require_once('../TTagConfig.php');
 
-// Use HtmlTTag
+// Use HtmlTTag.
 use Src\TTags\{HtmlTTag};
 
 // Displays The World Loves Tea!.

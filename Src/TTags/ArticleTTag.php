@@ -133,7 +133,7 @@ class ArticleTTag extends TapvirTagContainer{
 			// global $ttag_MDFilePath, $ttag_MDFileExtention;
 
             if($this->parameters === null )
-                $text = file_get_contents(ttag_MdFile($this->getDir($this->filename)));
+                $text = file_get_contents(ttag_MdFile($this->filename));
             else
                 $text = file_get_contents($this->getDir($this->filename));
 
