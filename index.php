@@ -23,7 +23,7 @@ $jumbo = new JumboTTag( [ // Buttons
 								'Download from Github' => [
 															'https://github.com/tapvirsingh/teatags',
 															'btn btn-success btn-lg',
-															'_target',
+															'_blank',
 														],
 							]
 						],
