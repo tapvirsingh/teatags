@@ -52,7 +52,7 @@ class NavBarTTag extends TapvirTagContainer{
 
 		$navBarHtml =  $brandTTagObj->get().$toggleButton->get().$div->get();
 
-        parent::__construct('nav', $attribute,$navBarHtml, $echoOnTheGo);
+        parent::__construct('nav', $attribute,$navBarHtml);
     }
 
     protected function createNavbarToggler(){
