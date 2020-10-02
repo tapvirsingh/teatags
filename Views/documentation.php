@@ -31,7 +31,7 @@ $docNavs = new NavTTag($articles_docFiles, [
 										] );
 
 // Create auto divs.
-$divs = new DivsTTags([$docNavs,$article],[ 'col'=>[2,6],'offset' => 1, 
+$divs = new DivsTTags([$docNavs,$article],[ 'col'=>[2,6], 
 	// 'extra-container-class' => 'text-justify', 
 	'extra-row-class' => 'ml-0 mr-0 ttag-doc-row',
 	'in-container' => false,
