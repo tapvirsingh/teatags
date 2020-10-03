@@ -21,12 +21,12 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 
     function __construct($pageHeaders = null) {
 
-    	global $ttag_CSSframework;
 
-        switch($ttag_CSSframework){
-        	case 'bootstrap':
-        		$this->initiateBootstrap();
-        }
+        // Adds Google Analytics Script if it's not null.
+        $this->addGoogleAnalyticsScript();
+
+        // initiate css framework.
+        $this->initiateCSSFramework();
 
         $this->appendHtml($this->headLink);
 
@@ -44,8 +44,13 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
         parent::__construct('head', null, $this->html);
     }
 
-    private function getGFAttribute($key2,$value,$attribute){
-		
+    private function initiateCSSFramework(){
+        global $ttag_CSSframework;
+
+        switch($ttag_CSSframework){
+            case 'bootstrap':
+                $this->initiateBootstrap();
+        }
     }
 
     private function loadStyleSheets(){
@@ -61,6 +66,15 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
     private function overrideBSCSS(){
     	$override = new BSCSS_Overrider_TTag();
     	$this->appendHtml($override->get());
+    }
+
+    private function addGoogleAnalyticsScript(){
+        global $ttag_GoogleAnalyticsScript;
+
+        if($ttag_GoogleAnalyticsScript !== null){
+            $this->appendHtml($ttag_GoogleAnalyticsScript);
+        }
+
     }
 
     private function linkGoogleFonts(){
