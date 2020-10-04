@@ -55,7 +55,7 @@ class JumboTTag extends TapvirTagContainer{
 	function __construct($jumboInnerContent, $parameters = null) {
 
 			$this->parameters = $parameters;
-			$this->jumboInnerHtml = $jumboInnerHtml;
+			$this->jumboInnerHtml = null;
 			$this->jumboInnerContent = $jumboInnerContent;
 
 			$this->createHead();
