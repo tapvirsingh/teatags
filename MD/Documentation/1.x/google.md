@@ -25,7 +25,7 @@ $ttag_GoogleFonts =  [
 
 
 // Add your google analytics script here.
-// It will added on all the pages by default.
+// It will be added on all the pages by default.
 $ttag_GoogleAnalyticsScript = '';
 
 ```
