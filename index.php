@@ -18,8 +18,10 @@ $navbar = new NavBarTTag($ttag_PageName);
 // Set the bootstrap's jumbotron
 $jumbo = new JumboTTag( [ // Buttons 
 							'buttons' => [
-								'Learn more' => [ttag_View('documentation'),
-													'btn btn-primary btn-lg m-4'],
+								'Learn more' => [
+													'https://teatags.blazehattechnologies.com/Views/documentation.php',
+													'btn btn-primary btn-lg m-4'
+												],
 								'Download from Github' => [
 															'https://github.com/tapvirsingh/teatags',
 															'btn btn-success btn-lg',
