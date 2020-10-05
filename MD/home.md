@@ -9,7 +9,7 @@ The **TTagAppSettings** folder contains files which have the global settings for
 ```php
 <?php  
 
-$ttag_Navbar = [
+$navbar = [
  
 	// You can create your global navbar menu in the form 
 	// of multi-dimensional array in this file, and it will 
