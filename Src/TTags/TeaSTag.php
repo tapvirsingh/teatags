@@ -15,7 +15,7 @@ class TeaSTag extends TapvirTag{
     
     function __construct($tagName, $class = null, $extraAttribute = null) {
     	
-        $attribute = null;
+        $attribute = ' ';
 
         if($class !== null){
             $attribute = 'class = "'.$class.'"';

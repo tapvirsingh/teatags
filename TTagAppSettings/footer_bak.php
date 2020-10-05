@@ -1,22 +1,5 @@
 <?php
 // Following code sets the global settings for footer. 
-// Footer
-$ttag_FooterConsts = [
-	'copyright' => '© Copyright 2020 
-					Blazehat Technologies LLP - All Rights Reserved',
-	'founder' => 'Tapvir Singh',
-
-	// 'founderSocialLinks' => [
-	// 	'twitter' => '',
-	// 	'facebook' => '',
-	// 	'linkedin' => '',
-	// 	'youtube' => '',
-	// ];
-	
-	'company' => 'Blazehat Technologies LLP',
-	'companyLink' => 'http://blazehattech.com/',
-	'companyText' => 'Created by ',
-];
 
 $ttag_FooterConf = [
 				'showSocialLinks' => true, // Links are defined in TTagAppSettings/social.php 
@@ -42,7 +25,7 @@ $ttag_FooterConf = [
 $ttag_FooterLinks = [
 	// 'orien' => 'h', // h = horizontal, v = vertical
 	NAVLINKS => ['caption'=>'Navigation','links'=>$ttag_NavigationLinks],
-	'Licence'=> ['caption'=>'Licence','links'=>['GPLV3'=>'#', 'Terms of use'=>'#']],
+	'Licence'=> ['caption'=>'Licence','links'=>['MIT'=>'#', 'Terms of use'=>'#']],
 	// 'Themes' => [
 	// 				'caption'=>'Themes',
 	// 				'links'=>[

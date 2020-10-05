@@ -128,7 +128,38 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 	}
 
 
+    private function createTags($pageHead){
+        foreach ($pageHead as $key => $value) {
+            if(is_array($value)){
+
+                if($key === 'meta'){
+
+                    $meta = new \Src\TTags\MetaTTag($value);
+                    $this->appendHtml($meta->get());
+
+                }else{
+
+                    foreach ($value as $key2 => $value2) {
+
+                        $tag = new TapvirTag($key,$key2.'="'.$value2.'"',false);
+                        $returned = $tag->getTagCode();
+                        $this->appendHtml($returned);
+
+                    }
+                }
+
+            }else{
+                // returns for instance <title>xyz</title>
+                $tag = new TapvirTagContainer($key,null,$value,false);
+                $returned = $tag->getThisContainerHtml();
+                $this->appendHtml($returned);
+            }
+        }
+    }
+
+
 	private function parseHeadArray($pageHead){
+
 		global $ttag_PageHeaders;
 
 		// So if no page headers are provided then use the default ones.
@@ -139,21 +170,7 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 			$pageHead = array_replace_recursive ($ttag_PageHeaders,$pageHead);
 		}
 
-
-		foreach ($pageHead as $key => $value) {
-			if(is_array($value)){
-				foreach ($value as $key2 => $value2) {
-					$tag = new TapvirTag($key,$key2.'="'.$value2.'"',false);
-					$returned = $tag->getTagCode();
-					$this->appendHtml($returned);
-				}
-			}else{
-				// returns for instance <title>xyz</title>
-				$tag = new TapvirTagContainer($key,null,$value,false);
-				$returned = $tag->getThisContainerHtml();
-				$this->appendHtml($returned);
-			}
-		}
+		$this->createTags($pageHead);
 
 	}
         

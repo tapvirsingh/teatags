@@ -75,6 +75,26 @@ function ttag_Image($file){
 	return ttag_theme().'/'.'Images/'.$file;
 }
 
+// Load the image from /Image/ folder.
+function ttag_RootImage($file){
+	return IMAGES_ROOT.'/'.$file;
+}
+
+// Load the image from /Image/ folder.
+function ttag_RootSettings($file){
+	return SETTINGS_ROOT.$file.'.php';
+}
+
+// Load the image from /Image/ folder.
+function ttag_FooterSettings($file){
+	return FOOTER_SETTINGS.$file.'.php';
+}
+
+// Load the image from /Image/ folder.
+function tta_NavBrandSettings($file){	
+	return NAVBRAND_SETTINGS.$file.'.php';
+}
+
 // Loads the Md file
 function ttag_MdFile($file, $doNotPrependDir = false){
 	global $ttag_MDFileExtention;

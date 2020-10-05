@@ -11,8 +11,8 @@ use Src\ContainerTags\TapvirTagContainer;
 
 class AnchorTTag extends TapvirTagContainer{
     
-    function __construct($srcAddress = null, $textOrHtml = null, $class = null, $otherAttr = null) {
-    	
+    function __construct($srcAddress = null, $data = null, $class = null, $otherAttr = null) {
+    	$data = ttag_getData($data);
     	 
         $srcLink = 'href="'.$srcAddress.'"';
 
@@ -24,7 +24,7 @@ class AnchorTTag extends TapvirTagContainer{
             $srcLink = $srcLink.' '.$otherAttr;
         }
         
-        parent::__construct('a', $srcLink, $textOrHtml);
+        parent::__construct('a', $srcLink, $data);
     }
 
 }

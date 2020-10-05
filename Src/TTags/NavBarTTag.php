@@ -16,13 +16,17 @@ class NavBarTTag extends TapvirTagContainer{
   	private $dropdownItemExtraClass = null;
   	private $navListCounter;
   	private $activeKey;
+    private $navbar;
 
     function __construct(
     					// Array in the key value format 
     					//  Set the name of the key active for the page.
     					$activeKey = null) {
 
-    	global $ttag_Navbar;
+
+        $this->navbar = include tta_NavBrandSettings('navbar');
+
+        // $this->navbar = $this->navbar;
 
     	$this->navListCounter = 0;
 
@@ -30,12 +34,12 @@ class NavBarTTag extends TapvirTagContainer{
 
     	$attribute = 'class = "';
 
-    	if(isset($ttag_Navbar['menu']) && $ttag_Navbar['menu'] !== null){
-    		$this->linksWithCaptions = $ttag_Navbar['menu'];
+    	if(isset($this->navbar['menu']) && $this->navbar['menu'] !== null){
+    		$this->linksWithCaptions = $this->navbar['menu'];
     	}
 
-    	if(isset($ttag_Navbar['extraClasses']) && $ttag_Navbar['extraClasses'] !== null){
-    		$attribute .= $ttag_Navbar['extraClasses'];
+    	if(isset($this->navbar['extraClasses']) && $this->navbar['extraClasses'] !== null){
+    		$attribute .= $this->navbar['extraClasses'];
     	}
 
     	$attribute .='"';
@@ -44,7 +48,7 @@ class NavBarTTag extends TapvirTagContainer{
     	$html = $this->createNavList2();
     	// $html = $this->createNavListRecursive();
 
-    	$div = new DivTTag('collapse navbar-collapse',$html, 'id = "'.$ttag_Navbar['toggleTarget'].'"');
+    	$div = new DivTTag('collapse navbar-collapse',$html, 'id = "'.$this->navbar['toggleTarget'].'"');
 
     	$toggleButton = $this->createNavbarToggler();
 
@@ -59,11 +63,13 @@ class NavBarTTag extends TapvirTagContainer{
     	  // <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     // <span class="navbar-toggler-icon"></span>
   // </button>
-    	global $ttag_Navbar;
+    	// global $this->navbar;
+
+        $this->navbar = include tta_NavBrandSettings('navbar');
 
     	$span = new SpanTTag('navbar-toggler-icon');
 
-        $buttonAttr = ' type="button" data-toggle="collapse" data-target="#'.$ttag_Navbar['toggleTarget'].'" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"';
+        $buttonAttr = ' type="button" data-toggle="collapse" data-target="#'.$this->navbar['toggleTarget'].'" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"';
 
     	$button = new TeaCTag('button','navbar-toggler',$span->get(),$buttonAttr);
 
@@ -278,7 +284,7 @@ $ttag_NavigationLinks = [
 
         $createdMenu = ' ';
 
-        global $ttag_Navbar;
+        // global $this->navbar;
 
         foreach($this->linksWithCaptions as $nav => $address){
 //            If its a dropdown list
@@ -312,7 +318,7 @@ $ttag_NavigationLinks = [
 //        Create the nav menu container
 //        $ul = new TapvirTagContainer('ul', 'class="navbar-nav mr-auto navLinks"', $createdMenu, false);
        $alignClass = 'mr-auto';
-       if(isset($ttag_Navbar['align']) && $ttag_Navbar['align'] === 'right'){
+       if(isset($this->navbar['align']) && $this->navbar['align'] === 'right'){
        		$alignClass = 'ml-auto';
        }  
 

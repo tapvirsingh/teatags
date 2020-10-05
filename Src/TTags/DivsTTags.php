@@ -50,6 +50,8 @@ $parameters :
 
 			// For 2 cols you may set preferred classes.
 			'col-classes' => ['bg-dark','bg-white'],
+
+			'extra-row-class' => add additional row classes.
 			
 		]*/
 

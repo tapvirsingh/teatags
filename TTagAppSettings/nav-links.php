@@ -7,7 +7,7 @@
 if(!Src\TeaTag::authorised()){
 
 
-	$ttag_NavigationLinks = [
+	return  [
 
 		'Home'=> ttag_IndexView(),
 
@@ -17,6 +17,8 @@ if(!Src\TeaTag::authorised()){
 		
 		'Blogs' => 'https://blazehattech.blogspot.com/',
 	];
+
+// return $ttag_NavigationLinks;
 
 
 	// $ttag_NavigationLinks = [
@@ -34,7 +36,7 @@ if(!Src\TeaTag::authorised()){
 	
 	*/
 
-	// $ttag_NavigationLinks = [
+	// return [
 
 	// 	'Home'=> ttag_IndexView(),
 
@@ -51,3 +53,4 @@ if(!Src\TeaTag::authorised()){
 // You may also have your custom named links here which you may use in your views.
 // Notice ttag_ suffix not used here as following is a custom named link.
 $docNavigation = $articles_docFiles; // Assigning for the navigation
+

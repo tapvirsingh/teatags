@@ -23,7 +23,7 @@ class FooterTTag extends TapvirTagContainer{
 	protected $showWebIcon;
 	protected $showSocialLinks;
 	protected $socialLinks;
-	protected $footerConsts;
+	protected $company;
 	protected $webIconLink;
 	protected $maxHorLinkCount ;
 	protected $orien ;
@@ -32,17 +32,17 @@ class FooterTTag extends TapvirTagContainer{
 
 	function __construct(){
 
-		global $ttag_FooterBSC, $ttag_FooterLinks, $ttag_FooterConf, $ttag_SocialLinks,
-				$ttag_FooterConsts;
+		global  $ttag_FooterConf, $ttag_SocialLinks;
 
-		if(isset($ttag_FooterConf['showFooter']) && $ttag_FooterConf['showFooter'] == true){
+		$this->configuration(include ttag_FooterSettings('configuration'));
 
-			$this->footerConsts = $ttag_FooterConsts;
-			$this->socialLinks = $ttag_SocialLinks;
+		if($this->showFooter){
 
-			$this->setFooterConf($ttag_FooterConf);
+			$this->company = include ttag_RootSettings('company');
+			$this->socialLinks = include ttag_RootSettings('social');
+			$footerClasses = include ttag_FooterSettings('classes');
 
-			$this->calculateLinks($ttag_FooterLinks);
+			$this->calculateLinks(include ttag_FooterSettings('links'));
 
 			$this->footerClass =  '';
 
@@ -50,19 +50,19 @@ class FooterTTag extends TapvirTagContainer{
 			if($this->orien == 'a'){
 
 				if($this->areSmallUniDimensionalLinks()){
-					$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
+					$this->footerClass .= $footerClasses['footerHLink'].'"';
 				}else{
-					$this->footerClass .= $ttag_FooterBSC['footerLink'].'"';
+					$this->footerClass .= $footerClasses['footerLink'].'"';
 				}
 			}elseif($this->orien == 'v'){
-				$this->footerClass .= $ttag_FooterBSC['footerLink'].'"';
+				$this->footerClass .= $footerClasses['footerLink'].'"';
 			}else{
-				$this->footerClass .= $ttag_FooterBSC['footerHLink'].'"';
+				$this->footerClass .= $footerClasses['footerHLink'].'"';
 			}
 				
-			$this->footerSubLinkCaption = $ttag_FooterBSC['footerSubCap'];
+			$this->footerSubLinkCaption = $footerClasses['footerSubCap'];
 
-			$attribute = $this->setFooterClasses($ttag_FooterBSC);
+			$attribute = $this->setFooterClasses($footerClasses);
 
 			// $this->createFooter();
 			$this->createFooterInOrder();
@@ -72,10 +72,10 @@ class FooterTTag extends TapvirTagContainer{
 
 	}
 
-	private function setFooterClasses($ttag_FooterBSC){
+	private function setFooterClasses($footerClasses){
 		$attribute = 'class = "footer';
-		if(isset($ttag_FooterBSC['class']) && $ttag_FooterBSC['class'] !== null){
-			$attribute .= ' '.$ttag_FooterBSC['class'];
+		if(isset($footerClasses['class']) && $footerClasses['class'] !== null){
+			$attribute .= ' '.$footerClasses['class'];
 		}
 
 		$attribute .= '"';
@@ -83,23 +83,24 @@ class FooterTTag extends TapvirTagContainer{
 	}
 
 	// Sets the footer's settings
-	private function setFooterConf($footerConf){
-		if(isset($footerConf)){
-			$this->showSocialLinks = $footerConf['showSocialLinks'];
-			$this->showWebIcon = $footerConf['showWebIcon'];
-			$this->webIconLink = ttag_Image($footerConf['webIconLink']);
-			$this->col = $footerConf['colsPerRow'];
-			$this->offset = $footerConf['colsOffset'];
-			$this->maxHorLinkCount = $footerConf['maxHorLinkCount'];
-			$this->iconOffset = $footerConf['iconOffset'];
-			$this->iconColsPerRow = $footerConf['iconColsPerRow'];
-			$this->orien = $footerConf['orien'];
-			$this->order = isset($footerConf['order']) ? $footerConf['order'] : $this->setDefaultDisplayOrder();
+	private function configuration($config){
+		if(isset($config)){
+			$this->showFooter = $config['showFooter'];
+			$this->showSocialLinks = $config['showSocialLinks'];
+			$this->showWebIcon = $config['showWebIcon'];
+			$this->webIconLink = ttag_Image($config['webIconLink']);
+			$this->col = $config['colsPerRow'];
+			$this->offset = $config['colsOffset'];
+			$this->maxHorLinkCount = $config['maxHorLinkCount'];
+			$this->iconOffset = $config['iconOffset'];
+			$this->iconColsPerRow = $config['iconColsPerRow'];
+			$this->orien = $config['orien'];
+			$this->order = isset($config['order']) ? $config['order'] : $this->setDefaultDisplayOrder();
 		}
 	}
 
 	private function setDefaultDisplayOrder(){
-		return  ['links','social','copyright','author'];
+		return  ['links','social','copyright','founder'];
 	}
 
 	private function calculateLinks($footerLinks){
@@ -107,6 +108,7 @@ class FooterTTag extends TapvirTagContainer{
 			$this->footerLinks = $footerLinks;
 			$this->totalFooterLinksCount = count($this->footerLinks);
 			if(isset($footerLinks[NAVLINKS])){
+
 				$this->linksCount = count($footerLinks[NAVLINKS]['links']);
 				$this->recurLinksCount = count($footerLinks[NAVLINKS]['links'],COUNT_RECURSIVE );
 			}
@@ -125,7 +127,8 @@ class FooterTTag extends TapvirTagContainer{
 		$this->generateFooterLinks();
 		$this->generateSocialLinks();
 		$this->showCopyright();
-		$this->showAuthors();
+		// $this->showAuthors();
+		$this->showFounder();
 	} 
 
 	protected function createFooterInOrder(){
@@ -143,8 +146,9 @@ class FooterTTag extends TapvirTagContainer{
 				case 'copyright' :
 					$this->showCopyright();
 					break;
-				case 'author' :
-					$this->showAuthors();
+				case 'founder' :
+					// $this->showAuthors();
+					$this->showFounder();
 					break;
 				default:
 			}
@@ -152,13 +156,20 @@ class FooterTTag extends TapvirTagContainer{
 	} 
 
 	protected function showCopyright(){
-		$p = new ParaTTag($this->footerConsts['copyright'],'text-light text-center');
+		$companyLink = new AnchorTTag($this->company['companyLink'],$this->company['company'],'ttag-developer-company','target = "_blank"');
+		$text = $this->company['copyright'].' '.$companyLink->get().' - All Rights Reserved';
+		$p = new ParaTTag($text,'text-light text-center');
 		$this->setFooterInnerHtml($p->get());
 	}
 
+	protected function showFounder(){
+		$founder = new FounderTTag();
+		$this->setFooterInnerHtml($founder->founder());
+	}
+
 	protected function showAuthors(){
-		$a = new AnchorTTag($this->footerConsts['companyLink'],$this->footerConsts['company'],'ttag-developer-company','target = "_blank"');
-		$p = new ParaTTag($this->footerConsts['companyText'].' '.$this->footerConsts['founder'].' @ '.$a->get(),'text-light text-center ttag-founder');
+		$a = new AnchorTTag($this->company['companyLink'],$this->company['company'],'ttag-developer-company','target = "_blank"');
+		$p = new ParaTTag($this->company['companyText'].' '.$this->company['founder'].' @ '.$a->get(),'text-light text-center ttag-founder');
 		$this->setFooterInnerHtml($p->get());
 	}
 
