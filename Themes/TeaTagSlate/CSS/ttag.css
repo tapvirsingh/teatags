@@ -153,7 +153,8 @@ footer{
     color: #cecece;
 }
 
-@media only screen and (max-width: 480px) {
+/*@media only screen and (max-width: 480px) */
+@media only screen and (max-width: 768px) {
 	.ttag-footer-links { text-align: center; margin-bottom: 1rem;}
 	.ttag-web-ico, .ttag-web-h-ico{background-position: center; 
 									margin-bottom: 2rem; 
