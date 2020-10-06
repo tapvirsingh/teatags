@@ -16,6 +16,9 @@ class FooterTTag extends TapvirTagContainer{
 	protected $recurLinksCount;
 	protected $col;
 
+	// All classes read from the footer configuration file.
+	protected $classes;
+	// Classes that need to added into the footer tag.
 	protected $footerClass;
 	protected $footerSubLinkCaption;
 	protected $footerLinks;
@@ -43,6 +46,8 @@ class FooterTTag extends TapvirTagContainer{
 			$footerClasses = include ttag_FooterSettings('classes');
 
 			$this->calculateLinks(include ttag_FooterSettings('links'));
+
+			$this->classes = $footerClasses;
 
 			$this->footerClass =  '';
 
@@ -378,7 +383,7 @@ class FooterTTag extends TapvirTagContainer{
 
 			if($this->showWebIcon){
 				// global 
-				$iconClass = 'offset-'.$this->iconOffset.' col-'.$this->iconColsPerRow;
+				$iconClass = 'offset-md-'.$this->iconOffset.' col-md-'.$this->iconColsPerRow;
 				$style = ' style = "background-image:url('.$this->webIconLink.')"';
 				$imgDiv = new DivTTag($iconClass.' ttag-web-ico','',$style);
 				$html = $imgDiv->get().$html;
@@ -390,9 +395,10 @@ class FooterTTag extends TapvirTagContainer{
 	}
 
 	private function getClass_OffsetVerLinks(){
-		$class = 'col-'.$this->col;
+		$class = $this->classes['footerLinks'];
+		$class .= ' col-md-'.$this->col;
 		if($this->offset > 0){
-			$class .= ' offset-'.$this->offset;
+			$class .= ' offset-md-'.$this->offset;
 		}
 		return $class;		
 	}

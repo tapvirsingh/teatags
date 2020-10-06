@@ -7,7 +7,7 @@ return [
 		// even if no img is given a space for it will be reserved.
 		'showWebIcon' => true, 
 		// Sets the offset value for icon in footer (works only on verticle display of links.)
-		'iconOffset' => 1, 
+		'iconOffset' => 2, 
 		//Sets the cols per row value for icon in footer (works only on verticle display of links.)
 		'iconColsPerRow' => 3, 
 		// Create a new on Col
