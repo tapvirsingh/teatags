@@ -77,7 +77,7 @@ function ttag_Image($file){
 
 // Load the image from /Image/ folder.
 function ttag_RootImage($file){
-	return IMAGES_ROOT.'/'.$file;
+	return IMAGES_ROOT.$file;
 }
 
 // Load the image from /Image/ folder.
