@@ -13,6 +13,10 @@ class ListTTag extends TapvirTagContainer{
 	/*
 	$parameters = [
 					'list-type' : ul (default) | ol ,
+					
+					'list-class' : You may pass additional classes for the list in here. 
+								eg. 'list-group-flush some-custom-class'
+
 					'active' : index number of the item to make it active. default: null
 					'disabled' : [] array of disabled item indexes. default null
 					]
@@ -26,7 +30,8 @@ class ListTTag extends TapvirTagContainer{
 	 		$this->setListType();
 	 		$this->createList();
 
-	 		$class = 'class = "list-group';
+	 		$class = 'class = "list-group ';
+	 		$class .= $this->getParameter('list-class');
 	 		$class .= '"';
 
 	 		$attribute = $class;
