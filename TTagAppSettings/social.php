@@ -29,10 +29,5 @@ return [
 			'icon'=>'github',
 			'link'=> 'https://github.com/tapvirsingh/teatags'
 		],
-		// [
-		// 	'className' => FNTAWSM_BRAND,
-		// 	'icon'=>'blog',
-		// 	'link'=> 'https://blazehattech.blogspot.com/'
-		// ],
-
+		
 ];
