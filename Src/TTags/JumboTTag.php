@@ -37,6 +37,7 @@ class JumboTTag extends TapvirTagContainer{
 
 		$parameters = [
 						'jumboClasses' : extra classes to be passed along with jombotron class.
+						'overlay' : null (Default) or ['color' => #bbb333, 'opacity' => 0.4] 
 						'make-fluid' : true | false,
 						'head-align' : 'left' | 'center' | 'right' | 'justify',
 						'lead-align' : 'left' | 'center' | 'right' | 'justify',
@@ -70,11 +71,22 @@ class JumboTTag extends TapvirTagContainer{
 
 			$jumboClasses = $this->getClasses('jumboClasses','jumbotron');
 
-			$jumbo = new DivTTag($jumboClasses,$this->jumboInnerHtml, $extraAttribute);
+			$overlay = $this->setOverlay();
+
+			$jumbo = new DivTTag($jumboClasses,$overlay.$this->jumboInnerHtml, $extraAttribute);
+
 
 			$this->setContainerCode($jumbo->getThisContainerHtml());
 		// }
         // parent::__construct('h1', $class, $textOrHtml, $echoOnTheGo);
+    }
+
+    private function setJumboInnerHtml($html){
+		if($this->jumboInnerHtml === null){
+			$this->jumboInnerHtml = is_object($html) ? $html->get() : $html;
+		}else{
+			$this->jumboInnerHtml .= is_object($html) ? $html->get() : $html;
+		}
     }
 
     protected function setBackgroundImage(){
@@ -106,7 +118,8 @@ class JumboTTag extends TapvirTagContainer{
 		$jumboHead = $this->getData($this->jumboInnerContent, $head , $ttag_Head);
 
 		$h1 = new PageHeadingTTag ($jumboHead,$headClasses);
-		$this->jumboInnerHtml = $h1->get();
+		
+		$this->jumboInnerHtml = $h1->get() ;
 
     }
 
@@ -131,7 +144,7 @@ class JumboTTag extends TapvirTagContainer{
 		
 		if($jumboLead !== false){
 			$lead = new ParaTTag($jumboLead,$leadClasses);
-			$this->jumboInnerHtml .= $lead->get();
+			$this->setJumboInnerHtml($lead);
 		}
 
     }
@@ -142,9 +155,11 @@ class JumboTTag extends TapvirTagContainer{
     	// continue if true or if the value is not set.
 		if($value === null){
 
-			$containerClasses = $this->getClasses('align','container');
+			$containerClasses = 'ttag-jumbo-content ';
+			$containerClasses .= $this->getClasses('align','container');
 
 			$jumboInner = new DivTTag($containerClasses,$this->jumboInnerHtml);
+			// $this->setJumboInnerHtml($jumboInner->getThisContainerHtml());
 			$this->jumboInnerHtml = $jumboInner->getThisContainerHtml();
 
 		}
@@ -185,7 +200,7 @@ class JumboTTag extends TapvirTagContainer{
 					
 				}
 
-				$this->jumboInnerHtml .= $buttonHtml;
+				$this->setJumboInnerHtml($buttonHtml);
 			}
 	}
 
@@ -227,6 +242,26 @@ class JumboTTag extends TapvirTagContainer{
     	}
 
     	return null;
+    }
+
+    private function setOverlay(){
+    	$overlay = $this->getParameter('overlay');
+    	if($overlay !== null){
+    		//  create the overlay.
+    		// opacity: 0.4; background-color: rgb(0, 0, 0);
+    		$style = 'style = "';
+
+    		$bgcolor = 'background-color:'.$overlay['color'].';';
+    		$opacity = 'opacity:'.$overlay['opacity'].';';
+
+    		$style .= $bgcolor.$opacity;
+
+    		$style .= '"';
+
+    		$overlayDiv = new DivTTag('ttag-overlay',null,$style);    
+    		return $overlayDiv->get();	
+    	}
+
     }
 
     private function getAlignParameter($subject){

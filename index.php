@@ -32,6 +32,7 @@ $jumbo = new JumboTTag( [ // Buttons
 						[//$parameters
 							'bg-image' => 'tea-background.jpg',
 							'lead-class' => 'col-7',
+							'overlay' => ['color' => '#fff', 'opacity'=>'0.5']
 						] );
 
 // Load home.md 
