@@ -69,15 +69,15 @@ class NavTTag extends TapvirTagContainer{
 
 	private function setId(){
 		$this->id = $this->getParameter('id');
-		if($this->id === null){
-			$this->id = UIDGeneratorTTag::getUID(__CLASS__);		
-		}
+		// if($this->id === null){
+		// 	$this->id = UIDGeneratorTTag::getUID(__CLASS__);		
+		// }
 
 	}
 
-	private function getId(){
-		return $this->id.$this->counter;
-	}
+	// private function getId(){
+	// 	return $this->id.$this->counter;
+	// }
 
 	private function navToggler(){
 
@@ -207,7 +207,7 @@ class NavTTag extends TapvirTagContainer{
 
 		// $div = new DivTTag('collapse show',ttag_getCombinedHtml($lis),'id="'.$this->id.'"');
 
-		$nav = new TeaCTag($tag,$class,ttag_getCombinedHtml($lis));
+		$nav = new TeaCTag($tag,$class,ttag_getCombinedHtml($lis),' id="'.$this->id.'"');
 		// $nav = new TapvirTagContainer($tag,'class = "'.$class.'"',$this->navToggler().$div->get());
 		return $nav->get();
 	}

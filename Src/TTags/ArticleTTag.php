@@ -35,6 +35,8 @@ class ArticleTTag extends TapvirTagContainer{
                     'type' : Works only when variable is used. 
                             values : get (default) | post 
 
+                    'nav-toggle' : Set the id of the nav to toggle.
+
                     'filter' : This variable takes values for php function filter_input
                                 Read more about this here:
 
