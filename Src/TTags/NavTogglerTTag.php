@@ -1,5 +1,9 @@
 <?php
 
+namespace Src\TTags;
+
+use Src\ContainerTags\TapvirTagContainer;
+
 class NavTogglerTTag extends TapvirTagContainer{
 
 	function __construct($parameters){
