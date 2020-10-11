@@ -252,9 +252,12 @@ class JumboTTag extends TapvirTagContainer{
     		$style = 'style = "';
 
     		$bgcolor = 'background-color:'.$overlay['color'].';';
-    		$opacity = 'opacity:'.$overlay['opacity'].';';
+    		$style .= $bgcolor;
 
-    		$style .= $bgcolor.$opacity;
+    		if(isset($overlay['opacity'])){
+    			$opacity = 'opacity:'.$overlay['opacity'].';';
+    			$style .= $opacity;
+    		}
 
     		$style .= '"';
 
