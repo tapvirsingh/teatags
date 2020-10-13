@@ -12,7 +12,7 @@ return [
 		[
 			'className' => FNTAWSM_BRAND,
 			'icon'=>'twitter',
-			'link'=> 'https://twitter.com/BlazehatTech'
+			'link'=> 'https://twitter.com/BlazingTeaTags'
 		],
 		[
 			'className' => FNTAWSM_BRAND,

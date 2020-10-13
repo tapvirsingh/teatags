@@ -25,7 +25,7 @@ $jumbo = new JumboTTag( [ // Buttons
 													'https://teatags.blazehattechnologies.com/Views/documentation.php',
 													'btn btn-primary btn-lg m-4'
 												],
-							$githubIco->get().' Download' => [
+							$githubIco->get().' Download / Clone' => [
 															'https://github.com/tapvirsingh/teatags',
 															'btn btn-success btn-lg',
 															'_blank',
