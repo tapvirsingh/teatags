@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Description of FontAwsmTTag
+ *
+ * @author Tapvir Singh.
+ */
+namespace Src\TTags;
+
+use Src\ContainerTags\TapvirTagContainer;
+
 class FontAwsmTTag extends TapvirTagContainer{
 
 	function __construct($ico, $size = 1){
@@ -10,8 +19,9 @@ class FontAwsmTTag extends TapvirTagContainer{
 			$attribute .= ' fa-'.$size;
 		}
 
+		$class = ' class = "'.$attribute.'"';
 
-		parent::__construct('i', $attribute);
+		parent::__construct('i', $class);
 	}
 
 };
