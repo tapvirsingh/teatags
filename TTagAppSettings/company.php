@@ -2,5 +2,11 @@
 return [
 	'copyright' => '© Copyright 2020',
 	'company' => 'Blazehat Technologies LLP',
-	'companyLink' => 'http://blazehattech.com/',
+	'website' => 'http://blazehattech.com/',
+	'social' => [
+			'twitter' => 'https://twitter.com/BlazehatTech',
+			'facebook' => 'https://www.facebook.com/BlazehatTech',
+			'linkedin' => 'https://www.linkedin.com/company/blazehattech',
+			'youtube'=> 'https://www.youtube.com/channel/UCRXchFZDXjW4YQKVsGI75_w',
+		],
 ];

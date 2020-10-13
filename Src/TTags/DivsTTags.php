@@ -17,6 +17,8 @@ class DivsTTags extends TapvirTagContainer {
 	protected $row ;
 	protected $rowCount ;
 
+	protected $ids;
+
 	/*
 $parameters : 
 	[
@@ -70,6 +72,9 @@ $parameters :
 		if(isset($parameters['offset']) && ($parameters['offset'] !== null)){
 			$this->offset  = $parameters['offset'];
 		}
+
+		$this->ids = $this->getParameter('ids');
+
 		$this->initiateCreation();
 	}
 
@@ -106,6 +111,10 @@ $parameters :
 		return is_array($this->col[$this->rowCount]) ? $this->col[$this->rowCount][$this->colCount] :  $this->col[$this->colCount];
 	}
 
+	private function setCols($colSpan){
+		return 'col-sm-12 col-md-'.$colSpan;
+	}
+
 	private function manageArrayRow($row){
 		$this->colCount = 0;
 		foreach ($row as $col => $value) {
@@ -117,7 +126,7 @@ $parameters :
 				$colSpan .= ' offset-'.$this->offset;
 			}
 
-			$class = 'col-'.$colSpan;
+			$class = $this->setCols($colSpan);
 
 			$colClasses = $this->getParameter('col-classes');
 
@@ -125,7 +134,7 @@ $parameters :
 				$class .= ' '.$colClasses[$this->colCount]; 
 			}
 
-			$divC = new DivTTag($class,$value);
+			$divC = new DivTTag($class,$value,$this->setId());
 			$divCols[] = $divC->get();
 			$this->colCount++;
 		}
@@ -140,13 +149,13 @@ $parameters :
 		$col = $col === null ? $this->col : $col;
 		$offset = $offset === null ? $this->offset : $offset;
 
-		$colV = 'col-'.$col;
+		$colV = $this->setCols($colSpan);
 
 		if($offset !== null ){
-			$colV .= ' offset-'.$offset;
+			$colV .= ' offset-md-'.$offset;
 		}
 
-		$divC = new DivTTag($colV, $row) ;
+		$divC = new DivTTag($colV, $row,$this->setId()) ;
 		$divR = $this->createRow($divC->get());
 		$divRows[] = $divR->get();
 		return $divRows;
@@ -165,6 +174,7 @@ $parameters :
 		return new DivTTag($rowClass ,$data) ;
 		
 	}
+
 
 	private function createDivs(){
 
@@ -213,5 +223,10 @@ $parameters :
 			return $divContainer->get();
 		}
 	}
+
+	protected function setId(){
+		return ' id = "'.$this->ids[$this->colCount].'" ';
+	}
+
 
 };

@@ -11,7 +11,9 @@ if(!Src\TeaTag::authorised()){
 
 		'Home'=> ttag_IndexView(),
 
-		'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
+		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
+		'Documentation' => ttag_View('documentation'),
+		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
 
 		// 'Downloads' => ttag_View('download-themes'),
 		

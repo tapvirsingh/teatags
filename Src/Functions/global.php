@@ -95,6 +95,11 @@ function tta_NavBrandSettings($file){
 	return NAVBRAND_SETTINGS.$file.'.php';
 }
 
+// Load the image from /Image/ folder.
+function tta_ScriptSettings($file, $script = 'javascript'){	
+	return SCRIPTS_SETTINGS.$script.'/'.$file.'.php';
+}
+
 // Loads the Md file
 function ttag_MdFile($file, $doNotPrependDir = false){
 	global $ttag_MDFileExtention;

@@ -97,13 +97,13 @@ footer{
 .ttag-nav-item{
 
 }
-.ttag-nav-link{
+.ttag-nav-link, .ttag-nav-multi-link-cap{
 	/*color: #457eb1 ;*/
 	/*color: #64a2da ;*/
 	color: #87b6e0;
 	font-size: .8rem;
 }
-.ttag-nav-link:hover{
+.ttag-nav-link:hover, .ttag-nav-multi-link-cap:hover{
 	color: #dfeeff
 }
 .ttag-dir{

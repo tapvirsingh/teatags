@@ -7,6 +7,7 @@
  */
 namespace Src\ContainerTags\TapvirTagContainers;
 use Src\ContainerTags\TapvirTagContainer;
+// use Src\TTags\{ScriptTTag};
 
 class BodyTapvirTagContainer extends TapvirTagContainer{
     
@@ -17,6 +18,8 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     	$this->appendHtml($textOrHtml);
 
     	$this->loadJSScriptLinks();
+        // $this->loadJSRawScripts(true);
+        $this->loadJSRawScripts();
     	$this->loadJSScripts();
 
 
@@ -27,7 +30,7 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     	Loads the Javascripts excluding Jquery, popper and bootstrap. These are loaded in BodyTTag
     */
 
-    private function loadJSScriptLinks(){
+    private function loadJSScriptLinks_op(){
 		global $ttag_JsScriptLinks;
 
     	foreach ($ttag_JsScriptLinks as $value) {
@@ -35,13 +38,25 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     		$this->appendHtml($js->get());
     		
     	}	
+    } 
+
+    private function loadJSScriptLinks(){
+        $jsScriptLinks = include tta_ScriptSettings('jslinks');
+
+        foreach ($jsScriptLinks as $value) {
+            $js  = new ScriptTapvirTagContainer($value);
+            $this->appendHtml($js->get());
+            
+        }   
     }
 
+    
+
     private function loadJSScripts(){
-		global $ttag_JsScripts;
+		$jsScripts = include tta_ScriptSettings('jsscripts');
 
 		$scripts = null;
-    	foreach ($ttag_JsScripts as $value) {
+    	foreach ($jsScripts as $value) {
     		if($scripts == null){
     			$scripts = $value;
     		}else{

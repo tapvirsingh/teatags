@@ -41,6 +41,9 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 
         $this->overrideBSCSS();
 
+        // Load the js scripts and embed those in the head. 
+        $this->loadJSRawScripts(true);
+
         parent::__construct('head', null, $this->html);
     }
 

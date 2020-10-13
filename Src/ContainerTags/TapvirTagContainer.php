@@ -8,7 +8,7 @@ namespace Src\ContainerTags;
 
 use Src\TeaTag;
 use Src\SingleTags\TapvirTag;
-use Src\TTags\{DivsTTags};
+use Src\TTags\{DivsTTags,ScriptTTag};
 
 class TapvirTagContainer extends TeaTag{
   
@@ -46,6 +46,10 @@ class TapvirTagContainer extends TeaTag{
      */
     public function get(){
         return $this->containerCode;
+    }
+
+    public function setCode($code){
+      return $this->setContainerCode($code);
     }
     
     public function setContainerCode($containerCode) {
@@ -209,5 +213,25 @@ class TapvirTagContainer extends TeaTag{
         }
     }
 
+    protected  function loadJSRawScripts($head = false){
+
+        $script = ($head === true) ? 'jsrawheadscripts' : 'jsrawscripts';
+
+        $jsScripts = include tta_ScriptSettings($script);
+
+        if(!is_array($jsScripts)){
+            return null;
+        }
+
+        $js = null;
+
+        foreach ($jsScripts as $value) {
+
+            $js[]  = new ScriptTTag($value);
+            
+        }   
+        $jsHtml = ttag_getCombinedHtml($js);
+        $this->appendHtml($jsHtml);
+    }
 
 }

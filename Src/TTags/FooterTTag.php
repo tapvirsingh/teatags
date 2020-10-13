@@ -161,8 +161,8 @@ class FooterTTag extends TapvirTagContainer{
 	} 
 
 	protected function showCopyright(){
-		$companyLink = new AnchorTTag($this->company['companyLink'],$this->company['company'],'ttag-developer-company','target = "_blank"');
-		$text = $this->company['copyright'].' '.$companyLink->get().' - All Rights Reserved';
+		$website = new AnchorTTag($this->company['website'],$this->company['company'],'ttag-developer-company','target = "_blank"');
+		$text = $this->company['copyright'].' '.$website->get().' - All Rights Reserved';
 		$p = new ParaTTag($text,'text-light text-center');
 		$this->setFooterInnerHtml($p->get());
 	}
@@ -173,7 +173,7 @@ class FooterTTag extends TapvirTagContainer{
 	}
 
 	protected function showAuthors(){
-		$a = new AnchorTTag($this->company['companyLink'],$this->company['company'],'ttag-developer-company','target = "_blank"');
+		$a = new AnchorTTag($this->company['website'],$this->company['company'],'ttag-developer-company','target = "_blank"');
 		$p = new ParaTTag($this->company['companyText'].' '.$this->company['founder'].' @ '.$a->get(),'text-light text-center ttag-founder');
 		$this->setFooterInnerHtml($p->get());
 	}

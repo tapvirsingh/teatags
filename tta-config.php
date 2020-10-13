@@ -23,6 +23,7 @@ define("IMAGES_ROOT", __DIR__ ."/Images/");
 define("SETTINGS_ROOT", __DIR__ ."/TTagAppSettings/");
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
+define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
 
 // Global Function
 require_once('Src/Functions/global.php');

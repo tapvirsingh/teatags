@@ -44,6 +44,8 @@ $div = $article->divs([ 'col' =>10,  'offset' => 1,
 						// 'extra-container-class' => 'text-justify', 
 						'extra-row-class' => 'mt-4']);
 
+
+
 // Creates the page with default page headers, array composed of
 // navbar, jumbotron and div, also auto creates the body tags, 
 // and then displays the page.
