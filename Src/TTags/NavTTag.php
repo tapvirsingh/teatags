@@ -25,6 +25,8 @@ class NavTTag extends TapvirTagContainer{
 	protected $currentLink;
 	protected $linkActivated;
 
+	private $index;
+
 	/*
 		$navList => array of list with keys and values as captions and links.
 
@@ -166,11 +168,19 @@ class NavTTag extends TapvirTagContainer{
 			 $lis[] =  $this->createLink($key,$value,NAVTAGG_INDENT);
 		}
 
-		$div = new DivTTag(null,ttag_getCombinedHtml($lis));
+		$addAttrib = 'id = "'.$this->getMultiLinkId().'"';
+
+		// class="panel-collapse collapse in"
+
+		$div = new DivTTag('panel-collapse collapse in',ttag_getCombinedHtml($lis), $addAttrib);
 
 		// $this->counter++;
 
 		return [$cap,$div->get()];
+	}
+
+	private function getMultiLinkId(){
+		return $this->id.'MultiLink'.$this->index;
 	}
 
 	private function getCaption($caption){
@@ -184,18 +194,22 @@ class NavTTag extends TapvirTagContainer{
 			$class .=' '.$capCol;
 		}
 
+		$addAttrib = 'data-toggle = "collapse"';
 
-		$a = new AnchorTTag('#', $caption, $class);
+		$a = new AnchorTTag('#'.$this->getMultiLinkId(), $caption, $class, $addAttrib	);
 		return $a->get();
 	}
 
 	private function createNav($tag = 'nav'){
 		$lis = null;
+		$this->index = 0;
 		foreach($this->navList as $caption => $href){
 			if(!is_array($href))
 				$lis[] = $this->createLink($caption,$href);
 			else
 				$lis = array_merge($lis, $this->createLinkFromArray($caption,$href));
+
+			$this->index++;
 		}
 
 		$class = $this->defaultCSSClass();
