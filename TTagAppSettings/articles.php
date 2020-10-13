@@ -23,6 +23,18 @@ $articles_docFiles = [
 			'TTagAppSettings Dir' => [
 					'constants.php' =>	$article_RootWithVariable.'constants',
 					'brand-navbar.php' => $article_RootWithVariable.'brand-navbar',
+
+					// 'footer' => [
+					// 			'classes.php' => $article_RootWithVariable.'classes',
+					// 			'configuration.php' => $article_RootWithVariable.'configuration',
+					// 			'links.php' => $article_RootWithVariable.'links',
+					// 			],
+
+					// 'navbrand' => [
+					// 			'brand.php' => $article_RootWithVariable.'classes',
+					// 			'navbar.php' => $article_RootWithVariable.'configuration',
+					// 			],
+
 					'footer.php' => $article_RootWithVariable.'footer',
 					'google.php' => $article_RootWithVariable.'google',
 					'js.php' => $article_RootWithVariable.'js',

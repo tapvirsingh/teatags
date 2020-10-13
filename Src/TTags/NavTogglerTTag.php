@@ -9,16 +9,16 @@ class NavTogglerTTag extends TapvirTagContainer{
 	function __construct($parameters){
 		$this->parameters = $parameters;
 
-		$buttonType = isset($parameters['button-type']) ? $parameters['button-type'] : 'button' ;
+		$buttonType = isset($parameters['button-type']) ? $parameters['button-type'] : 'link' ;
 
 		switch ($buttonType) {
-			case 'link':
-				$object = $this->createLink();
+			case 'button':
+				$object = $this->createButton();
 				break;
 			
 
 			default:
-				$object = $this->createButton();
+				$object = $this->createLink();
 				break;
 		}
 
@@ -57,7 +57,7 @@ class NavTogglerTTag extends TapvirTagContainer{
 
 		$html = $this->getInnerHtml();
 
-		$extraAttribute = ' id="'.$id.'" data-target = "'.$targetId.'"';
+		$extraAttribute = ' id="'.$id.'" data-toggle="collapse"';
 
 		return new AnchorTTag($src, $html, $class, $extraAttribute);
 	}

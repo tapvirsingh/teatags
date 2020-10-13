@@ -26,9 +26,9 @@ $navtoggler = new NavTogglerTTag([
 									'caption' => 'Docs Menu',
 									'icon' => 'ml-2 fa fa-align-justify',
 									// 'src' :  ,
-									'class' => 'btn btn-outline-info mb-3',
+									'class' => 'btn btn-outline-info mb-3  d-sm-block d-md-none',
 									'id' =>  'docNavToggler' ,
-									'target-id' => 'docNavCon' ,
+									'src' => '#docNavCon' ,
 								]);
 
 // Create document's navigation and use the article's 
@@ -48,7 +48,7 @@ $divs = new DivsTTags([$docNavs,$content],[ 'col'=>[2,6],
 	'extra-row-class' => 'ml-0 mr-0 ttag-doc-row',
 	'in-container' => false,
 	'ids' => ['docNavCon','container'],
-	'col-classes' => ['bg-dark ','pt-4 ml-4'],
+	'col-classes' => ['bg-dark d-xs-none d-sm-block','pt-4 ml-4'],
 	'position'=>'c']);
 
 // Display the navigation and the html within the divs.

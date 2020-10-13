@@ -149,7 +149,7 @@ $parameters :
 		$col = $col === null ? $this->col : $col;
 		$offset = $offset === null ? $this->offset : $offset;
 
-		$colV = $this->setCols($colSpan);
+		$colV = $this->setCols($col);
 
 		if($offset !== null ){
 			$colV .= ' offset-md-'.$offset;
