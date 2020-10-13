@@ -13,21 +13,23 @@ class NavTogglerTTag extends TapvirTagContainer{
 
 		switch ($buttonType) {
 			case 'link':
-				$this->createLink();
+				$object = $this->createLink();
 				break;
 			
 
 			default:
-				$this->createButton();
+				$object = $this->createButton();
 				break;
 		}
+
+		$this->setCode($object->get());
 
 	}
 
 	// Create the caption for the button.
 	protected function caption(){
 		$caption = $this->getParameter('caption');
-		return new SpanTTag(null, $caption);
+		return new SpanTTag('ml-2', $caption);
 	}
 
 	// Set the icon
@@ -41,7 +43,7 @@ class NavTogglerTTag extends TapvirTagContainer{
 	protected function getInnerHtml(){
 		$cap = $this->caption();
 		$icon = $this->icon();
-		return ttag_getCombinedHtml([$cap,$icon]);
+		return ttag_getCombinedHtml([$icon,$cap]);
 	}
 
 	// create an anchor link.
@@ -71,7 +73,7 @@ class NavTogglerTTag extends TapvirTagContainer{
 
 		$html = $this->getInnerHtml();
 
-		$extraAttribute = ' type="button" id="'.$id.'" data-target = "'.$targetId.'"';
+		$extraAttribute = ' type="button" id="'.$id.'" data-target = "'.$targetId.'" data-toggle="collapse"';
 
 		return new TeaCTag('button', $class, $html,$extraAttribute);
 	}
