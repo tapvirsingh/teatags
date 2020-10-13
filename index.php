@@ -2,7 +2,7 @@
 // Include the global TTag's configuration file.
 require_once('tta-config.php');
 
-use Src\TTags\{NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag};
+use Src\TTags\{NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag,FontAwsmTTag};
 
 $ttag_PageName = 'Home';
 // Page Metadata
@@ -15,14 +15,17 @@ $pageHeaders = [ 'meta' => [
 // Activate the Home link in the navigation bar.
 $navbar = new NavBarTTag($ttag_PageName);
 
+$githubIco = new FontAwsmTTag('github');
+$infoIco = new FontAwsmTTag('book');
+
 // Set the bootstrap's jumbotron
 $jumbo = new JumboTTag( [ // Buttons 
 							'buttons' => [
-								'Learn more' => [
+							$infoIco->get().' Learn more' => [
 													'https://teatags.blazehattechnologies.com/Views/documentation.php',
 													'btn btn-primary btn-lg m-4'
 												],
-								'Download from Github' => [
+							$githubIco->get().' Download' => [
 															'https://github.com/tapvirsingh/teatags',
 															'btn btn-success btn-lg',
 															'_blank',
