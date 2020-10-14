@@ -328,7 +328,7 @@ class FooterTTag extends TapvirTagContainer{
 		$retLinks = null;
 		foreach ($this->socialLinks as $key => $value) {
 			$i = new TeaCTag('i','fa fa-'.$value['icon'].' fa-2x');
-			$a = new AnchorTTag($value['link'],$i->get(),'m-3 text-light d-inline-flex ttag-social-link', 'target = "_blank"');
+			$a = new AnchorTTag($value['link'],$i->get(),$this->classes['social-link-class'], 'target = "_blank"');
 			$retLinks[] = $a->get();
 		}
 
