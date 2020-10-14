@@ -2,7 +2,7 @@
 
 return [
 			'name' => 'Tea Tags',
-			'link' => 'http://www.blazehattech.com',
+			'link' => 'https://teatags.blazehattechnologies.com/',
 			// 'img'  => null,	
 			'img'  => 'tea.png',
 			// 'imgIcon'  => $brandIcon->get() ,

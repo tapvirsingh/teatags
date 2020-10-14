@@ -8,6 +8,9 @@ return [
 	// id of the menu
 	'toggleTarget' => 'navbarMenu',	
 
+	// If set to true, the navbar will have container.
+	'in-container' => true, 
+
 	'align' => 'right', // left | right, default : left.
 
 	/* 
