@@ -46,9 +46,12 @@ class CardTTag extends TapvirTagContainer{
 
 	function __construct($parameters){
 		$this->parameters = $parameters;
-		$div = $this->createCard();
+		if(!empty($this->parameters)){
 
-		parent::__construct('div',null,$div->get());
+			$div = $this->createCard();
+
+			parent::__construct('div',null,$div->get());
+		}
 	}
 
 // 	<div class="card" style="width: 18rem;">
