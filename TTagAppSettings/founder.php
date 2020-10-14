@@ -23,4 +23,9 @@ return [
 
 		'website'=> '',
 		'text' => 'Founder ',
+
+		'extra-row-class' => 'text-center text-white mt-2',
+		'social-link-class' => 'm-2 text-light d-inline-flex ttag-social-link',
+		
+
 	];

@@ -41,7 +41,7 @@ class FounderTTag extends TapvirTagContainer{
 		foreach($this->founder['social'] as $social => $link){
 			if($link !== null){
 				$socialLink = new TeaCTag('i', 'fa fa-'.$social);
-				$anchor = new AnchorTTag($link, $socialLink, 'm-2 text-light d-inline-flex ttag-social-link','target="_blank"');
+				$anchor = new AnchorTTag($link, $socialLink, $this->founder['social-link-class'],'target="_blank"');
 				$socialLinks[] = $anchor->get(); 
 			}
 		}
@@ -71,7 +71,8 @@ class FounderTTag extends TapvirTagContainer{
    		// return $div->get();
 
    		$divs = new DivsTTags($founderData ,[
-   			'extra-row-class' => 'text-center text-white mt-2',
+   			// 'extra-row-class' => 'text-center text-white mt-2',
+   			'extra-row-class' => $this->founder['extra-row-class'],
    			'col' => [12,12,12,12,12],
    		]);
 
