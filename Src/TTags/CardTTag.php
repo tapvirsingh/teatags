@@ -4,7 +4,7 @@ CardsTTag : Class that creates bootstrap 4 cards
 @Author: Tapvir Singh
 */
 
-namespace Src\TTag;
+namespace Src\TTags;
 
 use Src\ContainerTags\TapvirTagContainer;
 
@@ -158,7 +158,7 @@ class CardTTag extends TapvirTagContainer{
 		$additionalClasses = $this->getParameter('card-class');
 
 		$div = new DivTTag('card '.$additionalClasses,$dataToAppend,$styleAttribute);
-		
+
 		return $div;
 	}
 }	

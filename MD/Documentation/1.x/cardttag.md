@@ -18,7 +18,7 @@ This class creates Bootstrap 4 cards.
 <?php
 
 // Namespace
-use Src\TTags\{ArticleTTag};
+use Src\TTags\{CardTTag};
 
 // Useage
 $card = new CardTTag($parameters);
