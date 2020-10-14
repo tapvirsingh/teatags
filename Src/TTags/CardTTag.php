@@ -13,13 +13,33 @@ class CardTTag extends TapvirTagContainer{
 	/**
 		$parameters = [
 			
-			'card-style' : (Optional) It is the equivalent of css style element for the card.
+			'card-style' => (Optional) It is the equivalent of css style element for the card.
 							It sets the style values for the card.
 							example,
 							'width: 18rem;'
 
-			'card-class' : (Optional) Add additional classes to the card. 
+			'card-class' => (Optional) Add additional classes to the card. 
 							'text-right text-sm-left some-custom-class'
+
+			'image' => [
+						'src' : Image source,
+						'alt' : Alternate text of the image,
+					]
+
+			// Buttons.
+			'links' => [
+				'xyz' => 'http://www.some-link.com'
+			]
+
+			'make-button' => [	
+										'0'=>'btn btn-primary'
+										'2'=>'btn btn-secondary'
+							] 
+			// Card Title
+			'title' => 'Xyz',
+			'subtitle' => 'Xyz',
+			'text' => 'Zyx is ....',
+
  
 		]
 	*/

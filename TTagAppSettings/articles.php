@@ -68,6 +68,7 @@ $articles_docFiles = [
 					'InputTTag' => $article_RootWithVariable.'InputTTag',
 					'PassTTag' => $article_RootWithVariable.'PassTTag',
 					'InpTextTTag' => $article_RootWithVariable.'InpTextTTag',
+					'CardTTag' => $article_RootWithVariable.'CardTTag',
 				],
 				'TTag Class Methods' => [
 					'get' => $article_RootWithVariable.'get',
