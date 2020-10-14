@@ -158,6 +158,7 @@ class CardTTag extends TapvirTagContainer{
 		$additionalClasses = $this->getParameter('card-class');
 
 		$div = new DivTTag('card '.$additionalClasses,$dataToAppend,$styleAttribute);
+		
+		return $div;
 	}
-	return $div;
 }	
