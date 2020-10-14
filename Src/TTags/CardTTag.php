@@ -10,6 +10,8 @@ use Src\ContainerTags\TapvirTagContainer;
 
 class CardTTag extends TapvirTagContainer{
 
+	protected $dataToAppend;
+
 	/**
 		$parameters = [
 			
@@ -127,17 +129,28 @@ class CardTTag extends TapvirTagContainer{
 		}
 	}
 
+	protected function appendToDataToAppend($html){
+		if($this->dataToAppend === null)
+			$this->dataToAppend = $html;
+		else
+			$this->dataToAppend .= $html;
+	}
+
 	// create the cards' body.
 	protected function cardBody(){
 
-		$title = $this->cardTitle();
-		$subtitle = $this->cardSubTitle();
-		$text = $this->cardText();
-		$links = $this->cardLinks();
+		$methods = [
+			'cardTitle','cardSubTitle','cardText','cardLinks',
+		];
 
-		$dataToAppend = $title->get().$subtitle->get().$text->get().$links;
+		foreach ($methods as $method) {
+			$object = $this->$method(); 
+			if(is_object($object)){
+				$this->appendToDataToAppend($object->get());
+			}
+		}
 
-		$div = new DivTTag('card-body' ,$dataToAppend);
+		$div = new DivTTag('card-body' ,$this->dataToAppend);
 		return $div->get();
 	}
 
@@ -161,7 +174,7 @@ class CardTTag extends TapvirTagContainer{
 		$additionalClasses = $this->getParameter('card-class');
 
 		$div = new DivTTag('card '.$additionalClasses,$dataToAppend,$styleAttribute);
-
+		
 		return $div;
 	}
 }	
