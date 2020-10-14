@@ -42,6 +42,16 @@ class CardTTag extends TapvirTagContainer{
 			'subtitle' => 'Xyz',
 			'text' => 'Zyx is ....',
 
+			'title-tag' => 'h4' (Default),
+			'title-class' => Additional head classes. 
+
+			'subtitle-tag' => 'h6' (Default),
+			'subtitle-class' => Additional head classes. 	
+
+			'text-class' => Additional head classes. 
+
+			'links-class' => Additional classes can be added here.
+
  
 		]
 	*/
@@ -91,10 +101,17 @@ class CardTTag extends TapvirTagContainer{
 		if($links !== null){
 			// Get the list of indexes to be made buttons.
   			$makeButtons = $this->getParameter('make-buttons');
+
+  			$additionalClasses = $this->getParameter('links-class');
+
   			$index = 0;
 			foreach ($links as $caption => $linkSrc) {
 
 				$class = isset($makeButtons[$index]) ? $makeButtons[$index] : 'card-link';
+
+				if($additionalClasses !== null){
+					$class .= ' '.$additionalClasses;
+				}
 
 				$returnLinks[] = new AnchorTTag($linkSrc, $caption, $class);
 
@@ -109,15 +126,33 @@ class CardTTag extends TapvirTagContainer{
 	protected function cardTitle(){
 		$title = $this->getParameter('title');
 		if($title !== null){
-			return new HeadingTTag('h5',$title,'card-title');
+
+			list($tag,$class) = $this->getTagAndClass('title', 'h4' , 'title-class');
+
+			return new HeadingTTag($tag, $title, $class);
 		}
+	}
+
+	protected function getTagAndClass($prefix, $defaultTag , $defaultClass){
+
+		$tag = $this->getParameter($prefix.'-tag');
+		$class = $this->getParameter($prefix.'-class');
+
+		$tag = $tag === null ? $defaultTag : $tag;
+
+		$class = $class === null ? $defaultClass : $class.' '.$defaultClass;
+
+		return [$tag,$class];
 	}
 
 	// set the card's subtitle.
 	protected function cardSubTitle(){
 		$subTitle = $this->getParameter('subtitle');
 		if($subTitle !== null){
-			return new HeadingTTag('h6',$subTitle,'card-subtitle mb-2 text-muted');
+
+			list($tag,$class) = $this->getTagAndClass('subtitle', 'h6' , 'card-subtitle mb-2 text-muted');
+
+			return new HeadingTTag($tag, $subTitle, $class);
 		}
 	}
 
@@ -147,6 +182,8 @@ class CardTTag extends TapvirTagContainer{
 			$object = $this->$method(); 
 			if(is_object($object)){
 				$this->appendToDataToAppend($object->get());
+			}elseif(is_string($object)){
+				$this->appendToDataToAppend($object);
 			}
 		}
 
