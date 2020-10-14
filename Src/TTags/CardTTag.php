@@ -6,7 +6,9 @@ CardsTTag : Class that creates bootstrap 4 cards
 
 namespace Src\TTag;
 
-class CardTTag extends TapvirTagController{
+use Src\ContainerTags\TapvirTagContainer;
+
+class CardTTag extends TapvirTagContainer{
 
 	/**
 		$parameters = [
@@ -24,6 +26,9 @@ class CardTTag extends TapvirTagController{
 
 	function __construct($parameters){
 		$this->parameters = $parameters;
+		$div = $this->createCard();
+
+		parent::__construct('div',null,$div->get());
 	}
 
 // 	<div class="card" style="width: 18rem;">
@@ -134,5 +139,5 @@ class CardTTag extends TapvirTagController{
 
 		$div = new DivTTag('card '.$additionalClasses,$dataToAppend,$styleAttribute);
 	}
-
-}
+	return $div;
+}	
