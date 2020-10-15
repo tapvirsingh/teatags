@@ -8,13 +8,13 @@ return [
 			// social icon
 	  	 	'icon'=>'facebook-f',
 	  	 	// Link to the social page.
-	  		'link'=> 'https://www.facebook.com/BlazehatTech'
+	  		'link'=> 'https://www.facebook.com/BlazingTeaTags'
 	  	],
 
 		'twitter'=>[
 			'className' => FNTAWSM_BRAND,
 			'icon'=>'twitter',
-			'link'=> 'https://twitter.com/BlazehatTech'
+			'link'=> 'https://twitter.com/BlazingTeaTags'
 		],
 
 		'youtube'=>[

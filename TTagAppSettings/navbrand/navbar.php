@@ -13,7 +13,24 @@ return [
 
 	'align' => 'right', // left | right, default : left.
 
-	'social-classes' => 'm-2 text-light d-inline-flex ttag-social-link',
+	// Additional navbar classes.
+	'navbar-class' => 'mr-3',
+
+	'social-classes' => 'mr-3 text-light d-inline-flex ttag-social-link',
+
+	'social-link-size' => '1x',
+
+	'icons' => [
+		'class'=>	'mr-1',
+		'size' =>'1x',
+	],
+
+	// If both of the following are false, then 
+	// by default captions will be shown.
+	// Show captions
+	'show-captions' => true,
+	// Show icons
+	'show-icons' => true,
 
 	/* 
 	Add navbar classes like navbar-light bg-light navbar-expand-lg, 

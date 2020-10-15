@@ -11,4 +11,6 @@ return [
 			// Bootstrap or custom css classes.
 			'class' => 'p-5  bg-dark',
 			'company-class' => 'text-light text-center',
+
+			'icons-class' => 'mr-1',
 	];

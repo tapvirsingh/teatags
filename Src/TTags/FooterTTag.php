@@ -16,6 +16,8 @@ class FooterTTag extends TapvirTagContainer{
 	protected $recurLinksCount;
 	protected $col;
 
+	protected $config;
+
 	// All classes read from the footer configuration file.
 	protected $classes;
 	// Classes that need to added into the footer tag.
@@ -90,6 +92,9 @@ class FooterTTag extends TapvirTagContainer{
 	// Sets the footer's settings
 	private function configuration($config){
 		if(isset($config)){
+
+			$this->config = $config;
+
 			$this->showFooter = $config['showFooter'];
 			$this->showSocialLinks = $config['showSocialLinks'];
 			$this->showWebIcon = $config['showWebIcon'];
@@ -182,8 +187,39 @@ class FooterTTag extends TapvirTagContainer{
 	}
 
 	// Create the anchor tag.
-	protected function createLink($value, $key = null){
+	protected function createLink2($value, $key = null){
 		return new AnchorTTag($value, $key , $this->footerClass ,' target = "_blank"');
+	}
+
+	// Create the anchor tag.
+	protected function createLink($value, $key = null){
+		// $this->footerLinks;
+
+		if(is_numeric($key)){
+			return null;
+		}
+
+        if(is($this->config['show-captions'],true) || is($this->config['show-icons'],false)){
+            $span = new SpanTTag(null,$key );
+            $html = $span->get();
+        }
+
+        if( 
+        	isset($value['ttag-icon']) &&
+        	($value['ttag-icon'] !== null) && 
+        	is($this->config['show-icons'],true)
+        ){
+                $icon = new FontAwsmTTag(
+                	$value['ttag-icon'], 
+                	$this->config['icons-size'],
+                	$this->classes['icons-class']);
+
+                $html = $icon->get().$html;
+        }
+
+        $link = isset($value['ttag-link']) ? $value['ttag-link'] : $value;
+
+		return new AnchorTTag( $link, $html , $this->footerClass ,' target = "_blank"');
 	}
 
 	protected function createListItem($aD){
@@ -198,9 +234,12 @@ class FooterTTag extends TapvirTagContainer{
 	}
 
 	protected function createListCaption($key){
-		//  Caption of the list.
-		$caption = new SpanTTag($this->footerSubLinkCaption, $key);
-		return $caption->get();
+
+		if($key !== 'ttag-social'){
+			//  Caption of the list.
+			$caption = new SpanTTag($this->footerSubLinkCaption, $key);
+			return $caption->get();
+		}
 	}
 
 	protected function createDiv($listWithCaption){
@@ -231,7 +270,7 @@ class FooterTTag extends TapvirTagContainer{
 		// Because when first time the links are sent, they have the key links.
 		// but when called recurrsively this key does not exists. $key now is
 		// the caption.
-		$caption = !isset($links['caption']) ? $key :$links['caption'];
+		$caption = !isset($links['caption']) ? $key : $links['caption'];
 		$links = !isset($links['links']) ? $links : $links['links'];
 
 		$caption = $this->createListCaption($caption);
@@ -242,7 +281,12 @@ class FooterTTag extends TapvirTagContainer{
 		// call this function again and create recurrtion.
 		foreach ($links as $key => $value) {
 
-			if(is_array($value)){
+			// debugTTag($key);
+			// debugTTag($value);
+			// debugTTag(contains('ttag-',$key));
+
+			// if(is_array($value)){
+			if(!contains('ttag-',$value) && is_array($value)){
 				// html of the links is returned.
 				$returnedLink[] = $this->generateOneSetOfFooterLinks($value, $key);
 
@@ -250,7 +294,9 @@ class FooterTTag extends TapvirTagContainer{
 				// An anchor object is returned
 				$linkObj = $this->createLink($value,$key);
 				// It is converted to html.
-				$returnedLink[] = $linkObj->get();
+				if(is_object($linkObj)){
+					$returnedLink[] = $linkObj->get();
+				}
 
 			}
 		}

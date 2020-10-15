@@ -126,3 +126,32 @@ function ttag_theme(){
 	global $ttag_Theme;
 	return ROOT.'Themes/'.$ttag_Theme;
 }
+
+// Check value if it is 
+function is($value,$condition){
+	return (isset($value) && $value === $condition);    
+}
+
+// Check value if its not
+function isNot($value,$condition){
+	return (isset($value) && $value !== $condition);    
+}
+
+// Checks if a substring exists in a string. Returns boolean 
+function contains($needle,$string){
+	$bool = false;
+
+	if(is_array($string)){
+
+		foreach ($string as $key => $value) {
+			$bool = strpos($key, $needle) !== false;
+			if($bool){
+				break;
+			}
+		}
+		
+	}else{
+		$bool = strpos($string, $needle) !== false;
+	}
+	return $bool;
+}

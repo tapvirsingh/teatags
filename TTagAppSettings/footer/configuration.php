@@ -21,6 +21,14 @@ return [
 		// a = auto, h = horizontal, v = vertical
 		'orien' => 'v', 
 
+		// Show captions
+		'show-captions' => true,
+
+		// Show icons
+		'show-icons' => true,
+
+		'icons-size' => '1x',	
+
 		// You can set the order in which the footer information should appear.
 		// Starting from the left most which will appear first then the others.
 		// 'icon',

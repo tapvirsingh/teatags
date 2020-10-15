@@ -302,7 +302,10 @@ $ttag_NavigationLinks = [
     protected function manageSocialLinks(){
         $social = null;
         foreach ($this->socialLinks as $key => $address) {
-            $social[] = new SocialTTag($address);
+
+            $size = isset($this->navbar['social-link-size']) && $this->navbar !== null ? $this->navbar['social-link-size'] : null;
+
+            $social[] = new SocialTTag($address, $size);
         }
              // Get the social links 
         // embed those into the menu
@@ -311,25 +314,49 @@ $ttag_NavigationLinks = [
          return ttag_getCombinedHtml($social);
     }
 
+
     protected function manageLinks($address,$nav){
         $class = $this->isThisNavSetToActive($nav);
         //                Create the clickable button for the list.
         // $clickableButton = new AnchorTapvirTagContainer($address, $nav, 'class="nav-link"');
-        $clickableButton = new AnchorTTag($address, $nav, 'nav-link');
-        //                Add the button and dropdown list html into the list item.
-        $li = new TeaCTag('li', $class, $clickableButton->get(), false);
+
+        if(is($this->navbar['show-captions'],true) || is($this->navbar['show-icons'],false)){
+            $span = new SpanTTag(null,$nav);
+            $html = $span->get();
+        }
+        if(isNot($address['ttag-icon'],null) && is($this->navbar['show-icons'],true)){
+            // $icon = faIcon($address['ttag-icon']);
+
+                $icon = new FontAwsmTTag($address['ttag-icon'], $this->navbar['icons']['size'],$this->navbar['icons']['class']);
+                $html = $icon->get().$html;
+        }
+
+
+        $clickableButton = new AnchorTTag($address['ttag-link'], $html, 'nav-link');
+
+        //  Add the button and dropdown list html into the list item.
+        $li = new TeaCTag('li', $class,  $clickableButton->get(), false);
 
         return $li;
     }
 
     private function getLinkType($address,$nav){
         //            If its a dropdown list
-            $linkType = is_array($address) === true ? 'dropdown' : 'link';
+            // $linkType = is_array($address) === true ? 'dropdown' : 'link';
+            // Default.
+            $linkType =  'dropdown';
 
              // If string has ttag- prefix manage it as a link
             // and not as a dropdown.
             if (strpos($nav, 'ttag-') !== false) {
                 $linkType = 'social';
+            }else{
+                foreach ($address as $key => $value) {
+                    if(strpos($key, 'ttag-') !== false){
+                        $linkType = 'list';
+                        break;
+                    }
+                }
             }
 
             return $linkType;
@@ -384,11 +411,19 @@ $ttag_NavigationLinks = [
 //        Create the nav menu container
 //        $ul = new TapvirTagContainer('ul', 'class="navbar-nav mr-auto navLinks"', $createdMenu, false);
        $alignClass = 'mr-auto';
-       if(isset($this->navbar['align']) && $this->navbar['align'] === 'right'){
+       // if(isset($this->navbar['align']) && $this->navbar['align'] === 'right'){
+       if(is($this->navbar['align'],'right')){
        		$alignClass = 'ml-auto';
        }  
 
-        $ul = new TeaCTag('ul', 'navbar-nav '.$alignClass, $createdMenu);
+       $navbarClass = $alignClass;
+
+       // if navbar-class is set.
+       if(isNot($this->navbar['navbar-class'],null)){
+            $navbarClass .= ' '.$this->navbar['navbar-class'];
+       }
+
+        $ul = new TeaCTag('ul', 'navbar-nav '.$navbarClass, $createdMenu);
 
         $return = $ul->get();
         if($this->socialLinks !== null){

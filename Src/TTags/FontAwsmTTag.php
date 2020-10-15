@@ -11,17 +11,27 @@ use Src\ContainerTags\TapvirTagContainer;
 
 class FontAwsmTTag extends TapvirTagContainer{
 
-	function __construct($ico, $size = 1){
+	function __construct($ico, $size = '1x', $additionalClass = null,$decorative = true,$class = 'fa'){
 
-		$attribute = 'fa fa-'.$ico;
+		$attribute = $class.' fa-'.$ico;
 
-		if($size > 1){
+		if($size != '1x'){
 			$attribute .= ' fa-'.$size;
 		}
 
-		$class = ' class = "'.$attribute.'"';
+		$setClass = ' class = "'.$attribute;
 
-		parent::__construct('i', $class);
+		if($additionalClass !== null){
+			$setClass .= ' '.$additionalClass;
+		}
+
+		$setClass .= '"';
+
+		if($decorative){
+			$setClass .= '  aria-hidden="true"';
+		}
+
+		parent::__construct('i', $setClass);
 	}
 
 };

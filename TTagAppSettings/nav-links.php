@@ -9,17 +9,26 @@ if(!Src\TeaTag::authorised()){
 
 	return  [
 
-		'Home'=> ttag_IndexView(),
+		'Home'=> [
+			'ttag-icon' => 'home',
+			'ttag-link' => ttag_IndexView(),
+		],
 
 		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
-		'Documentation' => ttag_View('documentation'),
+		'Documentation' => [
+			'ttag-icon' => 'book',
+			'ttag-link'=>ttag_View('documentation'),
+		],
 		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
 
 		// 'Downloads' => ttag_View('download-themes'),
 		
-		'Blogs' => 'https://blazehattech.blogspot.com/',
+		'Blogs' => [
+			'ttag-icon' => 'external-link',
+			'ttag-link'=>'https://blazehattech.blogspot.com/',
+		],
 
-		// social here in lowercase is a keyword, it will pick up the 
+		// ttag-social here in lowercase is a keyword, it will pick up the 
 		// social links to show on navbar.
 		'ttag-social' =>[
 			'facebook',
