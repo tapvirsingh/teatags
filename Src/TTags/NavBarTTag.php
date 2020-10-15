@@ -18,6 +18,8 @@ class NavBarTTag extends TapvirTagContainer{
   	private $activeKey;
     private $navbar;
 
+    protected $socialLinks = null;
+
     function __construct(
     					// Array in the key value format 
     					//  Set the name of the key active for the page.
@@ -286,8 +288,87 @@ $ttag_NavigationLinks = [
 
 ];
 */
+    protected function manageDropdownList($address,$nav){
+         $dropDownList .=  $this->createDropDownList3($address,$nav);
 
+//                Create the clickable button for the list.
+        $clickableButton = new AnchorTTag('#', $nav, 'nav-link dropdown-toggle',' id="navbarDropdown'.$i.'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"');
+//                Add the button and dropdown list html into the list item.
+        $li = new TeaCTag('li', 'nav-item dropdown', $clickableButton->get().$dropDownList);
 
+        return $li;
+    }
+
+    protected function manageSocialLinks(){
+        $social = null;
+        foreach ($this->socialLinks as $key => $address) {
+            $social[] = new SocialTTag($address);
+        }
+             // Get the social links 
+        // embed those into the menu
+         // $class = $this->isThisNavSetToActive($nav);
+         // $li = new TeaCTag('li', $class, $social->get());
+         return ttag_getCombinedHtml($social);
+    }
+
+    protected function manageLinks($address,$nav){
+        $class = $this->isThisNavSetToActive($nav);
+        //                Create the clickable button for the list.
+        // $clickableButton = new AnchorTapvirTagContainer($address, $nav, 'class="nav-link"');
+        $clickableButton = new AnchorTTag($address, $nav, 'nav-link');
+        //                Add the button and dropdown list html into the list item.
+        $li = new TeaCTag('li', $class, $clickableButton->get(), false);
+
+        return $li;
+    }
+
+    private function getLinkType($address,$nav){
+        //            If its a dropdown list
+            $linkType = is_array($address) === true ? 'dropdown' : 'link';
+
+             // If string has ttag- prefix manage it as a link
+            // and not as a dropdown.
+            if (strpos($nav, 'ttag-') !== false) {
+                $linkType = 'social';
+            }
+
+            return $linkType;
+    }
+
+    protected function createNavLink(){
+
+        $createdMenu = ' ';
+
+        foreach($this->linksWithCaptions as $nav => $address){
+
+            $linkType = $this->getLinkType($address,$nav);
+
+            switch ($linkType) {
+
+                case 'social':
+                    // $li = $this->manageSocialLinks($address,$nav);
+                    $this->socialLinks[$nav] = $address;
+                    break;
+
+               case 'dropdown':
+                    $li = $this->manageDropdownList($address,$nav);
+                    $createdMenu .= $li->get();
+
+                    break;
+
+                default:
+                    $li = $this->manageLinks($address,$nav);
+                    $createdMenu .= $li->get();
+
+                    break;
+            }
+
+//            Increment navlist counter.
+            $this->navListCounter++;
+        }
+
+        return $createdMenu;
+    }
 
 	private function createNavList2(){
 
@@ -295,38 +376,10 @@ $ttag_NavigationLinks = [
     		return null;
     	}
 
-        $createdMenu = ' ';
 
         // global $this->navbar;
 
-        foreach($this->linksWithCaptions as $nav => $address){
-//            If its a dropdown list
-            if(is_array($address)){
-//                Create the dropdownlist html.
-                $dropDownList .=  $this->createDropDownList3($address,$nav);
-
-		//                Create the clickable button for the list.
-		        $clickableButton = new AnchorTTag('#', $nav, 'nav-link dropdown-toggle',' id="navbarDropdown'.$i.'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"');
-		//                Add the button and dropdown list html into the list item.
-		        $li = new TeaCTag('li', 'nav-item dropdown', $clickableButton->get().$dropDownList);
-		//                Create a html code for the created menu.
-		         $createdMenu .=  $li->get();
-
-            }else{
-//                If its not a dropdown list but is a menu item.
-               $class = $this->isThisNavSetToActive($nav);
-//                Create the clickable button for the list.
-                // $clickableButton = new AnchorTapvirTagContainer($address, $nav, 'class="nav-link"');
-                $clickableButton = new AnchorTTag($address, $nav, 'nav-link');
-//                Add the button and dropdown list html into the list item.
-                $li = new TeaCTag('li', $class, $clickableButton->get(), false);
-//                Create a html code for the created menu.
-                $createdMenu .= $li->get();
-                
-            }
-//            Increment navlist counter.
-            $this->navListCounter++;
-        }
+        $createdMenu = $this->createNavLink();
         
 //        Create the nav menu container
 //        $ul = new TapvirTagContainer('ul', 'class="navbar-nav mr-auto navLinks"', $createdMenu, false);
@@ -336,7 +389,14 @@ $ttag_NavigationLinks = [
        }  
 
         $ul = new TeaCTag('ul', 'navbar-nav '.$alignClass, $createdMenu);
-        return $ul->get();
+
+        $return = $ul->get();
+        if($this->socialLinks !== null){
+            $socialLinks = $this->manageSocialLinks();
+            $return .= $socialLinks;
+        }
+
+        return $return;
         
     }
 

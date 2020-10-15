@@ -18,6 +18,15 @@ if(!Src\TeaTag::authorised()){
 		// 'Downloads' => ttag_View('download-themes'),
 		
 		'Blogs' => 'https://blazehattech.blogspot.com/',
+
+		// social here in lowercase is a keyword, it will pick up the 
+		// social links to show on navbar.
+		'ttag-social' =>[
+			'facebook',
+			'twitter',
+			'linkedin',
+			'github',
+		],
 	];
 
 // return $ttag_NavigationLinks;

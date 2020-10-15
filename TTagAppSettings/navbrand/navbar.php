@@ -13,6 +13,8 @@ return [
 
 	'align' => 'right', // left | right, default : left.
 
+	'social-classes' => 'm-2 text-light d-inline-flex ttag-social-link',
+
 	/* 
 	Add navbar classes like navbar-light bg-light navbar-expand-lg, 
 	other than the navbar class, it is added by default. We recommend 
