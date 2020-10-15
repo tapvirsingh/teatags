@@ -161,9 +161,12 @@ class FooterTTag extends TapvirTagContainer{
 	} 
 
 	protected function showCopyright(){
+
 		$website = new AnchorTTag($this->company['website'],$this->company['company'],'ttag-developer-company','target = "_blank"');
+
 		$text = $this->company['copyright'].' '.$website->get().' - All Rights Reserved';
-		$p = new ParaTTag($text,'text-light text-center');
+
+		$p = new ParaTTag($text,$this->classes['company-class']);
 		$this->setFooterInnerHtml($p->get());
 	}
 
