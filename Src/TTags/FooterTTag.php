@@ -328,16 +328,23 @@ class FooterTTag extends TapvirTagContainer{
 		$caption = !isset($links['caption']) ? $key :$links['caption'];
 		$links = !isset($links['links']) ? $links : $links['links'];
 
+		if(!is_array($links)){
+			return null;
+		}
+
 		$caption = $this->createListCaption($caption);
 
 		$returnedLink = null;
 		$foundArrayKey = null;
 		$foundArrayValue = null;
+
+
 		// Loop through all the links if any of the value is an array,
 		// call this function again and create recurrtion.
 		foreach ($links as $key => $value) {
 
-			if(is_array($value)){
+			// if(is_array($value)){
+			if(!contains('ttag-',$value)){
 				$foundArrayKey = $key;
 				$foundArrayValue = $value;
 			}else{
@@ -415,16 +422,19 @@ class FooterTTag extends TapvirTagContainer{
 
 			}else{
 				$divs=null;
+
 				do{
 
 					$ret = $this->divideNavMenu($value, $key);
+
+					// debugTTag($ret);
 
 					$divs[] = $ret['div'];
 					if( $ret['foundArrayKey'] !== null ){
 						// debugTTag($value);
 						// debugTTag($ret['foundArrayValue']);
 
-						$value = $ret['foundArrayValue'];
+						$value = $ret['foundArrayValue']; 
 						$key = $ret['foundArrayKey'];
 					}
 
@@ -473,17 +483,17 @@ class FooterTTag extends TapvirTagContainer{
 
 		foreach ($this->footerLinks as $keyF) {
 
+
 			$returnedLink = null;
 
 			$caption = $keyF['caption'];
 			$caption = $this->createListCaption($caption);
 
-
 			foreach ($keyF['links'] as $key => $value) {
 
 				if($key == 'ttag-social'){
 					continue;
-				}
+				}				
 
 				$linkObj = $this->createLink($value, $key);
 					// It is converted to html.
@@ -514,10 +524,10 @@ class FooterTTag extends TapvirTagContainer{
 
 	protected function generateFooterLinks(){
 
+
 		if($this->footerLinks === null ){
 			return null;
 		}
-
 		// debugTTag($this->totalFooterLinksCount);
 		// debugTTag($this->recurLinksCount);
 		// debugTTag($this->linksCount);
@@ -527,6 +537,7 @@ class FooterTTag extends TapvirTagContainer{
 				$dRowHtml = $this->createHorizontalLinks();
 				break;
 			case 'v':
+
 				$dRowHtml = $this->createVerticalLinks();
 				break;
 			

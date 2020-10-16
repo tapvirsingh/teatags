@@ -19,7 +19,7 @@ return [
 		'maxHorLinkCount' => 6, 
 		'webIconLink' => 'tea.png',
 		// a = auto, h = horizontal, v = vertical
-		'orien' => 'v', 
+		'orien' => 'h', 
 
 		// Show captions
 		'show-captions' => true,
