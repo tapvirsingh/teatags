@@ -210,9 +210,11 @@ class FooterTTag extends TapvirTagContainer{
         	is($this->config['show-icons'],true)
         ){
                 $icon = new FontAwsmTTag(
-                	$value['ttag-icon'], 
-                	$this->config['icons-size'],
-                	$this->classes['icons-class']);
+                	$value['ttag-icon'],
+                	[
+                	'fa-size'=>$this->config['icons-size'],
+                	'class' => $this->classes['icons-class'],
+                	] );
 
                 $html = $icon->get().$html;
         }

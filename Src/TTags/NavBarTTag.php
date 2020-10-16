@@ -327,7 +327,12 @@ $ttag_NavigationLinks = [
         if(isNot($address['ttag-icon'],null) && is($this->navbar['show-icons'],true)){
             // $icon = faIcon($address['ttag-icon']);
 
-                $icon = new FontAwsmTTag($address['ttag-icon'], $this->navbar['icons']['size'],$this->navbar['icons']['class']);
+                $icon = new FontAwsmTTag($address['ttag-icon'], 
+                    [
+                        'fa-size'=> $this->navbar['icons']['size'],
+                        'class'=> $this->navbar['icons']['class'],
+                    ],
+                );
                 $html = $icon->get().$html;
         }
 
