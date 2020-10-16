@@ -343,8 +343,12 @@ class FooterTTag extends TapvirTagContainer{
 			}else{
 				// An anchor object is returned
 				$linkObj = $this->createLink($value,$key);
-				// It is converted to html.
-				$returnedLink[] = $linkObj->get();
+				if(is_object($linkObj)){
+					// It is converted to html.
+					$returnedLink[] = $linkObj->get();
+				}elseif($linkObj !== null){
+					$returnedLink[] = $linkObj;
+				}
 
 			}
 		}
@@ -474,7 +478,12 @@ class FooterTTag extends TapvirTagContainer{
 			$caption = $keyF['caption'];
 			$caption = $this->createListCaption($caption);
 
+
 			foreach ($keyF['links'] as $key => $value) {
+
+				if($key == 'ttag-social'){
+					continue;
+				}
 
 				$linkObj = $this->createLink($value, $key);
 					// It is converted to html.
@@ -484,7 +493,7 @@ class FooterTTag extends TapvirTagContainer{
 
 			$valReturned = ttag_getCombinedHtml($returnedLink);
 				
-			$div = new DivTTag('col-12 text-center', $caption.$valReturned);
+			$div = new DivTTag($this->classes['horiz-links'], $caption.$valReturned);
 
 			$links[] = $div->get();
 		}
