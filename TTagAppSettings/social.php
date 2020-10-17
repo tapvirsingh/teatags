@@ -3,7 +3,7 @@
 return [
 
 		'facebook'=>[
-			// Fontawsome class ie. 'fab fa-'
+			// Fontawesome class ie. 'fab fa-'
 			'className' => FNTAWSM_BRAND,
 			// social icon
 	  	 	'icon'=>'facebook-f',
