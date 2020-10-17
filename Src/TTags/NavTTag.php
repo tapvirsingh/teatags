@@ -168,7 +168,7 @@ class NavTTag extends TapvirTagContainer{
 
 			$fileName =  $issetHref ? $value : $key;
 
-			$subHref = ARTICLE_ROOT_WITH_VAR.$fileName;
+			$subHref =  cleanedUrl('docs').$fileName;
 
 			$lis[] =  $this->createLink($value,$subHref,NAVTAGG_INDENT);
 		}
@@ -214,7 +214,7 @@ class NavTTag extends TapvirTagContainer{
 
 				$fileName =  $issetHref ? $href : $caption;
 
-				$href = ARTICLE_ROOT_WITH_VAR.$fileName;
+				$href = cleanedUrl('docs').$fileName;
 
 				$lis[] = $this->createLink($caption,$href);
 			}else{

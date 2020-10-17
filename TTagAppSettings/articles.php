@@ -13,11 +13,10 @@ $articles_mdSubFolder = '/Documentation/1.x/';
 // 		];
 
 $default_DocArticle = 'introducing-tea-tags';
-$article_Root = ttag_View().'documentation.php';
-$article_RootWithVariable = $article_Root.'?'.$ttag_ArticleVariable.'=';
+// $article_Root = ttag_View().'documentation.php';
 
 if(!defined('ARTICLE_ROOT_WITH_VAR')){
-	define('ARTICLE_ROOT_WITH_VAR',$article_RootWithVariable);
+	define('ARTICLE_ROOT_WITH_VAR', cleanedUrl());
 }
 
 // Please also note that md extention is used here.

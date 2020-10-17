@@ -70,6 +70,13 @@ function ttag_View($file = null){
 		return ROOT.'Views/';
 }
 
+function cleanedUrl($url = null){
+	if($url !== null)
+		return ROOT.$url.'/';	
+	else
+		return ROOT;	
+}
+
 // Loads the Image file.
 function ttag_Image($file){
 	return ttag_theme().'/'.'Images/'.$file;

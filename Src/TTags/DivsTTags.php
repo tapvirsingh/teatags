@@ -185,7 +185,10 @@ $parameters :
 			$this->setContainerCode(ttag_getCombinedHtml($divRows));	
 		}else{
 			// if the array is to be positioned in columns
-			if($this->parameters['position'] == 'c') { 
+			$position = $this->getParameter('position');
+
+			// if($this->parameters['position'] == 'c') { 
+			if($position == 'c') { 
 					// Columns
 					$divRows = $this->manageArrayRow($this->array);
 					$this->setContainerCode(ttag_getCombinedHtml($divRows));

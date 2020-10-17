@@ -1,1 +1,8 @@
 ErrorDocument 404 /Tag/Views/Errors/404.php
+
+RewriteEngine On
+
+RewriteRule ^docs/$ Views/documentation.php [NC]
+RewriteRule ^docs/([0-9a-zA-z_-]+)$ Views/documentation.php?article=$1 [NC,L]
+
+RewriteRule ^/ index.php [NC,L]

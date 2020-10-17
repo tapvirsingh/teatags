@@ -11,13 +11,15 @@ if(!Src\TeaTag::authorised()){
 
 		'Home'=> [
 			'ttag-icon' => 'home',
-			'ttag-link' => ttag_IndexView(),
+			// 'ttag-link' => ttag_IndexView(),
+			'ttag-link' => cleanedUrl(),
 		],
 
 		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
 		'Documentation' => [
 			'ttag-icon' => 'book',
-			'ttag-link'=>ttag_View('documentation'),
+			// 'ttag-link'=>ttag_View('documentation'),
+			'ttag-link'=> cleanedUrl('docs'),
 		],
 		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
 
