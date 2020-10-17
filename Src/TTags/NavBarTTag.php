@@ -331,8 +331,7 @@ $ttag_NavigationLinks = [
                     [
                         'fa-size'=> $this->navbar['icons']['size'],
                         'class'=> $this->navbar['icons']['class'],
-                    ],
-                );
+                    ] );
                 $html = $icon->get().$html;
         }
 
