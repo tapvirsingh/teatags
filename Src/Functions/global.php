@@ -155,3 +155,8 @@ function contains($needle,$string){
 	}
 	return $bool;
 }
+
+function getArticleRoot($file){
+	$article_Root = ttag_View().'documentation.php';
+	$article_RootWithVariable = $article_Root.'?'.$ttag_ArticleVariable.'=';
+}

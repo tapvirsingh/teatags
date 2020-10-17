@@ -159,13 +159,18 @@ class NavTTag extends TapvirTagContainer{
 		return 'nav ttag-nav';
 	}
 
-	private function createLinkFromArray($caption,$href){
+	private function createLinkFromArray($caption,$href,$issetHref){
 
 		$cap = $this->getCaption($caption);
 		$lis = null;
 
 		foreach ($href as $key => $value) {
-			 $lis[] =  $this->createLink($key,$value,NAVTAGG_INDENT);
+
+			$fileName =  $issetHref ? $value : $key;
+
+			$subHref = ARTICLE_ROOT_WITH_VAR.$fileName;
+
+			$lis[] =  $this->createLink($value,$subHref,NAVTAGG_INDENT);
 		}
 
 		$addAttrib = 'id = "'.$this->getMultiLinkId().'"';
@@ -204,10 +209,18 @@ class NavTTag extends TapvirTagContainer{
 		$lis = null;
 		$this->index = 0;
 		foreach($this->navList as $caption => $href){
-			if(!is_array($href))
+			$issetHref = isset($href);
+			if(!is_array($href)){
+
+				$fileName =  $issetHref ? $href : $caption;
+
+				$href = ARTICLE_ROOT_WITH_VAR.$fileName;
+
 				$lis[] = $this->createLink($caption,$href);
-			else
-				$lis = array_merge($lis, $this->createLinkFromArray($caption,$href));
+			}else{
+
+				$lis = array_merge($lis, $this->createLinkFromArray($caption,$href,$issetHref));
+			}
 
 			$this->index++;
 		}
