@@ -21,7 +21,8 @@ return [
 			'github' => 'https://github.com/tapvirsingh',
 		],
 
-		'website'=> '',
+		'website'=> 'https://tapvir.blogspot.com/',
+		'website-name'=> 'tapvir.blogspot.com',
 		'text' => 'Founder ',
 
 		'extra-row-class' => 'text-center text-white mt-2',

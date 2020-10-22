@@ -37,7 +37,7 @@ code{
 }
 
 
-.ttag-footer-link ,.ttag-footer-h-link, .ttag-developer-company {
+.ttag-footer-link ,.ttag-footer-h-link, .ttag-developer-company, .ttag-founder-web-link {
 	color:#8ac3ff;
 
 }
@@ -72,7 +72,8 @@ footer{
     background-position: center;
 }
 
-.ttag-footer-link:hover, .ttag-footer-h-link:hover, .ttag-developer-company:hover {
+.ttag-footer-link:hover, .ttag-footer-h-link:hover, .ttag-developer-company:hover, 
+.ttag-founder-web-link:hover {
     color: #c0d9ff;
     text-decoration: none;
 }

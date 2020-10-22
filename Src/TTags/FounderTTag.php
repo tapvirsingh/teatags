@@ -14,6 +14,7 @@ class FounderTTag extends TapvirTagContainer{
 	protected $founder;
 	private $name;
 	private $website;
+	private $websiteName;
 	private $text;
 	private $socialLinks;
 	private $dpFile;
@@ -27,6 +28,7 @@ class FounderTTag extends TapvirTagContainer{
 		$this->name = $this->founder['name'];
 		$this->text = $this->founder['text'];
 		$this->website = $this->founder['website'];
+		$this->websiteName = $this->founder['website-name'];
 
 		$this->dpFile = $this->founder['dp']['file'];
 		$this->dpStyle = $this->founder['dp']['style'];
@@ -62,7 +64,8 @@ class FounderTTag extends TapvirTagContainer{
    		$text = $text->get();
    		$dp = $dp->get();
    		$name = $this->name;
-   		$website = $this->website;
+   		$webName = isset($this->websiteName) && $this->websiteName !== null ? $this->websiteName : $this->website; 
+   		$website = new AnchorTTag($this->website,$webName,'ttag-founder-web-link');
    		$socialLinks = ttag_getCombinedHtml($dataToAppend);
 
    		$founderData = [$text,$dp,$name,$website,$socialLinks];
