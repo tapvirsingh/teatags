@@ -11,9 +11,13 @@ use Src\ContainerTags\TapvirTagContainer;
 class CardTTag extends TapvirTagContainer{
 
 	protected $dataToAppend;
+	protected $accordionId;
+	protected $count;
 
 	/**
 		$parameters = [
+
+			'accordion-id' => null (default) . When is set creates cards for accordion.
 			
 			'card-style' => (Optional) It is the equivalent of css style element for the card.
 							It sets the style values for the card.
@@ -59,6 +63,8 @@ class CardTTag extends TapvirTagContainer{
 	function __construct($parameters){
 		$this->parameters = $parameters;
 		if(!empty($this->parameters)){
+
+			$this->accordionId = $this->getParameter('accordion-id');
 
 			$div = $this->createCard();
 
@@ -199,6 +205,34 @@ class CardTTag extends TapvirTagContainer{
 			$styleAttribute = 'style = "'.$style.'"';
 		}
 		return $styleAttribute;
+	}
+
+	// UA - Unique attribute
+	protected function getUA($text){
+		return $this->accordionId.$text.$this->count;
+	}
+
+	protected function createAccordCardBody(){
+		// <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+		// $dataToAppend,$extraAttribute = null)
+		$body = $this->cardBody();
+
+		$extraAttribute = ' id="'.$this->getUA('collapse').'"  aria-labelledby="'.$this->getUA('heading').'" data-parent="'.$this->accordionId.'"';
+
+		$div = new DivTTag('collapse',$body,$extraAttribute);
+
+		return $div->get();
+	}
+
+	protected function createAccordCardHeader(){
+
+		// $button = new 
+
+		$h2 = new HeadingTTag('h2',$button,'mb-0')
+
+		$extraAttribute = 'id = "'.$this->getUA('heading').'"';
+
+		$div = new DivTTag('card-header',$h2,$extraAttribute);
 	}
 
 
