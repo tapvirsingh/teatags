@@ -21,7 +21,7 @@ This class creates Bootstrap 4 accordion.
 use Src\TTags\{AccordionTTag};
 
 // Useage
-$card = new AccordionTTag($parameters);
+$accord = new AccordionTTag($parameters);
 
 ```
 <p class = "ttag-code-caption text-muted"><b>example.php</b></p>
@@ -30,13 +30,13 @@ $card = new AccordionTTag($parameters);
 
 **`$parameters` : Array** : It takes an array with following keys.
 
-1. **`'accordion-id'` : String** : `null` <span class="badge badge-dark">Default</span>, when is set creates cards for accordion. The value must be same as that of the `accordion-id` set for `AccordionTTag`.
+1. **`'accordion-id'` : String** : `null` <span class="badge badge-dark">Default</span>, it sets the `id` for accordion.
 
 2. **`'default-show'` : Int** <span class="badge badge-dark">Only for AccordionTTag</span> : `0` <span class="badge badge-dark">Default</span> The index of the card that needs to be shown by default.
 
 --- 
 
-**`$parameters['data']` : Array** : Takes following values as keys. Note following paramaeters are as same as those of [CardTTag](../docs/CardTTag) as internally AccordionTTag uses `CardTTag` for creating accordion.
+**`$parameters['data']` : Array** : Takes following values as keys. Note following parameters are as same as those of [CardTTag](../docs/CardTTag), internally AccordionTTag uses `CardTTag` for creating accordion.
 
 1. **`'title'` : String** : Title of the card.
 

@@ -3,11 +3,6 @@
 	Donot make any changes to this file.
 */
 
-// // auto load classes.
-// spl_autoload_register(function ($className) {
-//     require_once $className . '.php';
-// });
-	
 define("ROOT", "http://localhost/tag/");
 // define("ROOT", "/");
 
