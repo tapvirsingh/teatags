@@ -26,7 +26,6 @@ $card = new AccordionTTag($parameters);
 ```
 <p class = "ttag-code-caption text-muted"><b>example.php</b></p>
 
-
 **Parameters**
 
 **`$parameters` : Array** : It takes an array with following keys.

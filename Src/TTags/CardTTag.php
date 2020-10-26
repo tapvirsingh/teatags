@@ -252,7 +252,7 @@ class CardTTag extends TapvirTagContainer{
         $collapseValue = $this->getUA('collapse');
         $extraAttribBtn = 'type="button" data-toggle="collapse" data-target="#'.$collapseValue.'" aria-expanded="true" aria-controls="'.$collapseValue.'"';
 
-		$button = new TeaCTag('button','btn btn-link btn-block text-left',$title,$extraAttribBtn);
+		$button = new TeaCTag('button','btn tta-card-header btn-block text-left',$title,$extraAttribBtn);
 
 		$h2 = new HeadingTTag('h2',$button->get(),'mb-0');
 

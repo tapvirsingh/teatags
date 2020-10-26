@@ -17,6 +17,7 @@ class ArticleTTag extends TapvirTagContainer{
 	protected $filesCount;
     protected $parameters;
     protected $articleName;
+    protected $filterInputVal;
 
     // protected $loadDirectlyFromMD;
     
@@ -55,6 +56,11 @@ class ArticleTTag extends TapvirTagContainer{
 		$this->setTheFilename($file);
         $this->queryString($file);
     }
+
+    public function getFilterInputVal(){
+        return $this->filterInputVal;
+    }
+
 
     /*
     	Todo.
@@ -103,7 +109,7 @@ class ArticleTTag extends TapvirTagContainer{
         $type = $this->getFilterInputType();
         $filter = $this->getFilter();
         
-        $return = filter_input ($type , $variable ,$filter);
+        $this->filterInputVal = $return = filter_input ($type , $variable ,$filter);
 
         if($return === false || $return === null){
             $this->setArticle($file);
