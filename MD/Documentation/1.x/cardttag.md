@@ -21,7 +21,7 @@ This class creates Bootstrap 4 cards.
 use Src\TTags\{CardTTag};
 
 // Useage
-$card = new CardTTag($parameters);
+$card = new CardTTag($parameters,$count = null);
 
 ```
 <p class = "ttag-code-caption text-muted"><b>example.php</b></p>
@@ -29,24 +29,26 @@ $card = new CardTTag($parameters);
 
 **Parameters**
 
+**`$parameters` : Array** : It takes a single dimension array values with following keys.
 
-**`'accordion-id'` : String** : `null` <span class="badge badge-dark">Default</span>, when is set creates cards for accordion. The value must be same as that of the `accordion-id` set for `AccordionTTag`.
+1. **`'accordion-id'` : String** : `null` <span class="badge badge-dark">Default</span>, when is set creates cards for accordion. The value must be same as that of the `accordion-id` set for `AccordionTTag`.
 
-**`'title'` : String** : Title of the card.
+2. **`'default-show'` : Int** <span class="badge badge-dark">Only for AccordionTTag</span> : `0` <span class="badge badge-dark">Default</span> The index of the card that needs to be shown by default.
 
-**`'subtitle'` : String** : Subtitle of the card.
+3. **`'title'` : String** : Title of the card.
 
-**`'text'` : String**  : Text in the card.
+4. **`'subtitle'` : String** : Subtitle of the card.
 
-**`'card-style'` : String** <span class="badge badge-dark">Optional</span> : It is the equivalent of css style element for the card.
+5. **`'text'` : String**  : Text in the card.
+
+6. **`'card-style'` : String** <span class="badge badge-dark">Optional</span> : It is the equivalent of css style element for the card.
 				It sets the style values for the card. 
+ 				Example,  `'width: 18rem;'`
 
-Example,  `'width: 18rem;'`
-
-**`'card-class'` : String** <span class="badge badge-dark">Optional</span> : Add additional classes to the card. 
+7. **`'card-class'` : String** <span class="badge badge-dark">Optional</span> : Add additional classes to the card. 
 				'text-right text-sm-left some-custom-class'
 
-**`'image'` : Array** : Card's image source and alternate text. 
+8. **`'image'` : Array** : Card's image source and alternate text. 
  
 ```php
 <?php
@@ -63,7 +65,7 @@ $parameters = [
 
 <p class = "ttag-code-caption text-muted"><b>Example of <code>'image'</code></b></p>
 
-**`'links'` : Array** : Links that need to be placed within a card.
+9. **`'links'` : Array** : Links that need to be placed within a card.
 
 ```php
 <?php
@@ -80,7 +82,8 @@ $parameters = [
 
 <p class = "ttag-code-caption text-muted"><b>Example of <code>'links'</code></b></p>
 
-**`'make-button'` : Array** : Converts all the indexed links into buttons. The keys are the index values of `links` and values are the custom or Bootstrap classes.
+10. **`'make-button'` : Array** : Converts all the indexed links into buttons. The keys are the index values of `links` and values are the custom or Bootstrap classes.
+
 ```php
 <?php
 
@@ -108,5 +111,7 @@ $parameters = [
 
 <p class = "ttag-code-caption text-muted"><b>Example of <code>'make-button'</code></b></p>
 
+--- 
 
+**`$count` : Int** : `null` <span class="badge badge-dark">Default</span>, Usually used when called in a loop. The index value of the loop is passed in this variable. It is used to uniquely identify an element, for example id.
  
