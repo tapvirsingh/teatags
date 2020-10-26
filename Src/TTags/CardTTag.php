@@ -55,20 +55,30 @@ class CardTTag extends TapvirTagContainer{
 			'text-class' => Additional head classes. 
 
 			'links-class' => Additional classes can be added here.
-
+			
+			// Only to be used for accordion or in group.
+			'default-show' => The index of the card that needs to be shown by default.
  
-		]
+		],
+
+		$count = null (Default) , Usually used when called in a loop. The index value of the loop is passed in this variable. It is used to uniquely identify an element for example id.
 	*/
 
-	function __construct($parameters){
+	function __construct($parameters, $count = null){
 		$this->parameters = $parameters;
+		$this->count = $count;
 		if(!empty($this->parameters)){
 
 			$this->accordionId = $this->getParameter('accordion-id');
 
 			$div = $this->createCard();
 
-			parent::__construct('div',null,$div->get());
+			if($this->accordionId === null){
+				parent::__construct('div',null,$div->get());
+			}else{
+				$this->setContainerCode($div->get());
+			}
+
 		}
 	}
 
@@ -209,7 +219,7 @@ class CardTTag extends TapvirTagContainer{
 
 	// UA - Unique attribute
 	protected function getUA($text){
-		return $this->accordionId.$text.$this->count;
+		return $this->accordionId."_".$text."_".$this->count;
 	}
 
 	protected function createAccordCardBody(){
@@ -217,28 +227,57 @@ class CardTTag extends TapvirTagContainer{
 		// $dataToAppend,$extraAttribute = null)
 		$body = $this->cardBody();
 
-		$extraAttribute = ' id="'.$this->getUA('collapse').'"  aria-labelledby="'.$this->getUA('heading').'" data-parent="'.$this->accordionId.'"';
+		$extraAttribute = ' id="'.$this->getUA('collapse').'"  aria-labelledby="'.$this->getUA('heading').'" data-parent="#'.$this->accordionId.'"';
 
-		$div = new DivTTag('collapse',$body,$extraAttribute);
+		$attribute = 'collapse';
+		// Get the default show index. Card that should be shown by default.
+		$defaultShow = $this->getParameter('default-show',0);
+
+		if($defaultShow === $this->count){
+			$attribute .= ' show';
+		}
+
+		$div = new DivTTag($attribute,$body,$extraAttribute);
 
 		return $div->get();
 	}
 
 	protected function createAccordCardHeader(){
 
-		// $button = new 
+		// $textOrHtml = null,
+        // $extraAttribute = null
 
-		$h2 = new HeadingTTag('h2',$button,'mb-0')
+		$title = $this->getParameter('title');
+
+        $collapseValue = $this->getUA('collapse');
+        $extraAttribBtn = 'type="button" data-toggle="collapse" data-target="#'.$collapseValue.'" aria-expanded="true" aria-controls="'.$collapseValue.'"';
+
+		$button = new TeaCTag('button','btn btn-link btn-block text-left',$title,$extraAttribBtn);
+
+		$h2 = new HeadingTTag('h2',$button->get(),'mb-0');
 
 		$extraAttribute = 'id = "'.$this->getUA('heading').'"';
 
 		$div = new DivTTag('card-header',$h2,$extraAttribute);
+		return $div->get();
 	}
 
+	protected function createAccordCard(){
+		$header = $this->createAccordCardHeader();
+
+		$body = $this->createAccordCardBody();
+
+		return $header.$body;
+	}
 
 	// create the card.
 	protected function createCard(){
-		$dataToAppend = $this->cardBody();
+
+		if($this->accordionId !== null){
+			$dataToAppend = $this->createAccordCard();
+		}else{
+			$dataToAppend = $this->cardBody();
+		}
 
 		$styleAttribute = $this->getStyleForCard();
 		

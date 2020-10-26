@@ -13,6 +13,8 @@ class HeadingTTag extends TapvirTagContainer{
 
 	function __construct($tag,$textOrHtml,$class = null) {
 
+		$textOrHtml = ttag_getData($textOrHtml);
+
 		if($class !== null){
 			$class = 'class="'.$class.'"';
 		}

@@ -30,6 +30,8 @@ $card = new CardTTag($parameters);
 **Parameters**
 
 
+**`'accordion-id'` : String** : `null` <span class="badge badge-dark">Default</span>, when is set creates cards for accordion. The value must be same as that of the `accordion-id` set for `AccordionTTag`.
+
 **`'title'` : String** : Title of the card.
 
 **`'subtitle'` : String** : Subtitle of the card.
