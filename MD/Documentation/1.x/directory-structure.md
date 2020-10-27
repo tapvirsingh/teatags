@@ -36,11 +36,11 @@ This directory here is the main control panel for your application. About every 
 
 This is where your views exists. All views other than the index.php must stay within the views directory.
 
+<p class = "ttag-dir">/TTagConfig</p>
+
+Contains directories and files in which the values can be changed to configure a project.
+
 **Root Files**
-
-<p class = "ttag-file">/TTagConfig.php</p>
-
-Loads all the TTag classes. Not to be touched.
 
 <p class = "ttag-file">/index.php</p>
 
