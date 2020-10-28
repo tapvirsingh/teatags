@@ -30,7 +30,7 @@ There should be a */Themes/TeaTagsTheme/<span  class = "ttag-dir-hilight">CSS</s
 
 <p class = "ttag-dir">/TTagAppSettings/</p>
 
-This directory here is the main control panel for your application. About every configuration **file** within this directory is explained seperatly under the *TTagAppSettings Directory* article section.
+This directory here is the main control panel for your application. About every configuration **file** within this directory is explained separately under the *TTagAppSettings Directory* article section.
 
 However the **directories** are explained here.
 
@@ -76,9 +76,11 @@ return [
 			'horiz-links' => 'col-12 text-center my-2',
 
 			// Classes for social links.
-			'social-link-class' => 'm-3 text-light d-inline-flex ttag-social-link',
+			'social-link-class' => 'm-3 text-light 
+									d-inline-flex ttag-social-link',
 
-			// Bootstrap or custom css classes that will affect the complete footer.
+			// Bootstrap or custom css classes that 
+			// will affect the complete footer.
 			'class' => 'p-5  bg-dark',
 
 			// Class for the company information.
@@ -106,15 +108,18 @@ return [
 		'showFooter' => true,
 
 		// Show website's icon.
-		// even if no img is given a space for it will be reserved.
+		// even if no img is given a space for it will 
+		// be reserved.
 		'showWebIcon' => true, 
 
 		// Website icon's offset value.
-		// Sets the offset value for icon in footer (works only on verticle display of links.)
+		// Sets the offset value for icon in footer 
+		// (works only on verticle display of links.)
 		'iconOffset' => 2, 
 
 		// How many icon cols per row need to be set.
-		//Sets the cols per row value for icon in footer (works only on verticle display of links.)
+		//Sets the cols per row value for icon in footer 
+		// (works only on verticle display of links.)
 		'iconColsPerRow' => 3, 
 
 		// Create a new on Col
@@ -126,7 +131,9 @@ return [
 		// Sets the offset of the col.
 		'colsOffset' => 0,
 
-		// If the links are of single dimension and are less the $maxHorLinkCount value set here then, the links will be displayed horizontally. 
+		// If the links are of single dimension and are 
+		// less the $maxHorLinkCount value set here then, 
+		// the links will be displayed horizontally. 
 		// Max links in a row to display horizontally.
 		'maxHorLinkCount' => 6, 
 
@@ -156,7 +163,6 @@ return [
 
 <p class = "ttag-file">/links.php</p>
 
-
 Following settings sets the configuration of the footer.
 	
 ```php
@@ -164,11 +170,19 @@ Following settings sets the configuration of the footer.
 
 return [
 	// Sets the navigation links.
-	NAVLINKS => ['caption'=>'Navigation','links'=> include ttag_RootSettings('nav-links')],
+	NAVLINKS => ['caption'=>'Navigation',
+				'links'=> include ttag_RootSettings('nav-links')],
+
 	// Sets the second set of links.
-	'License'=> ['caption'=>'License','links'=>['MIT'=>[
-														'ttag-icon' => 'balance-scale',
-														'ttag-link'=>	'https://github.com/tapvirsingh/teatags']]],
+	'License'=> ['caption'=>'License',
+
+				'links'=>[
+					'MIT'=>[
+							'ttag-icon' => 'balance-scale',
+							'ttag-link'=>'https://github.com/tapvirsingh/teatags',
+							]
+						]
+				],
 ];
 
 ```
@@ -177,7 +191,118 @@ return [
 
 <p class = "ttag-dir">/TTagAppSettings/navbrand/</p>
 
-<p class = "ttag-dir">/TTagAppSettings/scripts/</p>
+This directory contains two files.
+
+<p class = "ttag-file">/brand.php</p>
+
+It has the settings for brand.
+
+```php
+<?php
+
+return [
+			// Brand's name
+			'name' => 'Tea Tags',
+
+			// Brand's link 
+			'link' => 'https://teatags.blazehattechnologies.com/',
+	
+			// Brand's image.			
+			'img'  => 'tea.png',
+
+			// Set the font for displaying brand.
+			// The required Google font settings can be set in
+			// /TTagAppSettings/google.php.			
+			'font-family'=>'Dancing Script',
+		];
+
+```
+
+<p class = "ttag-dir">/TTagAppSettings/navbrand/</p>
+
+
+<p class = "ttag-file">/navbar.php</p>
+
+It has the settings for navbar.
+
+```php
+<?php
+
+return [
+
+ 	// When set to true Creates Navbar. 
+	'create' => true,
+
+	// Create the default menu for the application
+	// ttag_RootSettings function loads the settings
+	// stored at settings' root.
+	'menu' => include ttag_RootSettings('nav-links'), 
+
+	// id of the menu
+	'toggleTarget' => 'navbarMenu',	
+
+	// If set to true, the navbar will have container.
+	'in-container' => true, 
+
+	// Align the navigation menu in the navbar.
+	// left | right, default : left.
+	'align' => 'right', 
+
+	// Add any additional navbar classes.
+	// These will be added to the ul element 
+	// of the navbar menus.
+	'navbar-class' => 'mr-3',
+
+	// Classes for social icons.
+	'social-classes' => 'mr-3 text-light d-inline-flex ttag-social-link',
+
+	// Font awesome size of the social icons.
+	'social-link-size' => '1x',
+
+	// Universal class for the menu item icons.
+	'icons' => [
+		// Additional classes for the icons.
+		'class'=>	'mr-1',
+		// Font awesome size of the icons.
+		'size' =>'1x',
+	],
+
+	// If both of the following are false, then 
+	// by default captions will be shown.
+	// Show captions
+	'show-captions' => true,
+
+	// Show icons
+	'show-icons' => true,
+
+	/* 
+	Add navbar classes like navbar-light bg-light navbar-expand-lg, 
+	other than the navbar class, it is added by default. We recommend 
+	using css classes instead of using style element for custom styling.
+
+	For example avoid style="background-color: #e3f2fd;", 
+	create a css class instead and add the styling there.
+	
+
+	Examples:
+	'extraClasses' => 'navbar-expand-lg navbar-dark bg-primary',
+	'extraClasses' => 'navbar-expand-lg navbar-dark bg-danger',
+	'extraClasses' => 'navbar-expand-lg navbar-dark bg-dark',
+	'extraClasses' => 'navbar-expand-lg navbar-dark bg-transparent',
+	'extraClasses' => 'navbar-expand-lg sticky-top navbar-light bg-white',
+	*/
+	
+	'extraClasses' => 'navbar navbar-expand-lg sticky-top navbar-dark bg-dark',
+	
+	// 'extraClasses' => 'navbar navbar-expand-lg sticky-top navbar-dark',
+
+];
+
+```
+
+<p class = "ttag-dir">/TTagAppSettings/scripts/javascript</p>
+
+
 
 <p class = "ttag-dir">/Views/</p>
 
