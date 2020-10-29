@@ -1,7 +1,7 @@
 <?php 
 
 return [
-		// Links are defined in TTagAppSettings/social.php 
+		// Links are defined in ttag-settings/social.php 
 		'showSocialLinks' => true, 
 		'showFooter' => true,
 		// even if no img is given a space for it will be reserved.

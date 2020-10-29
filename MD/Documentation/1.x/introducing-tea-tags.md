@@ -125,4 +125,4 @@ Although we will talk more about `<footer>` later but one thing to note is that 
 
 <p class = "ttag-doc-ques">From where TTag got all that information?</p>
 
-Folder **TTagAppSettings** contains application's default global settings, once the details which are filled in those fields, will be automatically picked, processed and displayed. We will look deeper into this at later stage.
+Folder **ttag-settings** contains application's default global settings, once the details which are filled in those fields, will be automatically picked, processed and displayed. We will look deeper into this at later stage.

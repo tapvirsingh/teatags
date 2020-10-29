@@ -78,16 +78,16 @@ new HtmlTTag($jumbo);
 
 ```php
 
-// Default value set in TTagAppSettings/footer.php
+// Default value set in ttag-settings/footer.php
 $ttag_FooterConf['showFooter'] = true; 
 
 ```
 <p class = "ttag-code-caption text-muted"><b>some_page.php</b> will show the footer</p>
 
-`$ttag_FooterConf['showFooter'] = true;` is the default value that is set in *TTagAppSettings/footer.php*, this means that by default **footer will be created on all pages**.
+`$ttag_FooterConf['showFooter'] = true;` is the default value that is set in *ttag-settings/footer.php*, this means that by default **footer will be created on all pages**.
 
 
-**TTagAppSettings/footer.php** 
+**ttag-settings/footer.php** 
 
 The actual settings defined in *footer.php* of this page. Read comments carefully.
 
@@ -111,7 +111,7 @@ $ttag_FooterConsts = [
 // Footer configuration.
 $ttag_FooterConf = [
 
-				// Links are defined in TTagAppSettings/social.php 
+				// Links are defined in ttag-settings/social.php 
 				'showSocialLinks' => true, 
 
 				// Show footer true | false. When false footer won't show.
@@ -206,7 +206,7 @@ $ttag_FooterBSC = [
 
 <p class = "ttag-code-caption text-muted"><b>footer.php</b></p>
 
-The social links are defined in **social.php** file in the **TTagAppSettings** directory. These links automatically get picked up by the `FooterTTag` class.
+The social links are defined in **social.php** file in the **ttag-settings** directory. These links automatically get picked up by the `FooterTTag` class.
 
 ```php
 

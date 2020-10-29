@@ -23,7 +23,7 @@ class JumboTTag extends TapvirTagContainer{
 		$jumboInnerContent = [
 						// Main heading and lead of the jumbotron.
 						// You may omet these.
-					   // If no values are provided the default values of $ttag_Head and $ttag_Lead are assigned. These default values are defined in global settings file called constants.php in the TTagAppSettings dirctory. 
+					   // If no values are provided the default values of $ttag_Head and $ttag_Lead are assigned. These default values are defined in global settings file called constants.php in the ttag-settings dirctory. 
 
 								'head' => 'xyz',
 								'lead'  => 'abc',

@@ -4,7 +4,7 @@ Tea Tags is a view framework which helps you to create complex pages in core PHP
  
 You can write your articles using Markdown. HTML Tags and elements will still be available, for example, you may use `<code>`, `<b>`, `<strong>` etc tags along with elements in your code or text however we would recommend using <code>\`</code> and <code>\**</code> instead. Use HTML tags only when you are completely out of options.
  
-The **TTagAppSettings** folder contains files which have the global settings for your app. Files in this folder prevent you from rewriting the global default code again and again. For example, 
+The **ttag-settings** folder contains files which have the global settings for your app. Files in this folder prevent you from rewriting the global default code again and again. For example, 
  
 ```php
 <?php  
@@ -33,7 +33,7 @@ $ttag_Navbar = [
 ];
  
 ```
-You may create the navbar menu by declaring and defining it as an array in the navbar.php global settings file which is in the **TTagAppSettings** folder. You may later call `$navbar = new NavBarTTag("Home")` and `$navbar = new NavBarTTag("Documentation")`, in your *home.php* and *documentation.php* page files respectively, to set the *Home* and *Documentation* links of the menu to *active*.
+You may create the navbar menu by declaring and defining it as an array in the navbar.php global settings file which is in the **ttag-settings** folder. You may later call `$navbar = new NavBarTTag("Home")` and `$navbar = new NavBarTTag("Documentation")`, in your *home.php* and *documentation.php* page files respectively, to set the *Home* and *Documentation* links of the menu to *active*.
  
 Please note, there are naming conventions. Although it has been mentioned in the documentation that the names of the files may not be same as that of the links (array keys declared in the global settings) but the array keys declared in the menu in the **navbar.php** file must match the keys (links) instantiating the object of class NavBarTTag. We will talk more on this subject later in the documentation.
  

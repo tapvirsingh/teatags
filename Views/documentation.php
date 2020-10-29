@@ -43,7 +43,7 @@ $docNavs = new NavTTag($articles_docFiles, [
 $content = $navtoggler->get().$article->get();
 
 // Create auto divs.
-$divs = new DivsTTags([$docNavs,$content],[ 'col'=>[2,6], 
+$divs = new DivsTTags([$docNavs,$content],[ 'col'=>[3,6], 
 	// 'extra-container-class' => 'text-justify', 
 	'extra-row-class' => 'ml-0 mr-0 ttag-doc-row',
 	'in-container' => false,

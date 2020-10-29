@@ -16,7 +16,7 @@ This class is internally called by `NavBarTTag`. You won't need this class direc
 
 The constants for BrandTTag are defined in *brand-navbar.php* in global `$ttag_Brand` variable.
 
-**TTagAppSettings/brand-navbar.php**
+**ttag-settings/brand-navbar.php**
 
 ```php
 <?php

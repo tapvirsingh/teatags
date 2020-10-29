@@ -28,13 +28,13 @@ To customize the app you are building must be kept in a sub folder inside the */
 
 There should be a */Themes/TeaTagsTheme/<span  class = "ttag-dir-hilight">CSS</span>/* and */Themes/TeaTagsTheme/<span  class = "ttag-dir-hilight">Images</span>/* folder for keeping your css and images organised respectively.
 
-<p class = "ttag-dir">/TTagAppSettings/</p>
+<p class = "ttag-dir">/ttag-settings/</p>
 
-This directory here is the main control panel for your application. About every configuration **file** within this directory is explained separately under the *TTagAppSettings Directory* article section.
+This directory here is the main control panel for your application. About every configuration **file** within this directory is explained separately under the *ttag-settings Directory* article section.
 
 However the **directories** are explained here.
 
-<p class = "ttag-dir">/TTagAppSettings/footer/</p>
+<p class = "ttag-dir">/ttag-settings/footer/</p>
 
 The folder has currently three files.
 
@@ -101,7 +101,7 @@ Following settings sets the configuration of the footer.
 
 return [
 		// Show social links in the footer.
-		// Links are defined in TTagAppSettings/social.php 
+		// Links are defined in ttag-settings/social.php 
 		'showSocialLinks' => true, 
 
 		// Show or hide the footer.
@@ -189,7 +189,7 @@ return [
 
 --- 
 
-<p class = "ttag-dir">/TTagAppSettings/navbrand/</p>
+<p class = "ttag-dir">/ttag-settings/navbrand/</p>
 
 This directory contains two files.
 
@@ -212,13 +212,13 @@ return [
 
 			// Set the font for displaying brand.
 			// The required Google font settings can be set in
-			// /TTagAppSettings/google.php.			
+			// /ttag-settings/google.php.			
 			'font-family'=>'Dancing Script',
 		];
 
 ```
 
-<p class = "ttag-dir">/TTagAppSettings/navbrand/</p>
+<p class = "ttag-dir">/ttag-settings/navbrand/</p>
 
 
 <p class = "ttag-file">/navbar.php</p>
@@ -300,7 +300,7 @@ return [
 
 ```
 
-<p class = "ttag-dir">/TTagAppSettings/scripts/javascript</p>
+<p class = "ttag-dir">/ttag-settings/scripts/javascript</p>
 
 
 

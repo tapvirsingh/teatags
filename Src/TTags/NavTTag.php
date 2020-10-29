@@ -26,6 +26,7 @@ class NavTTag extends TapvirTagContainer{
 	protected $linkActivated;
 
 	private $index;
+	private $arrayIndex;
 
 	/*
 		$navList => array of list with keys and values as captions and links.
@@ -147,7 +148,8 @@ class NavTTag extends TapvirTagContainer{
 		}
 
 		if($indent !== null){
-			$class .= ' ttag-sub-link ml-'.$indent;
+			// $class .= ' ttag-sub-link ml-'.$indent;
+			$class .= ' ttag-sub-link';
 		}
 
 
@@ -184,8 +186,8 @@ class NavTTag extends TapvirTagContainer{
 		return [$cap,$div->get()];
 	}
 
-	private function getMultiLinkId(){
-		return $this->id.'MultiLink'.$this->index;
+	private function getMultiLinkId($index = null){
+		return $this->id.'MultiLink'. (($index === null) ?  $this->index : $index);
 	}
 
 	private function getCaption($caption){
@@ -201,29 +203,98 @@ class NavTTag extends TapvirTagContainer{
 
 		$addAttrib = 'data-toggle = "collapse"';
 
-		$a = new AnchorTTag('#'.$this->getMultiLinkId(), $caption, $class, $addAttrib	);
+		$a = new AnchorTTag('#'.$this->getMultiLinkId($this->arrayIndex), $caption, $class, $addAttrib	);
 		return $a->get();
 	}
 
-	private function createNav($tag = 'nav'){
+	private function manageLinkFromArray($caption,$href,$issetHref){
+
+		$cap = $this->getCaption($caption);
 		$lis = null;
-		$this->index = 0;
-		foreach($this->navList as $caption => $href){
-			$issetHref = isset($href);
+
+		foreach ($href as $key => $value) {
+
+			$fileName =  $issetHref ? $value : $key;
+
+			$subHref =  cleanedUrl('docs').$fileName;
+
+			$lis[] =  $this->createLink($value,$subHref,NAVTAGG_INDENT);
+		}
+
+		$addAttrib = 'id = "'.$this->getMultiLinkId().'"';
+
+		// class="panel-collapse collapse in"
+
+		$div = new DivTTag('panel-collapse collapse in',ttag_getCombinedHtml($lis), $addAttrib);
+
+		// $this->counter++;
+
+		return [$cap,$div->get()];
+	}
+
+
+	protected function loopThroughNavArray($array,$issetHref = null,$recursion = false){
+
+		$lis = null;
+		$this->arrayIndex++;
+
+		$indent = $recursion === true ? NAVTAGG_INDENT : null;
+
+		foreach($array as $key => $href){
+
+			// if($issetHref === null){
+				$issetHref = isset($href);
+			// }
+
 			if(!is_array($href)){
 
-				$fileName =  $issetHref ? $href : $caption;
+				$capName =  is_int($key) ? $href : $key ;
+				$fileName =  $issetHref ? $href : $key;
 
 				$href = cleanedUrl('docs').$fileName;
 
-				$lis[] = $this->createLink($caption,$href);
+				$lis[] = $this->createLink($capName ,$href, $indent );
+
+				// debugTTag($href);
+
 			}else{
 
-				$lis = array_merge($lis, $this->createLinkFromArray($caption,$href,$issetHref));
+				// If the caption is passed as an argument use the $caption else 
+				// use the $key as caption from foreach loop.
+				// $caption = $this->getCaption(($caption !== null) ? $caption : $key);
+				$caption = $this->getCaption($key);
+
+				// Save current index as it should be same as that of the caption.
+				$addAttrib = 'id = "'.$this->getMultiLinkId($this->arrayIndex).'"';
+
+				$retLis = $this->loopThroughNavArray($href,$issetHref,true);
+
+				// $retLis = array_merge($lis, $this->createLinkFromArray($caption,$href,$issetHref));
+
+				$ttagPanel = $recursion ? 'ttag-sub-panel' : 'ttag-panel'; 
+
+				$div = new DivTTag('panel-collapse collapse in ttag-panel-collapse '.$ttagPanel,ttag_getCombinedHtml($retLis), $addAttrib);
+
+				// $lis =array_merge($lis,  [$setCap,$div->get()]);
+				$lis[] = $caption.$div->get();
+
 			}
 
 			$this->index++;
 		}
+
+		return $lis;
+
+	}
+
+	private function createNav($tag = 'nav'){
+		
+		$this->index = 0;
+		$this->arrayIndex = 0;
+
+		$lis = $this->loopThroughNavArray($this->navList);
+
+		// debugTTag($lis);
 
 		$class = $this->defaultCSSClass();
 

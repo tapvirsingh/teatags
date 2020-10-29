@@ -1,4 +1,4 @@
-<b>/TTagAppSettings/<span class = "ttag-file">styles.php</span></b>
+<b>/ttag-settings/<span class = "ttag-file">styles.php</span></b>
 
 ```php
 <?php

@@ -9,7 +9,7 @@ class IconTTag extends TapvirTagContainer{
 	protected $iconsPack;
 	protected $icon;
 
-	// Use FNTAWSOME_* constants declared and defined in constants.php in TTagAppSettings folder
+	// Use FNTAWSOME_* constants declared and defined in constants.php in ttag-settings folder
 	function __construct($icon = null, $iconType){
 		global $ttag_IconDefaultClass, $ttag_IconTag, $ttag_IconsPack;
 

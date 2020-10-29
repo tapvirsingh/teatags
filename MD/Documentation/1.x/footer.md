@@ -1,4 +1,4 @@
-<b>/TTagAppSettings/<span class = "ttag-file">footer.php</span></b>
+<b>/ttag-settings/<span class = "ttag-file">footer.php</span></b>
 
 ```php
 
@@ -20,7 +20,7 @@ $ttag_FooterConsts = [
 // Footer configuration.
 $ttag_FooterConf = [
 
-				// Links are defined in TTagAppSettings/social.php 
+				// Links are defined in ttag-settings/social.php 
 				'showSocialLinks' => true, 
 
 				// Show footer true | false. When false footer won't show.

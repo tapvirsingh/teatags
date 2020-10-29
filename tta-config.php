@@ -15,7 +15,7 @@ spl_autoload_register(function ($className) {
 
 define("MD_ROOT", __DIR__ ."/MD/");
 define("IMAGES_ROOT", __DIR__ ."/Images/");
-define("SETTINGS_ROOT", __DIR__ ."/TTagAppSettings/");
+define("SETTINGS_ROOT", __DIR__ ."/ttag-settings/");
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
@@ -25,18 +25,18 @@ require_once('Src/Functions/global.php');
 
 // Include Global App Settings
 // The files must be loaded in the following order.
-require_once('TTagAppSettings/constants.php');
-require_once('TTagAppSettings/articles.php');
-require_once('TTagAppSettings/nav-links.php');
-require_once('TTagAppSettings/links.php');
-require_once('TTagAppSettings/social.php');
-require_once('TTagAppSettings/brand-navbar.php');
-require_once('TTagAppSettings/bootstrap.php');
-require_once('TTagAppSettings/styles.php');
-require_once('TTagAppSettings/js.php');
-// require_once('TTagAppSettings/footer.php');
-require_once('TTagAppSettings/google.php');
-require_once('TTagAppSettings/page-headers.php');
+require_once('ttag-settings/constants.php');
+require_once('ttag-settings/articles.php');
+require_once('ttag-settings/nav-links.php');
+require_once('ttag-settings/links.php');
+require_once('ttag-settings/social.php');
+require_once('ttag-settings/brand-navbar.php');
+require_once('ttag-settings/bootstrap.php');
+require_once('ttag-settings/styles.php');
+require_once('ttag-settings/js.php');
+// require_once('ttag-settings/footer.php');
+require_once('ttag-settings/google.php');
+require_once('ttag-settings/page-headers.php');
 
 // Dependences
 require_once('Dependences/parsedown_master/Parsedown.php');

@@ -12,7 +12,7 @@ namespace Src\TTags;
 
 Creates navigation bar and shows the current active page from list item.
 
-The structure of the navigation bar to be displayed should be defined in **nav-links.php** in the TTagAppSettings directory. It must be defined to `$ttag_NavigationLinks` variable.
+The structure of the navigation bar to be displayed should be defined in **nav-links.php** in the ttag-settings directory. It must be defined to `$ttag_NavigationLinks` variable.
 
 Example,
 
@@ -41,7 +41,7 @@ The navigation structure defined here will be automatically picked by **NavBarTT
 
 The global settings of NavBarTTag are defined in *brand-navbar.php* in global `$ttag_Navbar` variable. To customize your navbar you make changes here. Read the comments carefully for better understanding.
 
-**TTagAppSettings/brand-navbar.php**
+**ttag-settings/brand-navbar.php**
 
 ```php
 

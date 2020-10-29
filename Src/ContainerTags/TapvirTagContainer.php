@@ -215,7 +215,7 @@ class TapvirTagContainer extends TeaTag{
 
     protected  function loadJSRawScripts($head = false){
 
-        $script = ($head === true) ? 'jsrawheadscripts' : 'jsrawscripts';
+        $script = ($head === true) ? 'js-raw-head-scripts' : 'js-raw-scripts';
 
         $jsScripts = include tta_ScriptSettings($script);
 

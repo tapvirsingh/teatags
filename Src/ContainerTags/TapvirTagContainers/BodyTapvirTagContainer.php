@@ -41,7 +41,7 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     } 
 
     private function loadJSScriptLinks(){
-        $jsScriptLinks = include tta_ScriptSettings('jslinks');
+        $jsScriptLinks = include tta_ScriptSettings('js-links');
 
         foreach ($jsScriptLinks as $value) {
             $js  = new ScriptTapvirTagContainer($value);
@@ -53,7 +53,7 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     
 
     private function loadJSScripts(){
-		$jsScripts = include tta_ScriptSettings('jsscripts');
+		$jsScripts = include tta_ScriptSettings('js-scripts');
 
 		$scripts = null;
     	foreach ($jsScripts as $value) {

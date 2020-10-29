@@ -10,7 +10,7 @@ namespace Src\TTags;
 
 **Overview**
 
-Creates social links. It uses the *TTagAppSettings/social.php* settings.
+Creates social links. It uses the *ttag-settings/social.php* settings.
 	
 **Usage Syntax**
 
@@ -41,7 +41,7 @@ $social = new SocialTTag( ['twitter','facebook','github'] , '2x');
 
 **`$list` : Array**
 
-Single dimensional array. It takes the key names from the array defined in *TTagAppSettings/social.php*. 
+Single dimensional array. It takes the key names from the array defined in *ttag-settings/social.php*. 
 
 ---
 

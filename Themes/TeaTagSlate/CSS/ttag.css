@@ -186,6 +186,18 @@ footer{
     background-color: #f4f4ff  !important;
 }
 
+.ttag-panel-collapse{
+    margin-left: 1.5rem!important;
+}
+
+.ttag-panel{
+    border-left: 4px solid rgb(255, 118, 118);
+}
+
+.ttag-sub-panel{
+    border-left: 4px solid limegreen;
+}
+
 @media only screen and (max-width: 480px) {
 /*@media only screen and (max-width: 768px) {*/
 	.ttag-footer-links { text-align: center; margin-bottom: 1rem;}

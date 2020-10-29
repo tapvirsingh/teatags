@@ -55,7 +55,7 @@ $jumbo = new JumboTTag( [
 
 **`$jumboInnerContent` : Array**
 
-Main heading and lead of the jumbotron. You may omet these. If no values are provided the default values of `$ttag_Head` and `$ttag_Lead` are assigned. These default values are defined in global settings file called constants.php in the TTagAppSettings dirctory.
+Main heading and lead of the jumbotron. You may omet these. If no values are provided the default values of `$ttag_Head` and `$ttag_Lead` are assigned. These default values are defined in global settings file called constants.php in the ttag-settings dirctory.
 
 1. **`'head'`** => `'xyz'` Same as that of Bootstrap. It is the main heading of the page.
 

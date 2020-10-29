@@ -69,7 +69,7 @@ new HtmlTTag($someHtml);
 
 **`$pageHeaders` : Array**
 
-The default values of $pageHeaders are globally defined in `$ttag_PageHeaders` in the *TTagAppSettings/page-headers.php*. However, you may override those default values for a view by setting the new values locally.
+The default values of $pageHeaders are globally defined in `$ttag_PageHeaders` in the *ttag-settings/page-headers.php*. However, you may override those default values for a view by setting the new values locally.
 
 For example,
 ```php
@@ -103,7 +103,7 @@ $ttag_PageHeaders = [
 
 
 ```
-<p class = "ttag-code-caption text-muted"><b>TTagAppSettings/page-headers.php</b></p>
+<p class = "ttag-code-caption text-muted"><b>ttag-settings/page-headers.php</b></p>
 
 **Note, there were 3 keywords in page-headers.php which were overridden by 2 in local_view_page.php**
 

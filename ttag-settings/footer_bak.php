@@ -2,7 +2,7 @@
 // Following code sets the global settings for footer. 
 
 $ttag_FooterConf = [
-				'showSocialLinks' => true, // Links are defined in TTagAppSettings/social.php 
+				'showSocialLinks' => true, // Links are defined in ttag-settings/social.php 
 				'showFooter' => true,
 				'showWebIcon' => true, // even if no img is given a space for it will be reserved.
 				'iconOffset' => 1, // Sets the offset value for icon in footer (works only on verticle display of links.)
