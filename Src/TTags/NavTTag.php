@@ -259,8 +259,6 @@ class NavTTag extends TapvirTagContainer{
 
 			}else{
 
-				// If the caption is passed as an argument use the $caption else 
-				// use the $key as caption from foreach loop.
 				// $caption = $this->getCaption(($caption !== null) ? $caption : $key);
 				$caption = $this->getCaption($key);
 

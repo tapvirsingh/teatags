@@ -98,6 +98,22 @@ footer{
 .ttag-nav-item{
 
 }
+
+@keyframes slide {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  50% {
+    left: 244px;
+    top: 100px;
+  }
+  100% {
+    left: 488px;
+    top: 0;
+  }
+}
+
 .ttag-nav-link, .ttag-nav-multi-link-cap{
 	/*color: #457eb1 ;*/
 	/*color: #64a2da ;*/
@@ -105,8 +121,14 @@ footer{
 	font-size: .8rem;
 }
 .ttag-nav-link:hover, .ttag-nav-multi-link-cap:hover{
-	color: #dfeeff
+	color: #dfeeff;
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-delay: .5s;
 }
+
+
 .ttag-dir{
     /*color: #e60000;*/
     color: #7bdaff;
@@ -127,6 +149,7 @@ footer{
 }
 .ttag-nav-multi-link-cap{
 	font-size: .8rem;
+    /*color: #f7f7f7;*/
 }
 .ttag-sub-link{
 	font-weight: normal;
