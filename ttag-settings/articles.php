@@ -35,12 +35,15 @@ $articles_docFiles = [
 						'brand',
 						'navbar',
 					 ],
-					'scripts/javascript/' => [
-							'js-links',
-							'js-raw-head-scripts',
-							'js-raw-scripts',
-							'js-scripts'
-					],
+					'scripts/' => [
+							'javascript/' =>
+							[
+								'js-links',
+								'js-raw-head',
+								'js-raw',
+								'js-scripts'
+							],
+					], 
 					'constants.php' =>	'constants',
 					// 'brand-navbar.php' => 'brand-navbar',
 					// 'footer.php' => 'footer',
@@ -87,7 +90,7 @@ $articles_docFiles = [
 					'divs' ,
 					'authorised',
 				],
-					
+						
 		];		
 
 

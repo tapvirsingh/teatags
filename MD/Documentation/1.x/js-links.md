@@ -1,3 +1,10 @@
+<p class = "ttag-file">/scripts/javascript/js-links.php</p>
+
+Insert `src` of the script links here. These links will be inserted at the
+end of the `<body>` tag.
+
+```php
+
 <?php
 // Links to call
 return [
@@ -6,3 +13,5 @@ return [
 	'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js',
 	'//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js',
 ];
+
+```

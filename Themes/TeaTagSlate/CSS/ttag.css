@@ -98,7 +98,7 @@ footer{
 .ttag-nav-item{
 
 }
-
+/*
 @keyframes slide {
   0% {
     left: 0;
@@ -112,7 +112,7 @@ footer{
     left: 488px;
     top: 0;
   }
-}
+}*/
 
 .ttag-nav-link, .ttag-nav-multi-link-cap{
 	/*color: #457eb1 ;*/
@@ -122,10 +122,10 @@ footer{
 }
 .ttag-nav-link:hover, .ttag-nav-multi-link-cap:hover{
 	color: #dfeeff;
-    animation-name: slide;
+  /*  animation-name: slide;
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
-    animation-delay: .5s;
+    animation-delay: .5s;*/
 }
 
 
@@ -217,8 +217,12 @@ footer{
     border-left: 4px solid rgb(255, 118, 118);
 }
 
-.ttag-sub-panel{
+.ttag-sub-panel-level-1{
     border-left: 4px solid limegreen;
+}
+
+.ttag-sub-panel-level-2{
+    border-left: 4px solid #fdff7d;
 }
 
 @media only screen and (max-width: 480px) {

@@ -232,13 +232,19 @@ class NavTTag extends TapvirTagContainer{
 		return [$cap,$div->get()];
 	}
 
+	protected function getTTagPanel($recursion){
+		if ($recursion === false || $recursion === null || $recursion === 0 ) {
+				return 'ttag-panel';
+		}
+		return 'ttag-sub-panel-level-'.$recursion;
+	}
 
-	protected function loopThroughNavArray($array,$issetHref = null,$recursion = false){
+	protected function loopThroughNavArray($array,$issetHref = null,$recursion = 0){
 
 		$lis = null;
 		$this->arrayIndex++;
 
-		$indent = $recursion === true ? NAVTAGG_INDENT : null;
+		$indent = $recursion > 0 ? NAVTAGG_INDENT : null;
 
 		foreach($array as $key => $href){
 
@@ -265,11 +271,12 @@ class NavTTag extends TapvirTagContainer{
 				// Save current index as it should be same as that of the caption.
 				$addAttrib = 'id = "'.$this->getMultiLinkId($this->arrayIndex).'"';
 
-				$retLis = $this->loopThroughNavArray($href,$issetHref,true);
+				$retLis = $this->loopThroughNavArray($href,$issetHref, $recursion + 1 );
 
 				// $retLis = array_merge($lis, $this->createLinkFromArray($caption,$href,$issetHref));
 
-				$ttagPanel = $recursion ? 'ttag-sub-panel' : 'ttag-panel'; 
+				// $ttagPanel = $recursion ? 'ttag-sub-panel' : 'ttag-panel'; 
+				$ttagPanel = $this->getTTagPanel($recursion);
 
 				$div = new DivTTag('panel-collapse collapse in ttag-panel-collapse '.$ttagPanel,ttag_getCombinedHtml($retLis), $addAttrib);
 
