@@ -48,7 +48,7 @@ $divs = new DivsTTags([$docNavs,$content],[ 'col'=>[3,6],
 	'extra-row-class' => 'ml-0 mr-0 ttag-doc-row',
 	'in-container' => false,
 	'ids' => ['docNavCon','container'],
-	'col-classes' => ['bg-dark d-xs-none d-sm-block','pt-4 ml-4'],
+	'col-classes' => ['bg-dark d-xs-none d-sm-block collpase show','pt-4 ml-4'],
 	'position'=>'c']);
 
 // Display the navigation and the html within the divs.
