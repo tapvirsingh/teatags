@@ -1,16 +1,29 @@
 <h3 class="display-4 mb-5">Directory Structure</h3>
 
-TTag has a specific directory structure. When you download TTags, all the files and root directories will be in Tag directory. You must copy all of its content at your root.
+TTag has a specific directory structure. When you download TTags, all the files and root directories will be in Tag directory. You must copy all of its content at your root.<br>
 
-**Root Directories**
+#### Root Directories
 
-<p class = "ttag-dir">/src/</p>
+<br>
 
-This directory is the backbone of TTags. The complete source code of TTags is in the **`/src/`** directory. Any changes in this directory or its sub-directories will change the way this works. Hence, it should not be touched.
+##### Directories not to be touched
+
+*Note these directories begin with a capital letter.*
+
+<p class = "ttag-dir">/Src/</p>
+
+This directory is the backbone of TTags. The complete source code of TTags is in the **`/Src/`** directory. Any changes in this directory or its sub-directories will change the way this works. Hence, it should not be touched.
  
-<p class = "ttag-dir">/dependences/</p>
+
+<p class = "ttag-dir">/Dependences/</p>
 
 This directory contains the dependences TTags requires. TTags uses **Parsedown**.
+
+<br>
+
+##### Directories that can be customized
+
+*Note these directories begin with a lowercase letter.*
 
 <p class = "ttag-dir">/javascript/</p>
 
