@@ -171,3 +171,13 @@ function getArticleRoot($file){
 function isArrayAssoc(array $array) {
   return count(array_filter(array_keys($array), 'is_string')) > 0;
 }
+
+function in_array_r($needle, $haystack, $strict = false) {
+    foreach ($haystack as $item) {
+        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
+            return true;
+        }
+    }
+
+    return false;
+}

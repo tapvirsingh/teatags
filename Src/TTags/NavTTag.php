@@ -28,6 +28,8 @@ class NavTTag extends TapvirTagContainer{
 	private $index;
 	private $arrayIndex;
 
+	private $currentQueryVal;
+
 	/*
 		$navList => array of list with keys and values as captions and links.
 
@@ -60,6 +62,7 @@ class NavTTag extends TapvirTagContainer{
 		$this->linkActivated = false;
 		$this->navList = $navList;
 		$this->parameters = $parameters;
+		$this->currentQueryVal = $this->getParameter('query-key');
 		$this->setParameters();
 		$this->createNavTTag();
 	}
@@ -130,11 +133,12 @@ class NavTTag extends TapvirTagContainer{
 		if($this->linkActivated){
 			return false;
 		}
-		$key = $this->getParameter('query-key');
 
-		$stringToMatch = explode('=', $href)[1];
+		// $key =  $this->getParameter('query-key');
 
-		$this->linkActivated = $key === $stringToMatch;
+		$stringToMatch = explode('/', $href)[5];
+
+		$this->linkActivated = $this->currentQueryVal === $stringToMatch;
 		return $this->linkActivated;
 	}
 	
@@ -276,9 +280,13 @@ class NavTTag extends TapvirTagContainer{
 				// $retLis = array_merge($lis, $this->createLinkFromArray($caption,$href,$issetHref));
 
 				// $ttagPanel = $recursion ? 'ttag-sub-panel' : 'ttag-panel'; 
-				$ttagPanel = $this->getTTagPanel($recursion);
+				$addCssClass = $this->getTTagPanel($recursion);
 
-				$div = new DivTTag('panel-collapse collapse in ttag-panel-collapse '.$ttagPanel,ttag_getCombinedHtml($retLis), $addAttrib);
+				if(in_array_r($this->currentQueryVal, $href)){
+					$addCssClass .= ' show';
+				}
+
+				$div = new DivTTag('panel-collapse collapse in ttag-panel-collapse '.$addCssClass,ttag_getCombinedHtml($retLis), $addAttrib);
 
 				// $lis =array_merge($lis,  [$setCap,$div->get()]);
 				$lis[] = $caption.$div->get();

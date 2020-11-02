@@ -13,7 +13,7 @@ ul li{
 	list-style-type: none;
 }
 
-p a, p a:hover, .ttag_link, .ttag_link:hover{
+p a, p a:hover, .ttag-link, .ttag-link:hover{
 	/*color:#8ac3ff;*/
 	text-decoration: none;
 	font-weight: bold;
@@ -159,6 +159,7 @@ footer{
 	/*color:yellow;*/
 	/*color:#efef8f !important;*/
     color: #bdbd84 !important;
+    font-weight: bold;
 }
 .ttag-doc-row{
 	color: #bbb;
