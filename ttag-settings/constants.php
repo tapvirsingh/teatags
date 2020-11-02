@@ -22,14 +22,14 @@ $ttag_ArticleVariable = 'article' ;
 // define("ROOT","/");
 // Paths
 // Path where markdown files are stored.
-$ttag_MDFilePath = ROOT.'MD/';
+$ttag_MDFilePath = ROOT.'md/';
 // $ttag_MDFileExtention = '.txt'; // Can be set to .md | .txt or any other.
 $ttag_MDFileExtention = '.md'; // Can be set to .md | .txt or any other.
 $ttag_PHPFileExtention = '.php'; // Can be set to .php | .blade.php for laravel.
 
-$ttag_ViewsPath = ROOT.'Views/'; // Can be set to .md | .txt or any other.
+$ttag_ViewsPath = ROOT.'views/'; // Can be set to .md | .txt or any other.
 
-$ttag_ImagesPath = ROOT.'Images/'; // Can be set to .md | .txt or any other.
+$ttag_ImagesPath = ROOT.'images/'; // Can be set to .md | .txt or any other.
 
 $ttag_IconsPack = 'fontawesome'; // You may also use latest bootstrap's icon library.
 $ttag_IconTag = 'i';
@@ -37,7 +37,7 @@ $ttag_IconTag = 'i';
 $ttag_CSSframework = 'bootstrap';
 
 //$ttag_Theme = 'TeaTagsTheme';
- $ttag_Theme = 'TeaTagSlate';
+ $ttag_Theme = 'tea-tag-slate';
 
 //CONSTANTS
 const NAVLINKS = 'Navigation';

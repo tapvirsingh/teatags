@@ -13,8 +13,8 @@ spl_autoload_register(function ($className) {
 });
 
 
-define("MD_ROOT", __DIR__ ."/MD/");
-define("IMAGES_ROOT", __DIR__ ."/Images/");
+define("MD_ROOT", __DIR__ ."/md/");
+define("IMAGES_ROOT", __DIR__ ."/images/");
 define("SETTINGS_ROOT", __DIR__ ."/ttag-settings/");
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
@@ -33,7 +33,7 @@ require_once('ttag-settings/social.php');
 require_once('ttag-settings/brand-navbar.php');
 require_once('ttag-settings/bootstrap.php');
 require_once('ttag-settings/styles.php');
-require_once('ttag-settings/js.php');
+// require_once('ttag-settings/js.php');
 // require_once('ttag-settings/footer.php');
 require_once('ttag-settings/google.php');
 require_once('ttag-settings/page-headers.php');
