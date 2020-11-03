@@ -17,7 +17,7 @@ $navbar = new NavBarTTag($ttag_PageName);
 
 // Load the article.
 $article = new ArticleTTag($default_DocArticle, 
-										['dir'=>'Documentation/1.x',
+										['dir'=>'documentation/1.x',
 										'variable'=>$variable, 
 										'filter'=>FILTER_SANITIZE_STRING]);
 

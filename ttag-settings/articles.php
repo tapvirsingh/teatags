@@ -4,7 +4,7 @@
 
 // Note ttag_ prefix is not used here because you may have a custom name that you wish to use.
 // However, articles_ prefix should be used.
-$articles_mdSubFolder = '/Documentation/1.x/';
+$articles_mdSubFolder = '/documentation/1.x/';
 
 // // Please also note that md extention is used here.
 // $articles_docFiles = [

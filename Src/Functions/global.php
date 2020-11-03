@@ -65,9 +65,9 @@ function ttag_View($file = null){
 	global $ttag_PHPFileExtention;
 
 	if($file !== null)
-		return ROOT.'Views/'.$file.$ttag_PHPFileExtention;
+		return ROOT.'views/'.$file.$ttag_PHPFileExtention;
 	else
-		return ROOT.'Views/';
+		return ROOT.'views/';
 }
 
 function cleanedUrl($url = null){
@@ -79,7 +79,7 @@ function cleanedUrl($url = null){
 
 // Loads the Image file.
 function ttag_Image($file){
-	return ttag_theme().'/'.'Images/'.$file;
+	return ttag_theme().'/'.'images/'.$file;
 }
 
 // Load the image from /Image/ folder.
@@ -131,7 +131,7 @@ function ttag_IndexView(){
 // Returns the current theme's directory
 function ttag_theme(){
 	global $ttag_Theme;
-	return ROOT.'Themes/'.$ttag_Theme;
+	return ROOT.'themes/'.$ttag_Theme;
 }
 
 // Check value if it is 

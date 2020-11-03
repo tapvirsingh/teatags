@@ -138,7 +138,9 @@ class NavTTag extends TapvirTagContainer{
 
 		// $key =  $this->getParameter('query-key');
 
-		$stringToMatch = explode('/', $href)[5];
+	  	$explodedHref = explode('/', $href);
+	    $stringToMatch = end($explodedHref);
+
 
 		$this->linkActivated = $this->currentQueryVal === $stringToMatch;
 		return $this->linkActivated;

@@ -18,7 +18,7 @@ $navbar = new NavBarTTag($ttag_PageName);
 $githubIco = new FontAwsmTTag('github');
 $infoIco = new FontAwsmTTag('book');
 
-$verNum = new TeaCTag('sup','ttag-ver','v 2');
+$verNum = new TeaCTag('sup','ttag-ver','2');
 $beta = new TeaCTag('sup','ttag-beta','&beta;');
 
 
