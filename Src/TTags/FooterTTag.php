@@ -57,15 +57,17 @@ class FooterTTag extends TapvirTagContainer{
 			if($this->orien == 'a'){
 
 				if($this->areSmallUniDimensionalLinks()){
-					$this->footerClass .= $footerClasses['footerHLink'].'"';
+					$this->footerClass .= $footerClasses['footerHLink'];
 				}else{
-					$this->footerClass .= $footerClasses['footerLink'].'"';
+					$this->footerClass .= $footerClasses['footerLink'];
 				}
 			}elseif($this->orien == 'v'){
-				$this->footerClass .= $footerClasses['footerLink'].'"';
+				$this->footerClass .= $footerClasses['footerLink'];
 			}else{
-				$this->footerClass .= $footerClasses['footerHLink'].'"';
+				$this->footerClass .= $footerClasses['footerHLink'];
 			}
+
+			// debugTTag($this->footerClass);
 				
 			$this->footerSubLinkCaption = $footerClasses['footerSubCap'];
 

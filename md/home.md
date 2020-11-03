@@ -1,120 +1,200 @@
-### Introduction
- 
-Tea Tags is a view framework which helps you to create complex pages in core PHP without the need to write HTML. It will be created for you by Tea Tags. For example, this single line of code `$containerDiv = new DivTTag("container",$someHtml)` will create `<div class ="container"> ... </div>`.
- 
-You can write your articles using Markdown. HTML Tags and elements will still be available, for example, you may use `<code>`, `<b>`, `<strong>` etc tags along with elements in your code or text however we would recommend using <code>\`</code> and <code>\**</code> instead. Use HTML tags only when you are completely out of options.
- 
-The **ttag-settings** folder contains files which have the global settings for your app. Files in this folder prevent you from rewriting the global default code again and again. For example, 
- 
-```php
-<?php  
+<h3 class="ttag-text-light text-center display-4 mt-0 mb-5">How to use Tea Tags</h3>
 
-$ttag_Navbar = [
- 
-	// You can create your global navbar menu in the form 
-	// of multi-dimensional array in this file, and it will 
-   	// be available on all the pages of the website.
- 
-		'menu' =>  [
-				'Home'=>'#',
-				'Documentation'=>'#',
- 				
- 				// A dropdown menu
-				'Dropdown'=>[
-						'One'=>'#',
-						'Two'=>'#',
-						''=>'-',
-						'Three'=>'#'
-						],
-				],			
- 
-	'extraClasses' => 'navbar-expand-lg sticky-top navbar-light bg-white',
- 
-];
- 
-```
-You may create the navbar menu by declaring and defining it as an array in the navbar.php global settings file which is in the **ttag-settings** folder. You may later call `$navbar = new NavBarTTag("Home")` and `$navbar = new NavBarTTag("Documentation")`, in your *home.php* and *documentation.php* page files respectively, to set the *Home* and *Documentation* links of the menu to *active*.
- 
-Please note, there are naming conventions. Although it has been mentioned in the documentation that the names of the files may not be same as that of the links (array keys declared in the global settings) but the array keys declared in the menu in the **navbar.php** file must match the keys (links) instantiating the object of class NavBarTTag. We will talk more on this subject later in the documentation.
- 
-This visual framework can be used to build both static and dynamic PHP web applications.
- 
-**This page was created using the following code written in PHP.**
- 
+<p class="text-center ttag-text-light">Write this...</p>
+
 ```php
+
 <?php
 // Include the global TTag's configuration file.
-require_once('tta-config.php');
+require_once('../TTagConfig.php');
 
-use Src\TTags\{NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag};
+// Use HtmlTTag.
+use Src\TTags\{HtmlTTag};
 
-$ttag_PageName = 'Home';
-// Page Metadata
-// You may add new page headers and meta tags, or overwrite the defaults here.
-$pageHeaders = [ 'meta' => [
-					'keywords' => 'PHP Framework, Bootstrap Helper',
-					] 
-				];
-
-// Activate the Home link in the navigation bar.
-$navbar = new NavBarTTag($ttag_PageName);
-
-// Set the bootstrap's jumbotron
-$jumbo = new JumboTTag( [ // Buttons 
-							'buttons' => [
-								'Learn more' => [ttag_View('documentation'),
-													'btn btn-primary btn-lg m-4'],
-								'Download from Github' => [
-															'https://github.com/tapvirsingh/teatags',
-															'btn btn-success btn-lg',
-															'_blank',
-														],
-							]
-						],
-						[//$parameters
-							'bg-image' => 'tea-background.jpg',
-							'lead-class' => 'col-7',
-						] );
-
-// Load home.md 
-$article = new ArticleTTag($ttag_PageName);
-
-// Article auto creates div.col, rows and container, depending upon the type of data.
-// and returns a DivsTTags object.
-$div = $article->divs([ 'col' =>10,  'offset' => 1,
-						// 'extra-container-class' => 'text-justify', 
-						'extra-row-class' => 'mt-4']);
-
-// Creates the page with default page headers, array composed of
-// navbar, jumbotron and div, also auto creates the body tags, 
-// and then displays the page.
-new HtmlTTag([$navbar,$jumbo,$div]);
+// Displays The World Loves Tea!.
+new HtmlTTag('The World Loves Tea!');
 
 ```
- 
-That's it! No complex untraceable HTML and no chunks of small code either which again becomes difficult to manage.
- 
-The content which you are reading has been separately saved in the MD folder. It has been written using Markdown. This helps in keeping the code clean, and also ensures that the content writer who may not be a programmer is not bothered with embedded PHP scripts he isn't familiar with.
- 
-However, instead of separately saving the code and the content, you may hard code it directly in the code as a variable and then pass it as a parameter (argument) to the **ArticleTTag**'s **get()** method. For example,
- 
-```php
-<?php
+<p class="ttag-code-caption text-muted"><b>Tea Tags using PHP</b></p>
 
-// Some hard coded Markdown being saved in $md variable.
-$md = "**Lorem ipsum** dolor __sit__ amet, consectetur adipiscing elit.";
+<p class="text-center ttag-text-light">And get this!</p>
 
-// Instantiate object of ArticleTTag.
-$article = new ArticleTTag();
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" 
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+		crossorigin="anonymous">
+	<link 
+		href="https://fonts.googleapis.com/css2?
+		family=Dancing+Script:wght@500;600&
+		family=Manrope:wght@300&
+		family=Questrial&display=swap" 
+	rel="stylesheet">
+	<title>Tea Tags</title>
+	<meta name="viewport" 
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" 
+		href="http://localhost/tag/themes/tea-tag-slate/css/ttag.css">
+	<link rel="stylesheet" 
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" 
+		href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css">
+	<link rel="stylesheet" 
+		href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/zenburn.min.css">
+</head>
+<body class="">The World Loves Tea!
+	<footer class="footer p-5  bg-dark">
+		<div class="row mb-4">
+			<div class="ttag-web-h-ico col-12" 
+		style="background-image:url(http://localhost/tag/Themes/tea-tag-slate/images/tea.png)">
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-12 text-center my-2">
+				<span class="ttag-footer-sublink-caption">Navigation</span>
+				<a href="http://localhost/tag/" 
+					class="ttag-footer-h-link table-cell m-3" 
+					target="_blank">
+					<i class = "fa mr-1 fa-1x fa-home"></i>
+					<span>Home</span>
+				</a>
+				<a href="http://localhost/tag/docs/" 
+					class="ttag-footer-h-link table-cell m-3" 
+					target="_blank">
+					<i class = "fa mr-1 fa-1x fa-book"></i>
+					<span>Documentation</span>
+				</a>
+				<a href="https://blazehattech.blogspot.com/" 
+					class="ttag-footer-h-link table-cell m-3" 
+					target="_blank">
+					<i class = "fa mr-1 fa-1x fa-external-link"></i>
+					<span>Blogs</span>
+				</a>
+			</div>
+			<div class="col-12 text-center my-2">
+				<span class="ttag-footer-sublink-caption">License</span>
+				<a href="https://github.com/tapvirsingh/teatags" 
+					class="ttag-footer-h-link table-cell m-3" target="_blank">
+					<i class = "fa mr-1 fa-1x fa-balance-scale"></i>
+					<span>MIT</span>
+				</a>
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="text-center col-12">
+				<a href="https://www.facebook.com/BlazingTeaTags" 
+					class="m-3 text-light d-inline-flex ttag-social-link" 
+					target="_blank">
+					<i class = "fa fa-facebook-f fa-2x"></i>
+				</a>
+				<a href="https://twitter.com/BlazingTeaTags" 
+					class="m-3 text-light d-inline-flex ttag-social-link" 
+					target="_blank">
+					<i class = "fa fa-twitter fa-2x"></i>
+				</a>
+				<a href="https://www.youtube.com/channel/UCRXchFZDXjW4YQKVsGI75_w" 
+					class="m-3 text-light d-inline-flex ttag-social-link" 
+					target="_blank">
+					<i class = "fa fa-youtube fa-2x"></i>
+				</a>
+				<a href="https://www.linkedin.com/company/blazehattech" 
+					class="m-3 text-light d-inline-flex ttag-social-link" 
+					target="_blank">
+					<i class = "fa fa-linkedin fa-2x"></i>
+				</a>
+				<a href="https://github.com/tapvirsingh/teatags" 
+					class="m-3 text-light d-inline-flex ttag-social-link" 
+					target="_blank">
+					<i class = "fa fa-github fa-2x"></i>
+				</a>
+			</div>
+		</div>
+		<p class="text-light text-center">© Copyright 2020 
+			<a href="http://blazehattech.com/" 
+				class="ttag-developer-company" 
+				target="_blank">
+				Blazehat Technologies LLP
+			</a> - All Rights Reserved
+		</p>
+		<div class="container">
+			<div class="row text-center text-white mt-2">
+				<div class="col-sm-12 col-md-12" id="">
+					<span class="font-weight-bold">Founder </span>
+				</div>
+			</div>
+			<div class="row text-center text-white mt-2">
+				<div class="col-sm-12 col-md-12" id="">
+					<img alt="Tapvir Singh" 
+						class="rounded-circle" 
+						width="64" height="64" 
+						src="http://localhost/tag/images/DSC_7924.JPG">
+					</div>
+			</div>
+			<div class="row text-center text-white mt-2">
+				<div class="col-sm-12 col-md-12" id="">Tapvir Singh</div>
+			</div>
+			<div class="row text-center text-white mt-2">
+				<div class="col-sm-12 col-md-12" id="">
+					<a href="https://tapvir.blogspot.com/" 
+					class="ttag-founder-web-link">tapvir.blogspot.com</a>
+				</div>
+			</div>
+			<div class="row text-center text-white mt-2">
+				<div class="col-sm-12 col-md-12" id="">
+					<a href="https://twitter.com/tapvir_singh" 
+						class="m-2 text-light d-inline-flex ttag-social-link" 
+						target="_blank">
+						<i class = "fa fa-twitter"></i>
+					</a>
+					<a href="https://www.facebook.com/tapvir/" 
+						class="m-2 text-light d-inline-flex ttag-social-link" 
+						target="_blank">
+						<i class = "fa fa-facebook"></i>
+					</a>
+					<a href="https://www.linkedin.com/in/tapvir/" 
+						class="m-2 text-light d-inline-flex ttag-social-link" 
+						target="_blank">
+						<i class = "fa fa-linkedin"></i>
+					</a>
+					<a href="https://www.youtube.com/user/tapvir/" 
+						class="m-2 text-light d-inline-flex ttag-social-link" 
+						target="_blank">
+						<i class = "fa fa-youtube"></i>
+					</a>
+					<a href="https://github.com/tapvirsingh" 
+						class="m-2 text-light d-inline-flex ttag-social-link" 
+						target="_blank">
+						<i class = "fa fa-github"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+			type="text/javascript">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+			type="text/javascript">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
+			type="text/javascript">
+	</script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js" 
+			type="text/javascript">
+	</script>
+	<script type="text/javascript">
+	hljs.initHighlightingOnLoad();
+	</script>
+</body>
+</html>
 
-// Get the html of the article.
-$html = $article->get($md);
-
- 
 ```
+<p class="ttag-code-caption text-muted"><b>HTML output along with custom and Bootstrap 4 classes.</b></p>
 
-So, let's take a cup of tea and get started! 
+**Note** 
 
-<!-- Get on with the full [documentation](#)  and [download](#) the framework. -->
- 
-
+The above HTML output has been beautifed (tabbed and spaced) for making it easier to understand. The HTML output generated by Tea Tags shall be instead minified.

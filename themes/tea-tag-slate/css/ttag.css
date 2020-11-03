@@ -215,7 +215,8 @@ footer{
 }
 
 .ttag-panel{
-    border-left: 4px solid rgb(255, 118, 118);
+    /*border-left: 4px solid rgb(255, 118, 118);*/
+    border-left: 4px solid #e83e8c;
 }
 
 .ttag-sub-panel-level-1{
@@ -224,6 +225,31 @@ footer{
 
 .ttag-sub-panel-level-2{
     border-left: 4px solid #fdff7d;
+}
+
+.ttag-border-radius-0{
+    border-radius:0px !important;
+}
+
+.ttag-jumbo-background{
+   background: #2a2e32 !important;
+}
+
+.ttag-text-light{
+    color: #bbb !important;
+}
+
+.ttag-text-lighter{
+    color: #ababab !important;
+}
+
+.ttag-ver{
+    font-size: 3rem;
+    color : #e83e8c !important;
+}
+.ttag-beta{
+    font-size: 2rem;
+    color: #71a5d9 !important;
 }
 
 @media only screen and (max-width: 480px) {

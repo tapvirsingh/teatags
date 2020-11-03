@@ -11,9 +11,11 @@ $ttag_Author = 'Tapvir Singh';
 // App's main heading and the lead.
 // $ttag_Head = 'Have some Tea Tags!';
 $ttag_Head = 'Tea Tags';
-$ttag_Title = 'Enjoy Tea Tags!';
+$ttag_Title = 'Tea Tags';
 // Lead will also be part of the site's description.
-$ttag_Lead = 'A quick, easy and hassle free PHP framework that will assist you in writing HTML and Bootstrap in PHP.';
+// $ttag_Lead = 'A quick, easy and hassle free PHP framework that will assist you in writing HTML and Bootstrap in PHP.';
+
+$ttag_Lead = 'A PHP view framework that manages complete Html by itself. It uses Bootstrap 4 internally but also allows you to use custom or Bootstrap classes. PHP programmers don\'t have to embed PHP in HTML.';
 
 $ttag_ArticleVariable = 'article' ;
 

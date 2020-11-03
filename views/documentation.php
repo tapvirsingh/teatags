@@ -1,6 +1,6 @@
 <?php
 // Include the global TTag's configuration file.
-require_once('../tta-config.php');
+require_once('../ttag-config.php');
 
 use Src\TTags\{NavBarTTag,NavTTag,ArticleTTag, DivsTTags, HtmlTTag, NavTogglerTTag};
 
@@ -35,6 +35,7 @@ $navtoggler = new NavTogglerTTag([
 // query variable for navigating through the articles.
 $docNavs = new NavTTag($articles_docFiles, [
 											'style' => 'flex-column mt-4',
+											'dir'=>'docs',
 											// Get the article's query variable name.
 											'query-key' => $article->getCurrentArticleName(),
 											'id' => 'docNav'

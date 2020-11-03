@@ -1,8 +1,8 @@
 <?php
 // Include the global TTag's configuration file.
-require_once('tta-config.php');
+require_once('ttag-config.php');
 
-use Src\TTags\{NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag,FontAwsmTTag};
+use Src\TTags\{TeaCTag,NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag,FontAwsmTTag};
 
 $ttag_PageName = 'Home';
 // Page Metadata
@@ -18,24 +18,34 @@ $navbar = new NavBarTTag($ttag_PageName);
 $githubIco = new FontAwsmTTag('github');
 $infoIco = new FontAwsmTTag('book');
 
+$verNum = new TeaCTag('sup','ttag-ver','v 2');
+$beta = new TeaCTag('sup','ttag-beta','&beta;');
+
+
 // Set the bootstrap's jumbotron
-$jumbo = new JumboTTag( [ // Buttons 
+$jumbo = new JumboTTag(
+							[
+							'head' => "Tea Tags ".$verNum->get().$beta->get(),
+							// Buttons 
 							'buttons' => [
-							$infoIco->get().' Learn more' => [
+							$infoIco->get().' Read Docs' => [
 													'https://teatags.blazehattechnologies.com/Views/documentation.php',
-													'btn btn-primary btn-lg m-4'
+													'btn btn-outline-light btn-lg m-4'
 												],
 							$githubIco->get().' Download / Clone' => [
 															'https://github.com/tapvirsingh/teatags',
-															'btn btn-success btn-lg',
+															'btn btn-outline-success btn-lg',
 															'_blank',
 														],
 							]
 						],
 						[//$parameters
-							'bg-image' => 'tea-background.jpg',
-							'lead-class' => 'col-7',
-							'overlay' => ['color' => '#fff', 'opacity'=>'0.5']
+							// 'bg-image' => 'tea-background.jpg',
+							'lead-class' => 'col-8 offset-2 ttag-text-lighter',
+							'align'=>'center',
+							'jumbo-classes'=>'mb-0 pb-1 ttag-border-radius-0 ttag-jumbo-background ',
+							'head-class' => 'ttag-text-light mb-3',
+							// 'overlay' => ['color' => '#fff', 'opacity'=>'0.5']
 						] );
 
 // Load home.md 
@@ -43,7 +53,7 @@ $article = new ArticleTTag($ttag_PageName);
 
 // Article auto creates div.col, rows and container, depending upon the type of data.
 // and returns a DivsTTags object.
-$div = $article->divs([ 'col' =>10,  'offset' => 1,
+$div = $article->divs([ 'col' =>8,  'offset' => 2,
 						// 'extra-container-class' => 'text-justify', 
 						'extra-row-class' => 'mt-4']);
 

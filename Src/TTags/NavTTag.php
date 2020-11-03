@@ -54,6 +54,7 @@ class NavTTag extends TapvirTagContainer{
 								Custom classes may also be added.
 								for example 
 								docAsideBar
+							'dir' => Directory name to get the links
 
 		];
 	*/
@@ -70,6 +71,7 @@ class NavTTag extends TapvirTagContainer{
 	private function setParameters(){
 		$this->style = $this->getParameter('style');
 		$this->id = $this->getParameter('id');
+		$this->dir = $this->getParameter('dir');
 		// $this->setId();
 	}
 
@@ -174,7 +176,7 @@ class NavTTag extends TapvirTagContainer{
 
 			$fileName =  $issetHref ? $value : $key;
 
-			$subHref =  cleanedUrl('docs').$fileName;
+			$subHref =  cleanedUrl($this->dir).$fileName;
 
 			$lis[] =  $this->createLink($value,$subHref,NAVTAGG_INDENT);
 		}
@@ -220,7 +222,7 @@ class NavTTag extends TapvirTagContainer{
 
 			$fileName =  $issetHref ? $value : $key;
 
-			$subHref =  cleanedUrl('docs').$fileName;
+			$subHref =  cleanedUrl($this->dir).$fileName;
 
 			$lis[] =  $this->createLink($value,$subHref,NAVTAGG_INDENT);
 		}
@@ -261,7 +263,7 @@ class NavTTag extends TapvirTagContainer{
 				$capName =  is_int($key) ? $href : $key ;
 				$fileName =  $issetHref ? $href : $key;
 
-				$href = cleanedUrl('docs').$fileName;
+				$href = cleanedUrl($this->dir).$fileName;
 
 				$lis[] = $this->createLink($capName ,$href, $indent );
 

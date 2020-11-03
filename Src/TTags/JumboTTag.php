@@ -36,7 +36,7 @@ class JumboTTag extends TapvirTagContainer{
 							]
 
 		$parameters = [
-						'jumboClasses' : extra classes to be passed along with jombotron class.
+						'jumbo-classes' : extra classes to be passed along with jombotron class.
 						'overlay' : null (Default) or ['color' => #bbb333, 'opacity' => 0.4] 
 						'make-fluid' : true | false,
 						'head-align' : 'left' | 'center' | 'right' | 'justify',
@@ -69,7 +69,7 @@ class JumboTTag extends TapvirTagContainer{
 
 			$extraAttribute = $this->setBackgroundImage();
 
-			$jumboClasses = $this->getClasses('jumboClasses','jumbotron');
+			$jumboClasses = $this->getClasses('jumbo-classes','jumbotron');
 
 			$overlay = $this->setOverlay();
 
