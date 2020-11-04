@@ -6,7 +6,7 @@
 
 <?php
 // Include the global TTag's configuration file.
-require_once('../TTagConfig.php');
+require_once('../ttag-config.php');
 
 // Use HtmlTTag.
 use Src\TTags\{HtmlTTag};
