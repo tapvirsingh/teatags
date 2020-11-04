@@ -2,7 +2,7 @@
 // Include the global TTag's configuration file.
 require_once('ttag-config.php');
 
-use Src\TTags\{TeaCTag,NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag,FontAwsmTTag};
+use Src\TTags\{SpanTTag,TeaCTag,NavBarTTag,JumboTTag,ArticleTTag,HtmlTTag,FontAwsmTTag};
 
 $ttag_PageName = 'Home';
 // Page Metadata
@@ -21,11 +21,13 @@ $infoIco = new FontAwsmTTag('book');
 $verNum = new TeaCTag('sup','ttag-ver','2');
 $beta = new TeaCTag('sup','ttag-beta','&beta;');
 
+$ver = new SpanTTag('ttag-show-version-style',$verNum->get().$beta->get());
+
 
 // Set the bootstrap's jumbotron
 $jumbo = new JumboTTag(
 							[
-							'head' => "Tea Tags ".$verNum->get().$beta->get(),
+							'head' => "Tea Tags ".$ver->get(),
 							// Buttons 
 							'buttons' => [
 							$infoIco->get().' Read Docs' => [
