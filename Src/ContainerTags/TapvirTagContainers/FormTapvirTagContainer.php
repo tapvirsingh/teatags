@@ -59,12 +59,16 @@ class FormTapvirTagContainer extends TapvirTagContainer{
     }
         
     protected function setFieldSetAttribute() {
+        // if the fieldset-attribute is set then
+        // make it available at the class level.
         if(isset($this->arrayOfFields['fieldset-attribute'])){
             $this->fieldsetAttribute = $this->arrayOfFields['fieldset-attribute'];
         }
     }
     
     protected function setLegendAttribute() {
+       // if the legend-attribute is set then
+        // make it available at the class level.
         if(isset($this->arrayOfFields['legend-attribute'])){
             $this->legendAttribute = $this->arrayOfFields['legend-attribute'];
         }
@@ -119,16 +123,19 @@ class FormTapvirTagContainer extends TapvirTagContainer{
         for($i=0 ; $i < $this->fieldCount ; $i++){
             
 //            list($containerClass,$type, $field) = explode('-TAPFT-', $this->arrayOfFields[$i]);
+
             $explodedData = explode('-TAPFT-', $this->arrayOfFields[$i]);
             
-            
             if(sizeof($explodedData) == 3){
+                // Container class
                 $containerClass = $explodedData[0];
+                //  field type
                 $this->fieldType = $explodedData[1];
+                //  field
                 $this->field = $explodedData[2];
 //            If there is a class with the container
                 if(strpos($containerClass, '.')){
-                    list($this->container ,$this->containerClass) = explode('.', $containerClass);
+                    list($this->container,$this->containerClass) = explode('.', $containerClass);
                 }
             }else{
                 $this->fieldType = $explodedData[0];
@@ -142,7 +149,6 @@ class FormTapvirTagContainer extends TapvirTagContainer{
                 $this->getFieldName();
                 $this->getFieldAttr();
                $this->createField();
-                
 
             }else{
                 $this->checkDontCreateFieldset();
@@ -218,8 +224,12 @@ class FormTapvirTagContainer extends TapvirTagContainer{
         }
     }
     
+
     protected function setFieldCount(){
+
+        // Get the total array of current fields.
         $this->fieldCount = count($this->arrayOfFields);
+
         if($this->fieldsetAttribute !== null ){
             $this->fieldCount--;
         }
@@ -233,16 +243,22 @@ class FormTapvirTagContainer extends TapvirTagContainer{
     }
     
     protected function initiateFormCreation($multiDimensionArrayOfFields){
+
+        // Count the number of array passed as the argument.
         $mutiDemArrayCount = count($multiDimensionArrayOfFields);
+
+        // Loop through each array.
         foreach($multiDimensionArrayOfFields as $arrayOffields){
             
-//            debug2($arrayOffields,__FILE__,__LINE__);
-            
+            // Current active field in the loop. 
             $this->arrayOfFields = $arrayOffields;
+
+            // Set the field attribute at the class level.
             $this->setFieldSetAttribute();
             $this->setLegendAttribute();
             $this->setContainerParaAttribute();
             $this->setFieldCount();
+
 
             $this->createFields();
             $this->createFieldSet($mutiDemArrayCount);
