@@ -54,9 +54,15 @@ function ttag_MdDir($dir = null){
 
 
 // Convert space to dash.
-function ttag_spaceToDash($var){
+function ttag_SpaceToDash($var){
 	$var = strtolower($var);
 	return preg_replace('/[[:space:]]+/', '-', $var);
+}
+
+// Convert dash to space.
+function ttag_DashToSpace($var){
+	$var = strtolower($var);
+	return preg_replace('/[-]+/', ' ', $var);
 }
 
 // Loads the view file
@@ -180,4 +186,12 @@ function in_array_r($needle, $haystack, $strict = false) {
     }
 
     return false;
+}
+
+function concValueRef(&$var,$val){
+	if($var === null){
+		$var = $val;
+	}else{
+		$var .= ' '.$val;
+	}
 }

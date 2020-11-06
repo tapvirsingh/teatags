@@ -12,29 +12,28 @@ class FormTTag extends TapvirTagContainer{
 
 	/*
 		$fields => [
-
-		//	Basic Options
-		-------------------
-
-			'id' => 'form-id',
-
-			'action' => '',
-			'method' => 'POST' (default), 'PUT' or 'GET',
-
-			// set this value.
-			'enctype' => 'text' (default), 'mutipart' (multipart/form-data (default) if form has file type) or 'app' (application/x-www-form-urlencoded)
-
-			// Shorthands for input.
 			// Use any HTML Input Types.
 			// name attribute in these fields will be same as placeholder 
 			// however replaced with underscore.
+
 			'Some Custom Placeholder' => 'text', 'file' , 'range' ,'textarea', 'password' ... ,
+
 			// You may append readonly, required, disabled etc along with the type
 			// for example,
+
 			'Some Custom Placeholder' => 'text-required',
 
+			// will create input text with required attribute and with
+			// following values of id and name.
+			// Kindly note the naming convention.
+			// formId followed by '-' and then key values
+			// that have ' ' replaced with '-'
+			
+			//  id = "formId-some-custom-placeholder" 
+			// 	name = "formId-some-custom-placeholder"
+
 			'Some Custom Placeholder' => [
-				'type' => 'text', 'textarea', 'password' ,'dropdown', 'checkbox' or 'radio',
+				'type' => 'dropdown', 'checkbox' or 'radio',
 				'id' => 'dropdown-id',
 				'name' => 'dropdown-name',
 				'list' => [
@@ -45,19 +44,20 @@ class FormTTag extends TapvirTagContainer{
 				], 
 			],
 
-			//Shorthand for creating submit button.
-			// This reserved key creates Submit button.
+			// This reserved key creates 'submit' button.
 			// with following attributes.
-			// id = "form-id-submit" name = "form-id-submit" value="Submit" 
+			// id = "formId-submit" name = "formId-submit" value="Submit" 
 
-			'Submit',
+			'submit',
 
 			// Creates buttons
+			// If nothing is set the default value
+			// is set to null.
 			// This reserved key creates buttons.
 			// with following attributes.
-			// id = "form-id-button_caption_1" name = "form-id-button_caption_1" value="Button Caption 1" 	
-			// id = "form-id-button_caption_2" name = "form-id-button_caption_2" value="Button Caption 2" 	
-			// id = "form-id-button_caption_3" name = "form-id-button_caption_3" value="Button Caption 3"
+			// id = "formId-button-caption-1" name = "formId-button-caption-1" value="Button Caption 1" 	
+			// id = "formId-button-caption-2" name = "formId-button-caption-2" value="Button Caption 2" 	
+			// id = "formId-button-caption-3" name = "formId-button-caption-3" value="Button Caption 3"
 
 			'buttons' => [
 				'Button Caption 1' , 'Button Caption 2' , 'Button Caption 3' 
@@ -67,16 +67,35 @@ class FormTTag extends TapvirTagContainer{
 			// This reserved key creates hidden fields.
 			// with following attributes.
 
-			// type = "hidden" id = "form-id-hidden-name" name = "form-id-hidden-name" value="value"  	
+			// type = "hidden" id = "formId-hidden-name" name = "formId-hidden-name" value="value"  	
 
-			// type = "hidden" id = "form-id-hidden-name2" name = "form-id-hidden-name2" value="value2"  	
+			// type = "hidden" id = "formId-hidden-name2" name = "formId-hidden-name2" value="value2"  	
 
 			'hidden' => [
 				'name' => 'value',
 				'name2' => 'value2',
 			], 
+
+		];
+
+		$parameters => [
+
+		//	Basic Options
+		-------------------
+			
+			// Form id.
+			'id' => 'formId',
 	
-	
+			// Form action.
+			'action' => '',
+
+			// Form method.
+			'method' => 'POST' (default), 'PUT' or 'GET',
+
+			// set this value.
+			'enctype' => 'text' (default), 'mutipart' (multipart/form-data) or 'app' (application/x-www-form-urlencoded)
+
+		
 		//	Advanced Options
 		----------------------
 
@@ -100,8 +119,177 @@ class FormTTag extends TapvirTagContainer{
 		];
 	*/
 
-	function __construct($fields){
+	protected $formId;
+	protected $action;
+	protected $method;
 
+	protected $fields;
+
+	protected $formHtml;
+
+	function __construct($fields, $parameters){
+
+		$this->fields = $fields;
+		$this->parameters = $parameters;
+
+		// Sets form's id, action and method.
+		$this->setFormParameters();
+
+		$this->createForm();
+
+		$attribute = $this->getFormAttr();
+
+		parent::__construct('form',$attribute, $this->formHtml);
+	}
+
+	protected function setFormParameters(){
+		// Set the form's id.
+		$this->formId = $this->getParameter('id');
+
+		// Set the form's action.
+		$this->action = $this->getParameter('action');
+
+		// Set the form's method.
+		$this->method = $this->getParameter('method','POST');
+	}
+
+	protected function getFormAttr(){
+		$attribute = 'id = "'.$this->formId.'" method = "'.$this->method.'"';
+
+		if($this->action !== null){
+			$attribute .= ' action = "'.$this->action.'"';
+		}
+
+		return $attribute;
+	}
+
+	protected function createButtons($value){
+
+		$buttons = null;
+
+		foreach($value as $button){
+			$addAtt = $this->getUniqueAttr($button);
+			$extraAttribute = 'type = "button" '.$addAtt;
+			$buttonObject = new TeaSTag('input','form-control',$extraAttribute);
+			$buttons[] = $buttonObject->get();
+		}
+
+		return $buttons;
+	}
+
+	protected function createHiddenInput($value){
+		$hiddens = null;
+
+		foreach($value as $hidden => $hValue){
+			$addAtt = $this->getUniqueAttr($hidden);
+			$extraAttribute = 'type = "hidden" '.'value = "'.$hValue.'" '.$addAtt;
+			$hiddenObject = new TeaSTag('input','form-control',$extraAttribute);
+			$hiddens[] = $hiddenObject->get();
+		}
+
+		return $hiddens;
+	}
+
+	protected function reservedFieldIsArray($field, $value){
+
+		switch ($field) {
+			case 'buttons':
+				return $this->createButtons($value)	;		
+			case 'hidden' :
+				return $this->createHiddenInput($value);
+			default:
+				break;
+		}
+	}
+
+	protected function createReservedField($field, $value){
+
+		if($field == 'submit'){
+			$addAtt = $this->getUniqueAttr($value); 
+			// $submit = new InputTTag($field,'form-control',ucwords($field), $addAtt);
+			$extraAttribute = 'type = "submit" '.$addAtt;
+			$submit = new TeaSTag('input','form-control',$extraAttribute);
+			$html = $submit->get();
+			// $tagName, $class = null, $extraAttribute = null
+			// InputTTag($value,'form-control',$field,$addAtt);
+		}else{
+			$array = $this->reservedFieldIsArray($field, $value);
+			$html = ttag_getCombinedHtml($array);
+		}
+
+		return $html;
+	}
+
+	protected function createFields(){
+
+		$html = null;
+
+		foreach($this->fields as $field => $value){
+			if($this->isFieldReserved($value)){
+
+				$html[] = $this->createReservedField($field,$value);
+			}else{
+				// Create field
+				$html[] = $this->createField($field,$value);
+			}
+		}
+
+		$this->formHtml = ttag_getCombinedHtml($html);
+	}
+
+	protected function createAddValue($value){
+		$values = explode('-', $value);
+		$ret = null;
+		$retString = null;
+
+		foreach ($values as $key) {
+				// Working on following possible code
+				// 'Some Custom Placeholder' => 'text-required-autofocus'
+				if(isFieldReserved($key)){
+					$ret['type-value'] = $key;
+				}else{
+					concValueRef($retString, $key);
+				}
+		}
+
+		$ret['add-param'] = $retString;
+
+		return $ret;
+	}
+
+	protected function getUniqueAttr($param){
+		$dashed = ttag_SpaceToDash($param);
+		$unique = $this->formId.'-'.$dashed;
+		$return = ' id = "'.$unique.'" name = "'.$unique.'" ';
+		return $return;
+	}
+
+	protected function createField($field,$value){
+
+		$addAttr = $this->getUniqueAttr($field); 
+
+		if(contains('-',$value)){
+			$retured = $this->createAddValue($value);
+			$value = $retured['type-value'];
+			$addAttr .= $retured['add-param'];
+		}
+
+		// $value contains type of the input.
+		// $field contains placeholder.
+		$input = new InputTTag($value,'form-control',$field,$addAttr);
+		return $input->get();
+	}
+
+	protected function isFieldReserved($field){
+		$reservedFields = [
+			'submit' ,'hidden' ,'buttons'
+		];
+
+		return in_array($field, $reservedFields);
+	}
+
+	protected function createForm(){
+		$this->createFields();
 	}
 
 };

@@ -160,7 +160,7 @@ class NavBarTTag extends TapvirTagContainer{
         foreach($list as $key => $value){
         	if(is_array($value)){
 
-        			$fileName = $ttag_ViewsPath.ttag_spaceToDash($key).'.php';
+        			$fileName = $ttag_ViewsPath.ttag_SpaceToDash($key).'.php';
 	                $a = $this->getAnchorTTC($key,$fileName);
 	                $createdList .= $a->getThisContainerHtml();
 
