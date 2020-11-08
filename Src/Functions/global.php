@@ -85,7 +85,7 @@ function cleanedUrl($url = null){
 
 // Loads the Image file.
 function ttag_Image($file){
-	return ttag_theme().'/'.'images/'.$file;
+	return ttag_Theme().'/'.'images/'.$file;
 }
 
 // Load the image from /Image/ folder.
@@ -103,14 +103,29 @@ function ttag_FooterSettings($file){
 	return FOOTER_SETTINGS.$file.'.php';
 }
 
-// Load the image from /Image/ folder.
+// Load the image from /image/ folder.
 function tta_NavBrandSettings($file){	
 	return NAVBRAND_SETTINGS.$file.'.php';
 }
 
-// Load the image from /Image/ folder.
+// Load the script from /script/ folder.
 function tta_ScriptSettings($file, $script = 'javascript'){	
 	return SCRIPTS_SETTINGS.$script.'/'.$file.'.php';
+}
+
+// Load the form's structure from /forms/structure/ dir.
+function tta_FormStructSettings($file){	
+	return FORMSTRUCT_SETTINGS.'/'.$file.'.php';
+}
+
+// Load the form's settings from /forms/settings/ dir.
+function tta_FormSettings($file){	
+	return FORMSETTING_SETTINGS.'/'.$file.'.php';
+}
+
+// Load the form's parameters from /forms/parameters/ dir.
+function tta_FormParaSettings($file){	
+	return FORMPARA_SETTINGS.'/'.$file.'.php';
 }
 
 // Loads the Md file
@@ -135,7 +150,7 @@ function ttag_IndexView(){
 }
 
 // Returns the current theme's directory
-function ttag_theme(){
+function ttag_Theme(){
 	global $ttag_Theme;
 	return ROOT.'themes/'.$ttag_Theme;
 }

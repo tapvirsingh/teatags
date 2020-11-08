@@ -127,10 +127,14 @@ class FormTTag extends TapvirTagContainer{
 
 	protected $formHtml;
 
-	function __construct($fields, $parameters){
+	protected $file;
 
-		$this->fields = $fields;
-		$this->parameters = $parameters;
+	function __construct($fileWithoutExt){
+
+		$this->file = $fileWithoutExt ;
+
+		$this->fields = include tta_FormStructSettings($fileWithoutExt);
+		$this->parameters = include tta_FormParaSettings($fileWithoutExt);
 
 		// Sets form's id, action and method.
 		$this->setFormParameters();
@@ -202,19 +206,37 @@ class FormTTag extends TapvirTagContainer{
 		}
 	}
 
+	protected function createSubmitButton($value){
+		$addAtt = $this->getUniqueAttr($value); 
+		// $submit = new InputTTag($field,'form-control',ucwords($field), $addAtt);
+		$extraAttribute = 'type = "submit" '.$addAtt;
+		$submit = new TeaSTag('input','btn btn-primary',$extraAttribute);
+		return $submit->get();
+	}
+
 	protected function createReservedField($field, $value){
 
-		if($field == 'submit'){
-			$addAtt = $this->getUniqueAttr($value); 
-			// $submit = new InputTTag($field,'form-control',ucwords($field), $addAtt);
-			$extraAttribute = 'type = "submit" '.$addAtt;
-			$submit = new TeaSTag('input','form-control',$extraAttribute);
-			$html = $submit->get();
+		/*if($field == 'submit'){
+			$html = $this->createSubmitButton($value);
 			// $tagName, $class = null, $extraAttribute = null
 			// InputTTag($value,'form-control',$field,$addAtt);
 		}else{
 			$array = $this->reservedFieldIsArray($field, $value);
 			$html = ttag_getCombinedHtml($array);
+		}*/
+
+		$html = null;
+
+		switch ($field) {
+			case 'submit':
+				$html = $this->createSubmitButton($value);
+				break;
+			case 'buttons':
+				$html = $this->createButtons($value);
+				break;
+			case 'hidden' :
+				$html = $this->createHiddenInput($value);
+				break;
 		}
 
 		return $html;
@@ -245,7 +267,7 @@ class FormTTag extends TapvirTagContainer{
 		foreach ($values as $key) {
 				// Working on following possible code
 				// 'Some Custom Placeholder' => 'text-required-autofocus'
-				if(isFieldReserved($key)){
+				if($this->isFieldReserved($key)){
 					$ret['type-value'] = $key;
 				}else{
 					concValueRef($retString, $key);

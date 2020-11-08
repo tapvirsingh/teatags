@@ -20,6 +20,11 @@ define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
 
+define("FORMS_SETTINGS", SETTINGS_ROOT."forms/");
+define("FORMPARA_SETTINGS", FORMS_SETTINGS."parameters/");
+define("FORMSETTING_SETTINGS", FORMS_SETTINGS."settings/");
+define("FORMSTRUCT_SETTINGS", FORMS_SETTINGS."structures/");
+
 // Global Function
 require_once('Src/Functions/global.php');
 
