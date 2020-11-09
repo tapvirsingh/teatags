@@ -128,6 +128,8 @@ class FormTTag extends TapvirTagContainer{
 	protected $formHtml;
 
 	protected $file;
+	protected $settings;
+	protected $classes;
 
 	function __construct($fileWithoutExt){
 
@@ -135,6 +137,8 @@ class FormTTag extends TapvirTagContainer{
 
 		$this->fields = include tta_FormStructSettings($fileWithoutExt);
 		$this->parameters = include tta_FormParaSettings($fileWithoutExt);
+		$this->settings = include tta_FormSettings($fileWithoutExt);
+		$this->classes = include tta_FormSettings($fileWithoutExt);
 
 		// Sets form's id, action and method.
 		$this->setFormParameters();
