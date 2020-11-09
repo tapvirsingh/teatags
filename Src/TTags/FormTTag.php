@@ -124,6 +124,7 @@ class FormTTag extends TapvirTagContainer{
 	protected $method;
 
 	protected $fields;
+	protected $reservedFields;
 
 	protected $formHtml;
 
@@ -135,10 +136,12 @@ class FormTTag extends TapvirTagContainer{
 
 		$this->file = $fileWithoutExt ;
 
+		$this->setReserved();
+
 		$this->fields = include tta_FormStructSettings($fileWithoutExt);
 		$this->parameters = include tta_FormParaSettings($fileWithoutExt);
 		$this->settings = include tta_FormSettings($fileWithoutExt);
-		$this->classes = include tta_FormSettings($fileWithoutExt);
+		$this->classes = include tta_FormClasses($fileWithoutExt);
 
 		// Sets form's id, action and method.
 		$this->setFormParameters();
@@ -149,6 +152,47 @@ class FormTTag extends TapvirTagContainer{
 
 		parent::__construct('form',$attribute, $this->formHtml);
 	}
+
+
+	protected function setReserved(){
+
+		// Input types
+		$this->reservedTypeFields = [
+			'text','submit','hidden','email','button',
+			'password','checkbox','file','range',
+			'color','date','datetime-local','week',
+			'image','month','number','radio',
+			'reset','search','tel','time','url',
+		];
+
+		// Input state modifiers
+		$this->reservedInputModifiers = [
+			'required','disabled',
+		];
+
+		// TTag's reserved fields
+		$this->reservedFields = [
+			'buttons','name','submit',
+			'combo','confirm password',
+			'hidden',
+		];
+	}
+
+
+	protected function isInputTypeField($field){
+		return in_array($field, $this->reservedTypeFields) ;
+	}
+
+
+	protected function isInputModifier($field){
+		return in_array($field, $this->reservedInputModifiers) ;
+	}
+
+
+	protected function isFieldReserved($field){
+		return in_array($field, $this->reservedFields) ;
+	}
+
 
 	protected function setFormParameters(){
 		// Set the form's id.
@@ -198,17 +242,6 @@ class FormTTag extends TapvirTagContainer{
 		return $hiddens;
 	}
 
-	protected function reservedFieldIsArray($field, $value){
-
-		switch ($field) {
-			case 'buttons':
-				return $this->createButtons($value)	;		
-			case 'hidden' :
-				return $this->createHiddenInput($value);
-			default:
-				break;
-		}
-	}
 
 	protected function createSubmitButton($value){
 		$addAtt = $this->getUniqueAttr($value); 
@@ -219,15 +252,6 @@ class FormTTag extends TapvirTagContainer{
 	}
 
 	protected function createReservedField($field, $value){
-
-		/*if($field == 'submit'){
-			$html = $this->createSubmitButton($value);
-			// $tagName, $class = null, $extraAttribute = null
-			// InputTTag($value,'form-control',$field,$addAtt);
-		}else{
-			$array = $this->reservedFieldIsArray($field, $value);
-			$html = ttag_getCombinedHtml($array);
-		}*/
 
 		$html = null;
 
@@ -304,14 +328,6 @@ class FormTTag extends TapvirTagContainer{
 		// $field contains placeholder.
 		$input = new InputTTag($value,'form-control',$field,$addAttr);
 		return $input->get();
-	}
-
-	protected function isFieldReserved($field){
-		$reservedFields = [
-			'submit' ,'hidden' ,'buttons'
-		];
-
-		return in_array($field, $reservedFields);
 	}
 
 	protected function createForm(){
