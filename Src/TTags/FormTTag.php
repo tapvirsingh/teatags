@@ -158,7 +158,7 @@ class FormTTag extends TapvirTagContainer{
 
 		// Input types
 		$this->reservedTypeFields = [
-			'text','submit','hidden','email','button',
+			'text','submit','email','button',
 			'password','checkbox','file','range',
 			'color','date','datetime-local','week',
 			'image','month','number','radio',
@@ -176,21 +176,31 @@ class FormTTag extends TapvirTagContainer{
 			'combo','confirm password',
 			'hidden',
 		];
+
+		// Special Character
+
+		$this->specialChars = [
+			'|',
+		];
 	}
 
+	/*
+		These functions check whether the current
+		field is in any of the reserved arrays.
+	*/
 
 	protected function isInputTypeField($field){
 		return in_array($field, $this->reservedTypeFields) ;
 	}
 
 
-	protected function isInputModifier($field){
-		return in_array($field, $this->reservedInputModifiers) ;
+	protected function isFieldReserved($field){
+		return in_array($field, $this->reservedFields) ;
 	}
 
 
-	protected function isFieldReserved($field){
-		return in_array($field, $this->reservedFields) ;
+	protected function isInputModifier($field){
+		return in_array($field, $this->reservedInputModifiers) ;
 	}
 
 
@@ -215,41 +225,57 @@ class FormTTag extends TapvirTagContainer{
 		return $attribute;
 	}
 
-	protected function createButtons($value){
+	protected function createAttributes($attrOf,$field, $value=null){
+		$addAtt = $this->getUniqueAttr($attrOf);
 
-		$buttons = null;
+		$return = 'type = "'.$field.'" '.$addAtt;
 
-		foreach($value as $button){
-			$addAtt = $this->getUniqueAttr($button);
-			$extraAttribute = 'type = "button" '.$addAtt;
-			$buttonObject = new TeaSTag('input','form-control',$extraAttribute);
-			$buttons[] = $buttonObject->get();
+		if($value !== null){
+			$return .= ' value = "'.$value.'"';
 		}
 
-		return $buttons;
+		return $return;
 	}
 
-	protected function createHiddenInput($value){
-		$hiddens = null;
+	protected function distribute($field,$valueParam){
+		$exp = explode('|',$valueParam);
+		if(is_array($exp)){
+			foreach ($exp as $key) {
+				// Check if the current key is 
+				// in 'type' or 'reserved field'
+			}
+		}else{
+			if($this->isFieldReserved($exp)){
+				// The field is reserved and create 
+				// the tag with same type.
+			}else{
+				// The field is not reserved therefore
+				// create it as text.
+				$this->createFieldObject($field,$key,$exp)
+			}
 
-		foreach($value as $hidden => $hValue){
-			$addAtt = $this->getUniqueAttr($hidden);
-			$extraAttribute = 'type = "hidden" '.'value = "'.$hValue.'" '.$addAtt;
-			$hiddenObject = new TeaSTag('input','form-control',$extraAttribute);
-			$hiddens[] = $hiddenObject->get();
 		}
-
-		return $hiddens;
 	}
 
-
-	protected function createSubmitButton($value){
-		$addAtt = $this->getUniqueAttr($value); 
-		// $submit = new InputTTag($field,'form-control',ucwords($field), $addAtt);
-		$extraAttribute = 'type = "submit" '.$addAtt;
-		$submit = new TeaSTag('input','btn btn-primary',$extraAttribute);
-		return $submit->get();
+	protected function createInput($field,$value){
+		$html = null;
+		if(is_array($value)){
+			foreach($value as $key => $val){
+				$html[] = $this->createFieldObject($field,$key,$val);
+			}
+		}else{
+			// If its a mixed expression or simple value.
+			$this->distribute($field,$value);
+		}
+		return $html;
 	}
+
+	protected function createFieldObject($field,$key,$value){
+		$extraAttribute = $this->createAttributes($key,$field,$value);
+		$fieldObject = new TeaSTag('input','form-control',$extraAttribute);
+		return $fieldObject->get();
+	}
+
 
 	protected function createReservedField($field, $value){
 
@@ -257,7 +283,7 @@ class FormTTag extends TapvirTagContainer{
 
 		switch ($field) {
 			case 'submit':
-				$html = $this->createSubmitButton($value);
+				$html = $this->createSubmitButton($field,$value);
 				break;
 			case 'buttons':
 				$html = $this->createButtons($value);
