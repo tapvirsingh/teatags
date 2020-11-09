@@ -123,6 +123,11 @@ function tta_FormSettings($file){
 	return FORMSETTING_SETTINGS.'/'.$file.'.php';
 }
 
+// Load the form's classes from /forms/classes/ dir.
+function tta_FormClasses($file){	
+	return FORMCLASSES_SETTINGS.'/'.$file.'.php';
+}
+
 // Load the form's parameters from /forms/parameters/ dir.
 function tta_FormParaSettings($file){	
 	return FORMPARA_SETTINGS.'/'.$file.'.php';
