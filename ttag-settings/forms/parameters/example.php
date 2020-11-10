@@ -1,7 +1,7 @@
 <?php
 
 return  [
-	'id' => 'test-form',
+	'id' => 'example-form',
 	'action' => '',
 	'method' => 'POST',
 ];

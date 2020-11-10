@@ -132,21 +132,42 @@ class FormTTag extends TapvirTagContainer{
 	protected $settings;
 	protected $classes;
 
+	protected $separator;
+
+	// Current key and value.
+	protected $cKey;
+	protected $cValue;
+	protected $cIndex;
+
+	protected $field;
+	protected $caption;
+
+	// $attributeValue is Hyphened and lowercase caption.
+	// Following value is used in input's id and name.
+	protected $attributeValue;
+	protected $modifiers;
+
+
 	function __construct($fileWithoutExt){
 
 		$this->file = $fileWithoutExt ;
+
+		$this->cIndex = 0;
+
+		// Separator
+		$this->separator = '|';
 
 		$this->setReserved();
 
 		$this->fields = include tta_FormStructSettings($fileWithoutExt);
 		$this->parameters = include tta_FormParaSettings($fileWithoutExt);
-		$this->settings = include tta_FormSettings($fileWithoutExt);
+		// $this->settings = include tta_FormSettings($fileWithoutExt);
 		$this->classes = include tta_FormClasses($fileWithoutExt);
 
 		// Sets form's id, action and method.
 		$this->setFormParameters();
 
-		$this->createForm();
+		$this->createFormElements();
 
 		$attribute = $this->getFormAttr();
 
@@ -167,21 +188,17 @@ class FormTTag extends TapvirTagContainer{
 
 		// Input state modifiers
 		$this->reservedInputModifiers = [
-			'required','disabled',
+			'required','disabled','autofocus',
 		];
 
 		// TTag's reserved fields
 		$this->reservedFields = [
-			'buttons','name','submit',
-			'combo','confirm password',
-			'hidden',
+			'buttons','submit',
+			'combo', 'hidden',
+			// 'name','confirm password',
 		];
 
-		// Special Character
-
-		$this->specialChars = [
-			'|',
-		];
+		
 	}
 
 	/*
@@ -225,139 +242,108 @@ class FormTTag extends TapvirTagContainer{
 		return $attribute;
 	}
 
-	protected function createAttributes($attrOf,$field, $value=null){
-		$addAtt = $this->getUniqueAttr($attrOf);
-
-		$return = 'type = "'.$field.'" '.$addAtt;
-
-		if($value !== null){
-			$return .= ' value = "'.$value.'"';
-		}
-
-		return $return;
+	protected function getType(){
+		// if the type is in the array of reserved then return the type else return text.
+		return ($this->isInputTypeField($this->field))?  $this->field : 'text';
 	}
 
-	protected function distribute($field,$valueParam){
-		$exp = explode('|',$valueParam);
-		if(is_array($exp)){
-			foreach ($exp as $key) {
-				// Check if the current key is 
-				// in 'type' or 'reserved field'
+
+	protected function disintegrate(){
+
+		$explodedValue = explode($this->separator, $this->cValue);
+
+		// Set the first value to caption.
+		$this->field =  $explodedValue[0];
+		$this->attributeValue = ttag_SpaceToDash($this->field);
+		$this->caption = ucfirst($this->field);
+		$this->modifiers = null;
+
+		$isInputModifier = $this->isInputModifier($explodedValue[1]);
+
+		// The second element is an input modifier
+		if($isInputModifier){
+			// set all the modifiers.
+			if(isset($explodedValue[1])){
+				// $this->modifiers = explode($this->separator,$explodedValue[1]);
+				$this->modifiers = array_slice($explodedValue, 1);
 			}
+
+		// The second element is NOT an input modifier
 		}else{
-			if($this->isFieldReserved($exp)){
-				// The field is reserved and create 
-				// the tag with same type.
-			}else{
-				// The field is not reserved therefore
-				// create it as text.
-				$this->createFieldObject($field,$key,$exp)
+			// Set the second element as field
+			$this->field = $explodedValue[1];
+			// set all the modifiers.
+			if(isset($explodedValue[2])){
+				// $this->modifiers = explode($this->separator,$explodedValue[2]);
+				$this->modifiers = array_slice($explodedValue, 2);
 			}
-
 		}
 	}
 
-	protected function createInput($field,$value){
-		$html = null;
-		if(is_array($value)){
-			foreach($value as $key => $val){
-				$html[] = $this->createFieldObject($field,$key,$val);
-			}
+	protected function nonArrayElement(){
+		// If not an array proceed to check 
+		// whether the values contain any reserved fields.
+		if($this->isFieldReserved($this->cValue)){
+
+			// Create reserved fields
 		}else{
-			// If its a mixed expression or simple value.
-			$this->distribute($field,$value);
+			// Create non reserved fields.
+			// but check for other reservations.
+			return $this->createInput();
 		}
-		return $html;
 	}
 
-	protected function createFieldObject($field,$key,$value){
-		$extraAttribute = $this->createAttributes($key,$field,$value);
-		$fieldObject = new TeaSTag('input','form-control',$extraAttribute);
-		return $fieldObject->get();
-	}
+	protected function createInput(){
 
+		$this->disintegrate();
+		$type = $this->getType();
 
-	protected function createReservedField($field, $value){
+		$placeHolder = $this->caption ;
 
-		$html = null;
+		$unique = $this->formId.'-'.$this->attributeValue.'"';
 
-		switch ($field) {
-			case 'submit':
-				$html = $this->createSubmitButton($field,$value);
-				break;
-			case 'buttons':
-				$html = $this->createButtons($value);
-				break;
-			case 'hidden' :
-				$html = $this->createHiddenInput($value);
-				break;
-		}
+		$id = 'id = "'.$unique;
+		$name = 'name = "'.$unique;
+		$modifiers = implode(' ', $this->modifiers);
+		$extraAttribute = $id.' '.$name.' '.$modifiers;
 
-		return $html;
-	}
-
-	protected function createFields(){
-
-		$html = null;
-
-		foreach($this->fields as $field => $value){
-			if($this->isFieldReserved($value)){
-
-				$html[] = $this->createReservedField($field,$value);
-			}else{
-				// Create field
-				$html[] = $this->createField($field,$value);
-			}
-		}
-
-		$this->formHtml = ttag_getCombinedHtml($html);
-	}
-
-	protected function createAddValue($value){
-		$values = explode('-', $value);
-		$ret = null;
-		$retString = null;
-
-		foreach ($values as $key) {
-				// Working on following possible code
-				// 'Some Custom Placeholder' => 'text-required-autofocus'
-				if($this->isFieldReserved($key)){
-					$ret['type-value'] = $key;
-				}else{
-					concValueRef($retString, $key);
-				}
-		}
-
-		$ret['add-param'] = $retString;
-
-		return $ret;
-	}
-
-	protected function getUniqueAttr($param){
-		$dashed = ttag_SpaceToDash($param);
-		$unique = $this->formId.'-'.$dashed;
-		$return = ' id = "'.$unique.'" name = "'.$unique.'" ';
-		return $return;
-	}
-
-	protected function createField($field,$value){
-
-		$addAttr = $this->getUniqueAttr($field); 
-
-		if(contains('-',$value)){
-			$retured = $this->createAddValue($value);
-			$value = $retured['type-value'];
-			$addAttr .= $retured['add-param'];
-		}
-
-		// $value contains type of the input.
-		// $field contains placeholder.
-		$input = new InputTTag($value,'form-control',$field,$addAttr);
+		$class = "form-control";
+		$input = new InputTTag($type , $class, $placeHolder, $extraAttribute);
 		return $input->get();
 	}
 
-	protected function createForm(){
-		$this->createFields();
+	protected function createElement(){
+		$return = null;
+		// check if the current value is an array.
+		if(is_array($this->cValue)){
+
+		}else{
+
+			// If not an array proceed to check 
+			// whether the values contain any reserved fields.
+			$return = $this->nonArrayElement();
+		}	
+
+		return $return;
+
+	}
+
+	protected function createFormElements(){
+		// if key is numeric then 
+
+		// debugTTag($this->fields);
+
+		$return = null;
+
+		foreach ($this->fields as $this->cKey => $this->cValue) {
+
+			$return[] = $this->createElement();
+
+			$this->cIndex++;
+		}
+
+		$this->formHtml = ttag_getCombinedHtml($return);
+
 	}
 
 };

@@ -55,6 +55,7 @@ function ttag_MdDir($dir = null){
 
 // Convert space to dash.
 function ttag_SpaceToDash($var){
+
 	$var = strtolower($var);
 	return preg_replace('/[[:space:]]+/', '-', $var);
 }

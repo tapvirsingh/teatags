@@ -16,36 +16,39 @@
 */
 
 return [
-	'name',
+	'name|required|autofocus',
 	'username|disabled',
 	'email|required',
 	'password|required',
+	'date|required',
+	'DOB|date|required',
+	'color|required',
 
-	'username,email,phone|text|disabled',
-	// following unkown type will be 
-	// shown as text.
+	'Email or Phone|text|disabled',
+	// // following unkown type will be 
+	// // shown as text.
 	'unkownType|required',
-	'some field|combo|required'=>[
-		'apples' => 1,
-		'oranges'=> 'o',
-		'bananas' => 'ban',
-		'grapes' => 'g',
-	],
+	// 'some field|combo|required'=>[
+	// 	'apples' => 1,
+	// 	'oranges'=> 'o',
+	// 	'bananas' => 'ban',
+	// 	'grapes' => 'g',
+	// ],
 
-	'hidden'=>[
-		'apples' => 1,
-		'oranges'=> 'o',
-		'bananas' => 'ban',
-		'grapes' => 'g',
-	],
+	// 'hidden'=>[
+	// 	'apples' => 1,
+	// 	'oranges'=> 'o',
+	// 	'bananas' => 'ban',
+	// 	'grapes' => 'g',
+	// ],
 
-	'buttons' => [
-		'Calculate',
-		'Reset',
-	],
-	// 'Login' => 'text',
-	'confirm password|required',
+	// 'buttons' => [
+	// 	'Calculate',
+	// 	'Reset',
+	// ],
+	// // 'Login' => 'text',
+	// 'confirm password|required',
 
-	// 'submit',
-	'Jump In|submit',
+	// // 'submit',
+	// 'Jump In|submit',
 ];
