@@ -11,16 +11,28 @@ namespace Src\SingleTags\TapvirTags;
 use Src\SingleTags\TapvirTag;
 
 class InputTapvirTag  extends TapvirTag{
+
+    protected $authorisedForValueAttr;
     
-     function __construct($type = null, $placeHolder  = null ,$extraAttribute = null) {
-         if($type === null){
+    
+    protected function setAuthorisedAttrValues(){
+        $this->authorisedForValueAttr = [
+            'submit','button','hidden'
+        ];
+    }
+    
+    function __construct($type = null, $placeHolder  = null ,$extraAttribute = null) {
+
+        $this->setAuthorisedAttrValues();
+
+        if($type === null){
              $attribute = ' type = "Text"';
          }else{
             $attribute = ' type = "'.$type.'"';
          }
          
         if($placeHolder !== null){
-            if($type === 'submit' || $type === 'button'){
+            if(in_array($type, $this->authorisedForValueAttr)){
                 $attribute .= ' value = "'.$placeHolder.'"';
             }else{
                 $attribute .= ' placeholder = "'.$placeHolder.'"';

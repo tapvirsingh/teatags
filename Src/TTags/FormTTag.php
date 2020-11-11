@@ -138,6 +138,7 @@ class FormTTag extends TapvirTagContainer{
 	protected $cKey;
 	protected $cValue;
 	protected $cIndex;
+	protected $cArrayKeyExists;
 
 	protected $field;
 	protected $caption;
@@ -147,6 +148,9 @@ class FormTTag extends TapvirTagContainer{
 	protected $attributeValue;
 	protected $modifiers;
 
+	protected $type;
+	protected $typeCalledFrom;
+
 
 	function __construct($fileWithoutExt){
 
@@ -154,10 +158,13 @@ class FormTTag extends TapvirTagContainer{
 
 		$this->cIndex = 0;
 
+		$this->type = $this->typeCalledFrom = null;
+
 		// Separator
 		$this->separator = '|';
 
 		$this->setReserved();
+		$this->setReservedArrayValues();
 
 		$this->fields = include tta_FormStructSettings($fileWithoutExt);
 		$this->parameters = include tta_FormParaSettings($fileWithoutExt);
@@ -166,6 +173,7 @@ class FormTTag extends TapvirTagContainer{
 
 		// Sets form's id, action and method.
 		$this->setFormParameters();
+		
 
 		$this->createFormElements();
 
@@ -174,6 +182,20 @@ class FormTTag extends TapvirTagContainer{
 		parent::__construct('form',$attribute, $this->formHtml);
 	}
 
+	protected function setReservedArrayValues(){
+		$this->reservedArrayInputValues = [
+			'hides' => 'hidden',
+			'buttons' => 'button',
+			'radios' => 'radio',
+			'checks' => 'checkbox'
+		];
+
+		$this->reservedArrayElements = [
+			'combo' => [
+				'select' => 'option'
+			],
+		];
+	}
 
 	protected function setReserved(){
 
@@ -248,21 +270,35 @@ class FormTTag extends TapvirTagContainer{
 		return $attribute;
 	}
 
-	protected function getType(){
-		// if the type is in the array of reserved then return the type else return text.
-		return ($this->isInputTypeField($this->field))?  $this->field : 'text';
+	protected function setType(){
+		if($this->typeCalledFrom !== ARRAY_ELEMENT_CALL){
+			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
+			// if the type is in the array of reserved then return the type else returns text.
+			$this->type = ($this->isInputTypeField($this->field))?  $this->field : 'text';
+		}
 	}
 
+	protected function prepInpAttrVals($field,$value = null){
+
+		$this->modifiers = null;
+
+		if($this->typeCalledFrom === SINGLE_ELEMENT_CALL){
+			$this->field = $field;
+			$this->attributeValue = ttag_SpaceToDash($this->field);
+			$this->caption = ucfirst($this->field);
+		}else{
+			$this->field = $this->cKey;
+			$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
+			$this->caption = $this->cKey === 'hides' ? $value : ucfirst($value);
+		}
+	}
 
 	protected function disintegrate(){
 
 		$explodedValue = explode($this->separator, $this->cValue);
 
 		// Set the first value to caption.
-		$this->field =  $explodedValue[0];
-		$this->attributeValue = ttag_SpaceToDash($this->field);
-		$this->caption = ucfirst($this->field);
-		$this->modifiers = null;
+		$this->prepInpAttrVals($explodedValue[0]);
 
 		$isInputModifier = $this->isInputModifier($explodedValue[1]);
 
@@ -290,10 +326,8 @@ class FormTTag extends TapvirTagContainer{
 		// If not an array proceed to check 
 		// whether the values contain any reserved fields.
 		if($this->isFieldReserved($this->cValue)){
-			// Create reserved fields
-
-			#Todo code for submit.
-
+			// Create reserved fields that are not array.
+			// None at the moment.
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.
@@ -302,31 +336,57 @@ class FormTTag extends TapvirTagContainer{
 	}
 
 	protected function getExtraAttribute(){
-		$unique = $this->formId.'-'.$this->attributeValue.'"';
-		$id = 'id = "'.$unique;
-		$name = 'name = "'.$unique;
+		$unique = ' = "'.$this->formId.'-'.$this->attributeValue.'"';
+		$id = 'id '.$unique;
+		$name = 'name '.$unique;
 		$modifiers =($this->modifiers !== null)? implode(' ', $this->modifiers) : null; 
 		return $id.' '.$name.' '.$modifiers;
 	}
 
-	protected function createInput(){
+	protected function createInput($arrayElement = false){
 
-		$this->disintegrate();
-		$type = $this->getType();
+		if(!$arrayElement){
+			$this->disintegrate();
+			$this->setType();
+		}
 
 		$placeHolder = $this->caption ;
 		$extraAttribute = $this->getExtraAttribute();
 
-		$class = $this->classes[$type];
+		$class = $this->classes[$this->type];
+
+		debugTTag( $this->type);
+
 		// $class = "form-control";
-		$input = new InputTTag($type , $class, $placeHolder, $extraAttribute);
+		$input = new InputTTag($this->type , $class, $placeHolder, $extraAttribute);
+
 		return $input->get();
 	}
 
+	protected function setTypeForArrayElement($key,$value){
+		if($this->cArrayKeyExists){
+
+			$this->typeCalledFrom = ARRAY_ELEMENT_CALL;
+			$this->type = $this->reservedArrayInputValues[$this->cKey] ;
+
+			$this->prepInpAttrVals($key,$value);
+		}
+	}
+
 	protected function arrayElement(){
+
+		$this->cArrayKeyExists = array_key_exists($this->cKey, $this->reservedArrayInputValues);
+
+		$html = null;
+
 		foreach ($this->cValue as $key => $value) {
 
+			$this->setTypeForArrayElement($key,$value);
+			$html[] = $this->createInput(true);
 		}
+
+
+		return ttag_getCombinedHtml($html);
 	}
 
 	protected function createElement(){
@@ -334,7 +394,6 @@ class FormTTag extends TapvirTagContainer{
 		// check if the current value is an array.
 		if(is_array($this->cValue)){
 			$return = $this->arrayElement();
-
 		}else{
 
 			// If not an array proceed to check 
@@ -344,6 +403,10 @@ class FormTTag extends TapvirTagContainer{
 
 		return $return;
 
+	}
+
+	protected function resetType(){
+		$this->typeCalledFrom = $this->type = null;
 	}
 
 	protected function createFormElements(){
@@ -357,10 +420,13 @@ class FormTTag extends TapvirTagContainer{
 
 			$return[] = $this->createElement();
 
+			$this->resetType();
+
 			$this->cIndex++;
 		}
 
 		$this->formHtml = ttag_getCombinedHtml($return);
+			// debugTTag($this->formHtml);
 
 	}
 

@@ -17,7 +17,7 @@
 
 return [
 	'name|required|autofocus',
-	'username|disabled',
+	// 'username|disabled',
 	'email|required',
 	// 'password|required',
 	// 'date|required',
@@ -35,22 +35,23 @@ return [
 	// 	'grapes' => 'g',
 	// ],
 
-	// // The hidden input type fields.
-	// 'hides'=>[
-	// 	// <input type = "hidden" name ="apples" value = "1">
-	// 	'apples' => 1,
-	// 	'oranges'=> 'o',
-	// 	'bananas' => 'ban',
-	// 	'grapes' => 'g',
-	// ],
+	// The hidden input type fields.
+	'hides'=>[
+		// <input type = "hidden" name ="apples" value = "1">
+		'apples' => 1,
+		'oranges'=> 'o',
+		'bananas' => 'ban',
+		'grapes' => 'g',
+	],
 
-	// // Multiple buttons
-	// 'buttons' => [
-	// 	'Calculate',
-	// 	'Reset',
-	// ],
+	// Multiple buttons
+	'buttons' => [
+		'Calculate',
+		'Reset',
+	],
+
+	
 	// 'confirm password|required',
-
-	'submit',
-	// 'Jump In|submit',
+	// 'submit',
+	'Jump In|submit',
 ];

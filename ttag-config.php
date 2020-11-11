@@ -26,6 +26,9 @@ define("FORMSETTING_SETTINGS", FORMS_SETTINGS."settings/");
 define("FORMSTRUCT_SETTINGS", FORMS_SETTINGS."structures/");
 define("FORMCLASSES_SETTINGS", FORMS_SETTINGS."classes/");
 
+define("SINGLE_ELEMENT_CALL", 0);
+define("ARRAY_ELEMENT_CALL", 1);
+
 // Global Function
 require_once('Src/Functions/global.php');
 
