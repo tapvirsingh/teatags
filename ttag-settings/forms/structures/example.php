@@ -19,15 +19,15 @@ return [
 	'name|required|autofocus',
 	'username|disabled',
 	'email|required',
-	'password|required',
-	'date|required',
-	'DOB|date|required',
-	'color|required',
+	// 'password|required',
+	// 'date|required',
+	// 'DOB|date|required',
+	// 'color|required',
 
-	'Email or Phone|text|disabled',
+	// 'Email or Phone|text|disabled',
 	// // following unkown type will be 
 	// // shown as text.
-	'unkownType|required',
+	// 'unkownType|required',
 	// 'some field|combo|required'=>[
 	// 	'apples' => 1,
 	// 	'oranges'=> 'o',
@@ -35,20 +35,22 @@ return [
 	// 	'grapes' => 'g',
 	// ],
 
-	// 'hidden'=>[
+	// // The hidden input type fields.
+	// 'hides'=>[
+	// 	// <input type = "hidden" name ="apples" value = "1">
 	// 	'apples' => 1,
 	// 	'oranges'=> 'o',
 	// 	'bananas' => 'ban',
 	// 	'grapes' => 'g',
 	// ],
 
+	// // Multiple buttons
 	// 'buttons' => [
 	// 	'Calculate',
 	// 	'Reset',
 	// ],
-	// // 'Login' => 'text',
 	// 'confirm password|required',
 
-	// // 'submit',
+	'submit',
 	// 'Jump In|submit',
 ];

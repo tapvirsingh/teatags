@@ -184,17 +184,23 @@ class FormTTag extends TapvirTagContainer{
 			'color','date','datetime-local','week',
 			'image','month','number','radio',
 			'reset','search','tel','time','url',
+			'hidden'
 		];
 
 		// Input state modifiers
 		$this->reservedInputModifiers = [
-			'required','disabled','autofocus',
+			'required','disabled',
+			'autofocus','readonly',
 		];
 
 		// TTag's reserved fields
 		$this->reservedFields = [
-			'buttons','submit',
-			'combo', 'hidden',
+			'buttons',
+			// 'submit',
+			// Combo box and (hides) hidden attributes
+			'combo', 'hides',
+			// Radio buttons and Checkboxes
+			'radios','checks'
 			// 'name','confirm password',
 		];
 
@@ -270,8 +276,8 @@ class FormTTag extends TapvirTagContainer{
 
 		// The second element is NOT an input modifier
 		}else{
-			// Set the second element as field
-			$this->field = $explodedValue[1];
+			// if set, set the second element as field else set the first element
+			$this->field = isset($explodedValue[1]) ? $explodedValue[1] : $explodedValue[0];
 			// set all the modifiers.
 			if(isset($explodedValue[2])){
 				// $this->modifiers = explode($this->separator,$explodedValue[2]);
@@ -284,13 +290,23 @@ class FormTTag extends TapvirTagContainer{
 		// If not an array proceed to check 
 		// whether the values contain any reserved fields.
 		if($this->isFieldReserved($this->cValue)){
-
 			// Create reserved fields
+
+			#Todo code for submit.
+
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.
 			return $this->createInput();
 		}
+	}
+
+	protected function getExtraAttribute(){
+		$unique = $this->formId.'-'.$this->attributeValue.'"';
+		$id = 'id = "'.$unique;
+		$name = 'name = "'.$unique;
+		$modifiers =($this->modifiers !== null)? implode(' ', $this->modifiers) : null; 
+		return $id.' '.$name.' '.$modifiers;
 	}
 
 	protected function createInput(){
@@ -299,23 +315,25 @@ class FormTTag extends TapvirTagContainer{
 		$type = $this->getType();
 
 		$placeHolder = $this->caption ;
+		$extraAttribute = $this->getExtraAttribute();
 
-		$unique = $this->formId.'-'.$this->attributeValue.'"';
-
-		$id = 'id = "'.$unique;
-		$name = 'name = "'.$unique;
-		$modifiers = implode(' ', $this->modifiers);
-		$extraAttribute = $id.' '.$name.' '.$modifiers;
-
-		$class = "form-control";
+		$class = $this->classes[$type];
+		// $class = "form-control";
 		$input = new InputTTag($type , $class, $placeHolder, $extraAttribute);
 		return $input->get();
+	}
+
+	protected function arrayElement(){
+		foreach ($this->cValue as $key => $value) {
+
+		}
 	}
 
 	protected function createElement(){
 		$return = null;
 		// check if the current value is an array.
 		if(is_array($this->cValue)){
+			$return = $this->arrayElement();
 
 		}else{
 
