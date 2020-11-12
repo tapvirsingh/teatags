@@ -6,118 +6,10 @@
  */
 namespace Src\TTags;
 
-use Src\ContainerTags\TapvirTagContainer;
+use Src\ContainerTags\{TapvirTagContainer};
+use Src\ContainerTags\TapvirTagContainers\{SelectOptionTapvirTagContainer};
 
 class FormTTag extends TapvirTagContainer{
-
-	/*
-		$fields => [
-			// Use any HTML Input Types.
-			// name attribute in these fields will be same as placeholder 
-			// however replaced with underscore.
-
-			'Some Custom Placeholder' => 'text', 'file' , 'range' ,'textarea', 'password' ... ,
-
-			// You may append readonly, required, disabled etc along with the type
-			// for example,
-
-			'Some Custom Placeholder' => 'text-required',
-
-			// will create input text with required attribute and with
-			// following values of id and name.
-			// Kindly note the naming convention.
-			// formId followed by '-' and then key values
-			// that have ' ' replaced with '-'
-			
-			//  id = "formId-some-custom-placeholder" 
-			// 	name = "formId-some-custom-placeholder"
-
-			'Some Custom Placeholder' => [
-				'type' => 'dropdown', 'checkbox' or 'radio',
-				'id' => 'dropdown-id',
-				'name' => 'dropdown-name',
-				'list' => [
-					'caption1' => 'value1',
-					'caption2' => 'value2',
-					'caption3' => 'value3',
-					'caption4' => 'value4',
-				], 
-			],
-
-			// This reserved key creates 'submit' button.
-			// with following attributes.
-			// id = "formId-submit" name = "formId-submit" value="Submit" 
-
-			'submit',
-
-			// Creates buttons
-			// If nothing is set the default value
-			// is set to null.
-			// This reserved key creates buttons.
-			// with following attributes.
-			// id = "formId-button-caption-1" name = "formId-button-caption-1" value="Button Caption 1" 	
-			// id = "formId-button-caption-2" name = "formId-button-caption-2" value="Button Caption 2" 	
-			// id = "formId-button-caption-3" name = "formId-button-caption-3" value="Button Caption 3"
-
-			'buttons' => [
-				'Button Caption 1' , 'Button Caption 2' , 'Button Caption 3' 
-			],
-
-			// Creates hidden fields
-			// This reserved key creates hidden fields.
-			// with following attributes.
-
-			// type = "hidden" id = "formId-hidden-name" name = "formId-hidden-name" value="value"  	
-
-			// type = "hidden" id = "formId-hidden-name2" name = "formId-hidden-name2" value="value2"  	
-
-			'hidden' => [
-				'name' => 'value',
-				'name2' => 'value2',
-			], 
-
-		];
-
-		$parameters => [
-
-		//	Basic Options
-		-------------------
-			
-			// Form id.
-			'id' => 'formId',
-	
-			// Form action.
-			'action' => '',
-
-			// Form method.
-			'method' => 'POST' (default), 'PUT' or 'GET',
-
-			// set this value.
-			'enctype' => 'text' (default), 'mutipart' (multipart/form-data) or 'app' (application/x-www-form-urlencoded)
-
-		
-		//	Advanced Options
-		----------------------
-
-			//formnovalidate
-			'validate' => true (default) or false.
-
-			//formtarget
-			// Note: The formtarget attribute can be used with type="submit" and type="image".
-			'target' => _self (default), _blank, _parent, _top or framename ,
-
-			//autocomplete
-			<form autocomplete="on|off">
-			'autocomplete' => true (default) , false,
-
-			// rel
-			// <form rel="value">
-			'rel' => null (default) , 'external', 'help', 'license' ,'next','nofollow','noopener'
-			,'noreferrer','opener','prev','search',
-
-
-		];
-	*/
 
 	protected $formId;
 	protected $action;
@@ -191,9 +83,7 @@ class FormTTag extends TapvirTagContainer{
 		];
 
 		$this->reservedArrayElements = [
-			'combo' => [
-				'select' => 'option'
-			],
+			'combo',
 		];
 	}
 
@@ -271,8 +161,8 @@ class FormTTag extends TapvirTagContainer{
 	}
 
 	protected function setType(){
-		if($this->typeCalledFrom !== ARRAY_ELEMENT_CALL){
-			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
+		if($this->typeCalledFrom === SINGLE_ELEMENT_CALL){
+
 			// if the type is in the array of reserved then return the type else returns text.
 			$this->type = ($this->isInputTypeField($this->field))?  $this->field : 'text';
 		}
@@ -282,23 +172,42 @@ class FormTTag extends TapvirTagContainer{
 
 		$this->modifiers = null;
 
-		if($this->typeCalledFrom === SINGLE_ELEMENT_CALL){
-			$this->field = $field;
-			$this->attributeValue = ttag_SpaceToDash($this->field);
-			$this->caption = ucfirst($this->field);
-		}else{
-			$this->field = $this->cKey;
-			$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
-			$this->caption = $this->cKey === 'hides' ? $value : ucfirst($value);
+		switch ($this->typeCalledFrom) {
+
+			case SINGLE_ELEMENT_CALL:
+				$this->field = $field;
+				$this->attributeValue = ttag_SpaceToDash($this->field);
+				$this->caption = ucfirst($this->field);
+				break;
+
+			case ARRAY_ELEMENT_CALL:
+				$this->field = $this->cKey;
+				$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
+				$this->caption = $this->cKey === 'hides' ? $value : ucfirst($value);
+				break;
+
+			case COMBO_ELEMENT_CALL:
+				$this->field = $this->cKey;
+				$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
+				$this->caption = ucfirst($field);
+				break;
+
+			default:
+				break;
 		}
+
 	}
 
 	protected function disintegrate(){
 
-		$explodedValue = explode($this->separator, $this->cValue);
+		$explodeValue = is_int($this->cKey) ? $this->cValue : $this->cKey;
+
+		$explodedValue = explode($this->separator, $explodeValue);
 
 		// Set the first value to caption.
 		$this->prepInpAttrVals($explodedValue[0]);
+
+		// debugTTag($this->caption);
 
 		$isInputModifier = $this->isInputModifier($explodedValue[1]);
 
@@ -345,17 +254,16 @@ class FormTTag extends TapvirTagContainer{
 
 	protected function createInput($arrayElement = false){
 
-		if(!$arrayElement){
-			$this->disintegrate();
-			$this->setType();
-		}
+		$this->disintegrate();
+		// if(!$arrayElement){
+		$this->setType();
+		// }
 
-		$placeHolder = $this->caption ;
+		$placeHolder = $this->caption;
 		$extraAttribute = $this->getExtraAttribute();
 
 		$class = $this->classes[$this->type];
 
-		debugTTag( $this->type);
 
 		// $class = "form-control";
 		$input = new InputTTag($this->type , $class, $placeHolder, $extraAttribute);
@@ -366,12 +274,12 @@ class FormTTag extends TapvirTagContainer{
 	protected function setTypeForArrayElement($key,$value){
 		if($this->cArrayKeyExists){
 
-			$this->typeCalledFrom = ARRAY_ELEMENT_CALL;
 			$this->type = $this->reservedArrayInputValues[$this->cKey] ;
 
 			$this->prepInpAttrVals($key,$value);
 		}
 	}
+
 
 	protected function arrayElement(){
 
@@ -382,22 +290,57 @@ class FormTTag extends TapvirTagContainer{
 		foreach ($this->cValue as $key => $value) {
 
 			$this->setTypeForArrayElement($key,$value);
-			$html[] = $this->createInput(true);
+			$html[] = $this->createInput();
 		}
 
 
 		return ttag_getCombinedHtml($html);
 	}
 
+	protected function createCombo(){
+		// debugTTag($this->cValue);
+		$data = [
+			'option-data' => $this->cValue,
+			'caption' => $this->caption,
+			'modifiers' => $this->modifiers,
+			'attribute-parameters' => $this->attributeValue,
+		];
+
+		$combo = new ComboTTag($data);
+		return $combo->get();
+	}
+
+	protected function createField(){
+		// $this->reservedArrayElements
+		$this->typeCalledFrom = COMBO_ELEMENT_CALL;
+		$this->disintegrate();
+		// check if the field is combo
+		if(in_array($this->field, $this->reservedArrayElements)){
+			return $this->createCombo();		
+			// debugTTag($this->field);
+			// debugTTag($this->cValue);
+			// debugTTag($this->caption);
+			// debugTTag($this->modifiers);
+			// debugTTag($this->attributeValue);
+		 }else{
+			// return $this->arrayElement();
+		}
+	}
+
+
 	protected function createElement(){
 		$return = null;
 		// check if the current value is an array.
 		if(is_array($this->cValue)){
-			$return = $this->arrayElement();
+
+			$this->typeCalledFrom = ARRAY_ELEMENT_CALL;
+			$return = $this->createField();
+
 		}else{
 
 			// If not an array proceed to check 
 			// whether the values contain any reserved fields.
+			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
 			$return = $this->nonArrayElement();
 		}	
 

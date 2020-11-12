@@ -39,7 +39,8 @@ function ttag_getData($data){
 function debugTTag($array){
 	echo '<pre>';
 	// echo '<code>';
-	var_dump(print_r($array));
+	$printed = print_r($array,true);
+	var_dump($printed);
 	// echo '</code>';
 	echo '</pre>';
 }
