@@ -34,6 +34,7 @@ class FormTTag extends TapvirTagContainer{
 
 	protected $field;
 	protected $caption;
+	protected $lowerCaption;
 
 	// $attributeValue is Hyphened and lowercase caption.
 	// Following value is used in input's id and name.
@@ -42,6 +43,7 @@ class FormTTag extends TapvirTagContainer{
 
 	protected $type;
 	protected $typeCalledFrom;
+	protected $noFormControlList;
 
 
 	function __construct($fileWithoutExt){
@@ -51,6 +53,10 @@ class FormTTag extends TapvirTagContainer{
 		$this->cIndex = 0;
 
 		$this->type = $this->typeCalledFrom = null;
+
+		$this->noFormControlList = [
+			'button','submit',
+		];
 
 		// Separator
 		$this->separator = '|';
@@ -177,18 +183,22 @@ class FormTTag extends TapvirTagContainer{
 			case SINGLE_ELEMENT_CALL:
 				$this->field = $field;
 				$this->attributeValue = ttag_SpaceToDash($this->field);
+				$this->lowerCaption = $this->field;
 				$this->caption = ucfirst($this->field);
 				break;
 
 			case ARRAY_ELEMENT_CALL:
 				$this->field = $this->cKey;
+
 				$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
+				$this->lowerCaption = $value;
 				$this->caption = $this->cKey === 'hides' ? $value : ucfirst($value);
 				break;
 
 			case COMBO_ELEMENT_CALL:
 				$this->field = $this->cKey;
 				$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
+				$this->lowerCaption = $field;
 				$this->caption = ucfirst($field);
 				break;
 
@@ -232,6 +242,7 @@ class FormTTag extends TapvirTagContainer{
 	}
 
 	protected function nonArrayElement(){
+
 		// If not an array proceed to check 
 		// whether the values contain any reserved fields.
 		if($this->isFieldReserved($this->cValue)){
@@ -240,21 +251,26 @@ class FormTTag extends TapvirTagContainer{
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.
+			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
+			$this->disintegrate();
 			return $this->createInput();
 		}
 	}
 
+	protected function getUnique(){
+		return $this->formId.'-'.$this->attributeValue;
+	}
+
 	protected function getExtraAttribute(){
-		$unique = ' = "'.$this->formId.'-'.$this->attributeValue.'"';
+		$unique = ' = "'.$this->getUnique().'"';
 		$id = 'id '.$unique;
 		$name = 'name '.$unique;
 		$modifiers =($this->modifiers !== null)? implode(' ', $this->modifiers) : null; 
 		return $id.' '.$name.' '.$modifiers;
 	}
 
-	protected function createInput($arrayElement = false){
+	protected function createInput(){
 
-		$this->disintegrate();
 		// if(!$arrayElement){
 		$this->setType();
 		// }
@@ -262,8 +278,15 @@ class FormTTag extends TapvirTagContainer{
 		$placeHolder = $this->caption;
 		$extraAttribute = $this->getExtraAttribute();
 
-		$class = $this->classes[$this->type];
+		$class = $this->classes[$this->lowerCaption];
 
+		if(!in_array($this->type, $this->noFormControlList)){
+			$class .= ' form-control'; 
+		}
+
+		if(isset($this->classes['all'])){
+			$class .= ' '.$this->classes['all']; 	
+		}
 
 		// $class = "form-control";
 		$input = new InputTTag($this->type , $class, $placeHolder, $extraAttribute);
@@ -293,17 +316,24 @@ class FormTTag extends TapvirTagContainer{
 			$html[] = $this->createInput();
 		}
 
-
 		return ttag_getCombinedHtml($html);
 	}
 
 	protected function createCombo(){
 		// debugTTag($this->cValue);
+		$class = null;
+		if(isset($this->classes[$this->lowerCaption])){
+			$class = $this->classes[$this->lowerCaption];
+		}
+
+		// debugTTag($this->lowerCaption);
+
 		$data = [
 			'option-data' => $this->cValue,
 			'caption' => $this->caption,
 			'modifiers' => $this->modifiers,
 			'attribute-parameters' => $this->attributeValue,
+			'class' => $class, 
 		];
 
 		$combo = new ComboTTag($data);
@@ -312,18 +342,19 @@ class FormTTag extends TapvirTagContainer{
 
 	protected function createField(){
 		// $this->reservedArrayElements
-		$this->typeCalledFrom = COMBO_ELEMENT_CALL;
-		$this->disintegrate();
 		// check if the field is combo
-		if(in_array($this->field, $this->reservedArrayElements)){
+
+// in_array($this->field, $this->reservedArrayElements)
+			// debugTTag($this->cKey);
+
+		if(contains('combo',$this->cKey)){
+			$this->typeCalledFrom = COMBO_ELEMENT_CALL;
+			$this->disintegrate();
 			return $this->createCombo();		
-			// debugTTag($this->field);
-			// debugTTag($this->cValue);
-			// debugTTag($this->caption);
-			// debugTTag($this->modifiers);
-			// debugTTag($this->attributeValue);
 		 }else{
-			// return $this->arrayElement();
+	 		$this->typeCalledFrom = ARRAY_ELEMENT_CALL;
+ 			$this->disintegrate();
+			return $this->arrayElement();
 		}
 	}
 
@@ -333,14 +364,13 @@ class FormTTag extends TapvirTagContainer{
 		// check if the current value is an array.
 		if(is_array($this->cValue)){
 
-			$this->typeCalledFrom = ARRAY_ELEMENT_CALL;
+			// $this->typeCalledFrom = ARRAY_ELEMENT_CALL;
 			$return = $this->createField();
 
 		}else{
 
 			// If not an array proceed to check 
 			// whether the values contain any reserved fields.
-			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
 			$return = $this->nonArrayElement();
 		}	
 
@@ -350,6 +380,13 @@ class FormTTag extends TapvirTagContainer{
 
 	protected function resetType(){
 		$this->typeCalledFrom = $this->type = null;
+	}
+
+	protected function createFormGroup($innerHtml){
+		$attr = 'for = "'.$this->getUnique().'"';
+		$label = new TeaCTag('label',null,$innerHtmlLabel,$attr);
+		$divFormGroup = new DivTTag('form-group',$innerHtml);
+		return $divFormGroup->get();
 	}
 
 	protected function createFormElements(){

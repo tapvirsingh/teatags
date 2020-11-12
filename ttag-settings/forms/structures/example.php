@@ -24,10 +24,11 @@ return [
 	'DOB|date|required',
 	'color|required',
 
-	// 'Email or Phone|text|disabled',
-	// // following unkown type will be 
-	// // shown as text.
-	// 'unkownType|required',
+	'Email or Phone|text|disabled',
+	// following unkown type will be 
+	// shown as text.
+	'Some Unkown Type|required',
+	
 	'Some Field|combo|required'=>[
 		'apples' => 1,
 		'oranges'=> 'o',

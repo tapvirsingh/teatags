@@ -30,7 +30,12 @@ class ComboTTag extends TapvirTagContainer{
 		$this->setParameters();
 		$this->createOptions();
 
-		$attribute = 'class="custom-select"';
+		$attribute = 'class="custom-select';
+
+		$class = $this->getParameter('class');
+
+		$attribute .= ' '.$class.'"';
+
 		$data = $this->optionsHtml;
 
 		parent::__construct('select',$attribute, $data);
