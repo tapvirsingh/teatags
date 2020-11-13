@@ -49,6 +49,7 @@ class FormTTag extends TapvirTagContainer{
 	protected $useFormGroup;
 	protected $placeholder;
 
+	protected $formCaption;
 
 	function __construct($fileWithoutExt){
 
@@ -89,10 +90,26 @@ class FormTTag extends TapvirTagContainer{
 		$this->useFormGroup = $this->getParameter('form-group',false);
 
 		$this->createFormElements();
+		$this->setFormCaption();
 
 		$attribute = $this->getFormAttr();
 
-		parent::__construct('form',$attribute, $this->formHtml);
+		$this->setFormCaption();
+
+		parent::__construct('form',$attribute, $this->formCaption.$this->formHtml);
+	}
+
+	protected function setFormCaption(){
+		$caption = $this->getParameter('form-caption');
+		$classes = $this->getParameter('form-caption-classes');
+
+		if($caption !== null){
+			$cap = new HeadingTTag('h3',$caption,$classes);
+			$this->formCaption = $cap->get();
+			return true;
+		}
+		$this->formCaption = null;
+		return null;
 	}
 
 	protected function setReservedArrayValues(){
