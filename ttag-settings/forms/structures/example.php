@@ -21,8 +21,10 @@ return [
 	'email|required',
 	'password|required',
 	'date|required',
-	'DOB|date|required',
+	'Date of birth|date|required',
 	'color|required',
+	'Upload File|file|required',
+	'Set Range|range|required',
 
 	'Email or Phone|text|disabled',
 	// following unkown type will be 

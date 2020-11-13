@@ -44,8 +44,10 @@ class FormTTag extends TapvirTagContainer{
 	protected $type;
 	protected $typeCalledFrom;
 	protected $noFormControlList;
+	protected $formGroupMustList;
 
 	protected $useFormGroup;
+	protected $placeholder;
 
 
 	function __construct($fileWithoutExt){
@@ -57,12 +59,17 @@ class FormTTag extends TapvirTagContainer{
 		$this->type = $this->typeCalledFrom = null;
 
 		$this->noFormControlList = [
-			'hidden','submit','button',
+			'hidden','submit','button', 
+			'file',
 		];
 
 		$this->noFormGroupList = [
 			'hidden','submit','button',
-			'hides','buttons'
+			'hides','buttons', 
+		];
+
+		$this->formGroupMustList = [
+			'date','color','file'
 		];
 
 		// Separator
@@ -277,15 +284,25 @@ class FormTTag extends TapvirTagContainer{
 		return $id.' '.$name.' '.$modifiers;
 	}
 
+	protected function shouldDisablePlaceholder(){
+		$inFormGroupMustList = in_array($this->field,$this->formGroupMustList); 
+		if($inFormGroupMustList){
+			return true;
+		}
+
+		$notInNoFormGroupList = !in_array($this->field,$this->noFormGroupList);
+		return  ($this->useFormGroup  && $notInNoFormGroupList) ;
+	}
+
 	protected function createInput(){
 
 		// if(!$arrayElement){
 		$this->setType();
 		// }
-		$placeHolder = null;
-		
-		if(!$this->useFormGroup){
-			$placeHolder = $this->caption;
+		$this->placeholder = $this->caption;
+
+		if( $this->shouldDisablePlaceholder() ){
+			$this->placeholder = null;
 		}
 
 		$extraAttribute = $this->getExtraAttribute();
@@ -296,12 +313,12 @@ class FormTTag extends TapvirTagContainer{
 			$class .= ' form-control'; 
 		}
 
-		if(isset($this->classes['all'])){
+		if(isset($this->classes['all']) && $this->placeholder !== null ){
 			$class .= ' '.$this->classes['all']; 	
 		}
 
 		// $class = "form-control";
-		$input = new InputTTag($this->type , $class, $placeHolder, $extraAttribute);
+		$input = new InputTTag($this->type , $class, $this->placeholder, $extraAttribute);
 
 		return $input->get();
 	}
@@ -415,7 +432,9 @@ class FormTTag extends TapvirTagContainer{
 
 			$returnedHtml = $this->createElement();	
 
-			if(!in_array($this->field, $this->noFormGroupList) && $this->useFormGroup){
+			if($this->placeholder === null ||
+				(!in_array($this->field, $this->noFormGroupList) && 
+					$this->useFormGroup)){
 			
 				$return[] = $this->createFormGroup($returnedHtml);
 

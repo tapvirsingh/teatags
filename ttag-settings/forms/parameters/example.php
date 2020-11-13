@@ -7,6 +7,6 @@ return  [
 	'method' => 'POST',
 
 	// Add form elements in div.form-group
-	'form-group' => true,
+	// 'form-group' => true,
 
 ];
