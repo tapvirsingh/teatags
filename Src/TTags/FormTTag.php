@@ -50,6 +50,7 @@ class FormTTag extends TapvirTagContainer{
 	protected $placeholder;
 
 	protected $formCaption;
+	protected $linkHref;
 
 	function __construct($fileWithoutExt){
 
@@ -61,12 +62,12 @@ class FormTTag extends TapvirTagContainer{
 
 		$this->noFormControlList = [
 			'hidden','submit','button', 
-			'file',
+			'file', 'link',
 		];
 
 		$this->noFormGroupList = [
 			'hidden','submit','button',
-			'hides','buttons', 
+			'hides','buttons', 'link',
 		];
 
 		$this->formGroupMustList = [
@@ -150,8 +151,9 @@ class FormTTag extends TapvirTagContainer{
 			// Combo box and (hides) hidden attributes
 			'combo', 'hides',
 			// Radio buttons and Checkboxes
-			'radios','checks'
-			// 'name','confirm password',
+			'radios','checks',
+			
+			'link',
 		];
 
 		
@@ -195,6 +197,12 @@ class FormTTag extends TapvirTagContainer{
 			$attribute .= ' action = "'.$this->action.'"';
 		}
 
+		$class = $this->getParameter('form-classes');
+
+		if($class !== null){
+			$attribute .= ' class = "'.$class.'"';
+		}
+
 		return $attribute;
 	}
 
@@ -232,6 +240,13 @@ class FormTTag extends TapvirTagContainer{
 				$this->attributeValue = is_int($field) ? ttag_SpaceToDash($value) : ttag_SpaceToDash($field);
 				$this->lowerCaption = $field;
 				$this->caption = ucfirst($field);
+				break;			
+
+			case LINK_ELEMENT_CALL:
+				$this->field = $field;
+				$this->attributeValue = ttag_SpaceToDash($this->field);
+				$this->lowerCaption = $this->field;
+				$this->caption = ucfirst($this->field);
 				break;
 
 			default:
@@ -273,13 +288,35 @@ class FormTTag extends TapvirTagContainer{
 		}
 	}
 
+	protected function createLink(){
+
+		$id = 'id = "'.$this->getUnique().'"';
+		$name = 'name = "'.$this->getUnique().'"';
+
+		$attr = $id.' '.$name;
+
+		$class = $this->classes[$this->lowerCaption];
+
+		$href = new AnchorTTag($this->linkHref, $this->caption, $class, $attr);
+		return $href->get();
+	}
+
 	protected function nonArrayElement(){
 
 		// If not an array proceed to check 
 		// whether the values contain any reserved fields.
-		if($this->isFieldReserved($this->cValue)){
+		if(contains('link',$this->cValue)){
 			// Create reserved fields that are not array.
 			// None at the moment.
+			$this->typeCalledFrom = LINK_ELEMENT_CALL;
+			$this->disintegrate();
+
+			$explodedValue = explode('=>',$this->field);
+
+			$this->field = $explodedValue[0];
+			$this->linkHref = $explodedValue[1];
+
+			return $this->createLink();
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.

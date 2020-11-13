@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'username,email,phone-required',
-	// 'Login' => 'text',
-	'password-required',
-	'login',
+	// 'Email or phone|required|autofocus',
+	// 'password|required',
+	// 'Login|submit',
+	// 'Forgot password|link=>#some-link',
 ];

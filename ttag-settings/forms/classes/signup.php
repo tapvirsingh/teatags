@@ -1,5 +1,7 @@
 <?php
 
 return [
-	'signup' => 'btn btn-success ttag-signup',
+	// 'all' => 'mb-3 mt-3',
+	// 'Signup' => 'btn btn-primary btn-block',
+	// 'Go to Login' => 'btn btn-link',
 ];

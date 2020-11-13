@@ -1,10 +1,10 @@
 <?php
 
 return [
-	'name-required',
-	// 'username',
-	'email-required',
-	'password-required',
-	'confirm password-required',
-	'signup',
+	// 'name|required|autofocus',
+	// 'email|required',
+	// 'password|required',
+	// 'Confirm password|password|required',
+	// 'Signup|submit',
+	// 'Go to Login|link=>#home',
 ];

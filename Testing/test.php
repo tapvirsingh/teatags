@@ -17,7 +17,7 @@ use Src\TTags\{FormTTag, HtmlTTag};
 // By default if nothing is passed, 
 // then it will take the current file's name.
 // in this case test.php
-$form = new FormTTag('example');
+$form = new FormTTag('login');
 
 $div = $form->divs([
 	'col' => 4, 'offset'=>4
