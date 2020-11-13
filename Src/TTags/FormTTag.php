@@ -45,6 +45,8 @@ class FormTTag extends TapvirTagContainer{
 	protected $typeCalledFrom;
 	protected $noFormControlList;
 
+	protected $useFormGroup;
+
 
 	function __construct($fileWithoutExt){
 
@@ -55,7 +57,12 @@ class FormTTag extends TapvirTagContainer{
 		$this->type = $this->typeCalledFrom = null;
 
 		$this->noFormControlList = [
-			'button','submit',
+			'hidden','submit','button',
+		];
+
+		$this->noFormGroupList = [
+			'hidden','submit','button',
+			'hides','buttons'
 		];
 
 		// Separator
@@ -72,6 +79,7 @@ class FormTTag extends TapvirTagContainer{
 		// Sets form's id, action and method.
 		$this->setFormParameters();
 		
+		$this->useFormGroup = $this->getParameter('form-group',false);
 
 		$this->createFormElements();
 
@@ -274,8 +282,12 @@ class FormTTag extends TapvirTagContainer{
 		// if(!$arrayElement){
 		$this->setType();
 		// }
+		$placeHolder = null;
+		
+		if(!$this->useFormGroup){
+			$placeHolder = $this->caption;
+		}
 
-		$placeHolder = $this->caption;
 		$extraAttribute = $this->getExtraAttribute();
 
 		$class = $this->classes[$this->lowerCaption];
@@ -382,11 +394,14 @@ class FormTTag extends TapvirTagContainer{
 		$this->typeCalledFrom = $this->type = null;
 	}
 
-	protected function createFormGroup($innerHtml){
+	protected function createFormGroup($returnedHtml){
 		$attr = 'for = "'.$this->getUnique().'"';
-		$label = new TeaCTag('label',null,$innerHtmlLabel,$attr);
-		$divFormGroup = new DivTTag('form-group',$innerHtml);
-		return $divFormGroup->get();
+		$label = new TeaCTag('label',null,$this->caption,$attr);
+
+		$data = $label->get().$returnedHtml;
+
+		$div = new DivTTag('form-group',$data);
+		return $div->get();
 	}
 
 	protected function createFormElements(){
@@ -398,7 +413,15 @@ class FormTTag extends TapvirTagContainer{
 
 		foreach ($this->fields as $this->cKey => $this->cValue) {
 
-			$return[] = $this->createElement();
+			$returnedHtml = $this->createElement();	
+
+			if(!in_array($this->field, $this->noFormGroupList) && $this->useFormGroup){
+			
+				$return[] = $this->createFormGroup($returnedHtml);
+
+			}else{
+				$return[] = $returnedHtml;
+			}
 
 			$this->resetType();
 
