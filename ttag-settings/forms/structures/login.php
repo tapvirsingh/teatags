@@ -4,5 +4,6 @@ return [
 	'Email or phone|required|autofocus',
 	'password|required',
 	'Login|submit',
-	'Forgot password|link=>#some-link',
+	'Forgot password?|link=>#some-link',
+	// 'Help|link=>#help',
 ];

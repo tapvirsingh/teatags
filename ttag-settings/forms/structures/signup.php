@@ -6,5 +6,5 @@ return [
 	'password|required',
 	'Confirm password|password|required',
 	'Signup|submit',
-	'Login|link=>#home',
+	'Go to Login|link=>#home',
 ];
