@@ -84,6 +84,7 @@ $articles_docFiles = [
 					'FontAwsmTTag' ,
 					'SocialTTag' ,
 					'AccordionTTag' ,
+					'FormTTag' ,
 				],
 				'TTag Class Methods' => [
 					'get',
