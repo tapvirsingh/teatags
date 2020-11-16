@@ -12,11 +12,11 @@ class BSCSS_Overrider_TTag extends TapvirTagContainer{
 
 		function __construct(){
 
-			global $ttag_CSS;
+			$embedded = include tta_StyleSettings('embedded');
 
 			$css = null;
 
-			foreach ($ttag_CSS as $key => $value) {
+			foreach ($embedded as $key => $value) {
 				if($css === null){
 					$css = $key.'{';
 				}else{

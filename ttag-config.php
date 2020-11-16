@@ -16,9 +16,11 @@ spl_autoload_register(function ($className) {
 define("MD_ROOT", __DIR__ ."/md/");
 define("IMAGES_ROOT", __DIR__ ."/images/");
 define("SETTINGS_ROOT", __DIR__ ."/ttag-settings/");
+
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
+define("STYLES_SETTINGS", SETTINGS_ROOT."styles/");
 
 define("FORMS_SETTINGS", SETTINGS_ROOT."forms/");
 define("FORMPARA_SETTINGS", FORMS_SETTINGS."parameters/");

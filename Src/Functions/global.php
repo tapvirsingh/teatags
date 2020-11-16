@@ -115,6 +115,11 @@ function tta_ScriptSettings($file, $script = 'javascript'){
 	return SCRIPTS_SETTINGS.$script.'/'.$file.'.php';
 }
 
+// Load the script from /script/ folder.
+function tta_StyleSettings($file'){	
+	return STYLES_SETTINGS.$file.'.php';
+}
+
 // Load the form's structure from /forms/structure/ dir.
 function tta_FormStructSettings($file){	
 	return FORMSTRUCT_SETTINGS.'/'.$file.'.php';
