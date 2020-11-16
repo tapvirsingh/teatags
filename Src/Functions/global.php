@@ -116,7 +116,7 @@ function tta_ScriptSettings($file, $script = 'javascript'){
 }
 
 // Load the script from /script/ folder.
-function tta_StyleSettings($file'){	
+function tta_StyleSettings($file){	
 	return STYLES_SETTINGS.$file.'.php';
 }
 
