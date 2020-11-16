@@ -38,10 +38,10 @@ $ttag_IconTag = 'i';
 
 $ttag_CSSframework = 'bootstrap';
 
-//$ttag_Theme = 'TeaTagsTheme';
- $ttag_Theme = 'tea-tag-slate';
+const TTAG_THEME = 'tea-tag-slate';
 
 //CONSTANTS
+
 const NAVLINKS = 'Navigation';
 const SOCIALLINKS = 'Social';
 const BLAZEHATLINKS = 'BlazehatTech';

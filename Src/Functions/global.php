@@ -163,8 +163,8 @@ function ttag_IndexView(){
 
 // Returns the current theme's directory
 function ttag_Theme(){
-	global $ttag_Theme;
-	return ROOT.'themes/'.$ttag_Theme;
+	// global $ttag_Theme;
+	return ROOT.'themes/'.TTAG_THEME;
 }
 
 // Check value if it is 

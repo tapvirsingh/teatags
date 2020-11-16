@@ -50,8 +50,7 @@ $ttag_CSSframework = 'bootstrap';
 
 // The theme you wish to activate.
 // Please note that the name should be same as that of the directory.
-// There should be no space or any other character. 
-$ttag_Theme = 'TeaTagsTheme';
+const TTAG_THEME = 'tea-tag-slate';
 
 
 ```

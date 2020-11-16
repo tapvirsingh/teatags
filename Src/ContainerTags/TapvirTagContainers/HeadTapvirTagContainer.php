@@ -57,8 +57,10 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
     }
 
     private function loadStyleSheets(){
-    	global $ttag_StyleSheets;
-    	foreach ($ttag_StyleSheets  as $key => $value) {
+
+        $sheets = include tta_StyleSettings('stylesheets');
+
+    	foreach ($sheets  as $key => $value) {
 
     		$stylesheet  = new HeadLinkTapvirTag($value);
     		$this->appendHtml($stylesheet->get());

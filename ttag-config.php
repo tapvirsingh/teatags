@@ -33,6 +33,10 @@ define("ARRAY_ELEMENT_CALL", 1);
 define("COMBO_ELEMENT_CALL", 2);
 define("LINK_ELEMENT_CALL", 3);
 
+//$ttag_Theme = 'TeaTagsTheme';
+ // $ttag_Theme = 'tea-tag-slate';
+
+
 // Global Function
 require_once('Src/Functions/global.php');
 
