@@ -13,10 +13,13 @@ use Src\ContainerTags\TapvirTagContainer;
 class ScriptTTag extends TapvirTagContainer{
 
 
-	function __construct($parameters,$dataToAppend = null){
+	function __construct($parameters = null,$dataToAppend = null){
 		$this->parameters = $parameters;
 
-		$attribute = $this->createScriptTagAttribute();
+		$attribute = null;
+		if($parameters !== null){
+			$attribute = $this->createScriptTagAttribute();
+		}
 
 		$dataToAppend = ttag_getData($dataToAppend);
 

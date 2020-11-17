@@ -21,6 +21,7 @@ define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
 define("STYLES_SETTINGS", SETTINGS_ROOT."styles/");
+define("GOOGLE_SETTINGS", SETTINGS_ROOT."google/");
 
 define("FORMS_SETTINGS", SETTINGS_ROOT."forms/");
 define("FORMPARA_SETTINGS", FORMS_SETTINGS."parameters/");

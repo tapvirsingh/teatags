@@ -100,6 +100,14 @@ function ttag_RootSettings($file){
 	return SETTINGS_ROOT.$file.'.php';
 }
 
+// Google Settings.
+function ttag_GoogleSettings($file){
+	if($file == 'analytics')
+		return GOOGLE_SETTINGS.$file.'.js';
+	else
+		return GOOGLE_SETTINGS.$file.'.php';
+}
+
 // Load the image from /Image/ folder.
 function ttag_FooterSettings($file){
 	return FOOTER_SETTINGS.$file.'.php';

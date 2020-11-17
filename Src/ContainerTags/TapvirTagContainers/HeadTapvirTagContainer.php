@@ -73,7 +73,7 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
     	$this->appendHtml($override->get());
     }
 
-    private function addGoogleAnalyticsScript(){
+    private function addGoogleAnalyticsScript_op(){
         global $ttag_GoogleAnalyticsScript;
 
         if($ttag_GoogleAnalyticsScript !== null){
@@ -82,7 +82,19 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 
     }
 
-    private function linkGoogleFonts(){
+    private function addGoogleAnalyticsScript(){
+        // global $ttag_GoogleAnalyticsScript;
+
+        $analytics = file_get_contents(ttag_GoogleSettings('analytics'));
+
+        if($analytics != false){
+            $script = new ScriptTapvirTagContainer(null,$analytics);
+            $this->appendHtml($script->get());
+        }
+
+    }
+
+    private function linkGoogleFonts_op(){
     	// '<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Manrope:wght@300&family=Questrial&display=swap" rel="stylesheet">
 
 
@@ -117,6 +129,43 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
     	}
 
     	 return $link->getTagCode();
+    }
+
+    private function linkGoogleFonts(){
+        // '<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Manrope:wght@300&family=Questrial&display=swap" rel="stylesheet">
+
+
+        $link = null;
+
+        $fonts = include ttag_GoogleSettings('fonts');
+
+        if(isset($fonts) && $fonts !== null && is_array($fonts)){
+
+            $attribute = '';
+
+            foreach ($fonts as $key) {
+                foreach ($key as $key2 => $value) {
+                    if($attribute == ''){
+                        $attribute = 'href = "https://fonts.googleapis.com/css2?'.$key2.'='.$value;
+                    }else{
+                        switch($key2){
+                            case 'family':
+                                $attribute .= '&'.$key2.'='.$value;
+                                break;
+                            case 'wght' :
+                                $attribute .= ':'.$key2.'@'.$value;
+                        }
+                    }
+                }
+            }
+
+            $attribute .= '&display=swap" rel = "stylesheet"';
+
+            $link = new TapvirTag('link',$attribute);
+
+        }
+
+         return $link->getTagCode();
     }
 
 	function initiateBootstrap(){
