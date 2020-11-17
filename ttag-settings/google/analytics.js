@@ -1,10 +1,8 @@
-// Tea Tags, settings for Google Analytics
+// Tea Tags - settings for Google Analytics
+// For setting Google Analytics
+// goto ttag-settings/google/analytics.js
+//
+// Read docs on
 // https://teatags.blazehattech.com/
 
 // Copy and paste your Google analytics code here.
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'UA-142378682-1');

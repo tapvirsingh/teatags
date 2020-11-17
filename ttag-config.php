@@ -50,10 +50,10 @@ require_once('ttag-settings/links.php');
 require_once('ttag-settings/social.php');
 require_once('ttag-settings/brand-navbar.php');
 require_once('ttag-settings/bootstrap.php');
-require_once('ttag-settings/styles.php');
+// require_once('ttag-settings/styles.php');
 // require_once('ttag-settings/js.php');
 // require_once('ttag-settings/footer.php');
-require_once('ttag-settings/google.php');
+// require_once('ttag-settings/google.php');
 require_once('ttag-settings/page-headers.php');
 
 // Dependences

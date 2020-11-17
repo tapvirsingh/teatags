@@ -5,17 +5,22 @@
 */
 
 // Author of the application. You may change the page header and meta tags settings for a page by rewriting these on that page.
-$ttag_Author = 'Tapvir Singh';
+// $ttag_Author = 'Tapvir Singh';
+define('TTAG_AUTHOR','Tapvir Singh');
 
 // Head and Lead, you may set the global values here and override on the page by redefining.
 // App's main heading and the lead.
 // $ttag_Head = 'Have some Tea Tags!';
-$ttag_Head = 'Tea Tags';
-$ttag_Title = 'Tea Tags';
+// $ttag_Head = 'Tea Tags';
+define('TTAG_HEAD','Tea Tags');
+// $ttag_Title = 'Tea Tags';
+define('TTAG_TITLE','Tea Tags');
 // Lead will also be part of the site's description.
 // $ttag_Lead = 'A quick, easy and hassle free PHP framework that will assist you in writing HTML and Bootstrap in PHP.';
 
 $ttag_Lead = 'A PHP view framework that manages complete Html by itself. It uses Bootstrap 4 internally but also allows you to use custom or Bootstrap classes. PHP programmers don\'t have to embed PHP in HTML.';
+
+// define('TTAG_LEAD',$ttag_Lead);
 
 $ttag_ArticleVariable = 'article' ;
 
@@ -38,6 +43,8 @@ $ttag_IconTag = 'i';
 
 $ttag_CSSframework = 'bootstrap';
 
+//$ttag_Theme = 'TeaTagsTheme';
+ // $ttag_Theme = 'tea-tag-slate';
 const TTAG_THEME = 'tea-tag-slate';
 
 //CONSTANTS
@@ -46,7 +53,6 @@ const NAVLINKS = 'Navigation';
 const SOCIALLINKS = 'Social';
 const BLAZEHATLINKS = 'BlazehatTech';
 
-// define(,);
 const FONTAWESOME = 'fontawesome';
 const FNTAWSM_REGULAR = 'far fa-';
 const FNTAWSM_BRAND = 'fab fa-';

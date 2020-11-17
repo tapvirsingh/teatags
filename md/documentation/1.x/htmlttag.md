@@ -91,12 +91,14 @@ This overrides the global default value `$ttag_PageHeaders` set in page-headers.
 <?php
 
 $ttag_PageHeaders = [
-				'title'  => $ttag_Title,
+				// 'title'  => $ttag_Title,
+				'title'  => TTAG_TITLE,
 				'meta' => [
 					'keywords' => 'CSS Framework, PHP Framework, Bootstrap Helper',
 					'description' => $ttag_Lead,
 					// Add the author's name.
-					'author' => $ttag_Author,
+					// 'author' => $ttag_Author,
+					'author' => TTAG_AUTHOR,
 					'viewport' => 'width=device-width, initial-scale=1, shrink-to-fit=no'
 				]
 		];

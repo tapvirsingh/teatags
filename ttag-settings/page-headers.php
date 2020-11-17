@@ -3,7 +3,8 @@
 // Page Metadata
 // You may add new page headers and meta tags, or overwrite the defaults here.
 $ttag_PageHeaders = [
-				'title'  => $ttag_Title,
+				// 'title'  => $ttag_Title,
+				'title'  => TTAG_TITLE,
 				'meta' => [
 					[
 						'name' => 'viewport',

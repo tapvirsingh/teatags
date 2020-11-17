@@ -114,8 +114,8 @@ class JumboTTag extends TapvirTagContainer{
 
 		$headClasses .= $this->getParameter('head-class');
 
-		global $ttag_Head;
-		$jumboHead = $this->getData($this->jumboInnerContent, $head , $ttag_Head);
+		// global $ttag_Head;
+		$jumboHead = $this->getData($this->jumboInnerContent, $head , TTAG_HEAD);
 
 		$h1 = new PageHeadingTTag ($jumboHead,$headClasses);
 		
