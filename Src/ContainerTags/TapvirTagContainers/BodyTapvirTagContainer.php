@@ -50,9 +50,7 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
         }   
     }
 
-    
-
-    private function loadJSScripts(){
+    private function loadJSScripts_op(){
 		$jsScripts = include tta_ScriptSettings('js-scripts');
 
 		$scripts = null;
@@ -66,6 +64,21 @@ class BodyTapvirTagContainer extends TapvirTagContainer{
     	}	
 		$js  = new ScriptTapvirTagContainer(null,$scripts);
 		$this->appendHtml($js->get());
+    }
+
+    private function loadJSScripts(){
+        $jsScripts = include tta_ScriptSettings('js-scripts');
+
+        $scripts = null;
+        foreach ($jsScripts as $value) {
+            $embeddedJs = ttag_EmbeddedJS($value);
+            $scripts[] = file_get_contents($embeddedJs);
+        }   
+
+        $combinedScripts = ttag_getCombinedHtml($scripts);
+
+        $js  = new ScriptTapvirTagContainer(null,$combinedScripts);
+        $this->appendHtml($js->get());
     }
 
     

@@ -148,6 +148,11 @@ function tta_FormParaSettings($file){
 	return FORMPARA_SETTINGS.'/'.$file.'.php';
 }
 
+// Load the form's parameters from /forms/parameters/ dir.
+function ttag_EmbeddedJS($file){	
+	return EMBEDDED_JS_ROOT.'/'.$file.'.js';
+}
+
 // Loads the Md file
 function ttag_MdFile($file, $doNotPrependDir = false){
 	global $ttag_MDFileExtention;

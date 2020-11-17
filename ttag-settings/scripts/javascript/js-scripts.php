@@ -1,7 +1,8 @@
 <?php
 
-// Scripts will be directly embedded in the page.
+// Scripts will be directly loaded from ./javascript/embed dir, and then embedded in the page.
 
 return [
-	'hljs.initHighlightingOnLoad();',
+	// file name, donot add extention.
+	'hilight',
 ];

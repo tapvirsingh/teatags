@@ -16,6 +16,8 @@ spl_autoload_register(function ($className) {
 define("MD_ROOT", __DIR__ ."/md/");
 define("IMAGES_ROOT", __DIR__ ."/images/");
 define("SETTINGS_ROOT", __DIR__ ."/ttag-settings/");
+define("JAVASCRIPT_ROOT", __DIR__ ."/javascript/");
+define("EMBEDDED_JS_ROOT",JAVASCRIPT_ROOT."/embed/");
 
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
