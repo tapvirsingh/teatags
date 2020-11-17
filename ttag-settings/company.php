@@ -2,7 +2,7 @@
 return [
 	'copyright' => '© Copyright 2020',
 	'company' => 'Blazehat Technologies LLP',
-	'website' => 'http://blazehattech.com/',
+	'website' => 'https://blazehattech.com/',
 	'social' => [
 			'twitter' => 'https://twitter.com/BlazingTeaTags',
 			'facebook' => 'https://www.facebook.com/BlazehatTech',

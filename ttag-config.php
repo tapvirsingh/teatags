@@ -1,6 +1,7 @@
 <?php
 /*
-	Donot make any changes to this file.
+	Warning : Donot make any changes to this file, any change made here 
+	may affect the working of the framework.
 */
 
 define("ROOT", "http://localhost/tag/");
@@ -19,18 +20,21 @@ define("SETTINGS_ROOT", __DIR__ ."/ttag-settings/");
 define("JAVASCRIPT_ROOT", __DIR__ ."/javascript/");
 define("EMBEDDED_JS_ROOT",JAVASCRIPT_ROOT."/embed/");
 
+// dir settings at root.
 define("FOOTER_SETTINGS", SETTINGS_ROOT."footer/");
 define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
 define("STYLES_SETTINGS", SETTINGS_ROOT."styles/");
 define("GOOGLE_SETTINGS", SETTINGS_ROOT."google/");
 
+// Form settings
 define("FORMS_SETTINGS", SETTINGS_ROOT."forms/");
 define("FORMPARA_SETTINGS", FORMS_SETTINGS."parameters/");
 define("FORMSETTING_SETTINGS", FORMS_SETTINGS."settings/");
 define("FORMSTRUCT_SETTINGS", FORMS_SETTINGS."structures/");
 define("FORMCLASSES_SETTINGS", FORMS_SETTINGS."classes/");
 
+// Constants
 define("SINGLE_ELEMENT_CALL", 0);
 define("ARRAY_ELEMENT_CALL", 1);
 define("COMBO_ELEMENT_CALL", 2);
