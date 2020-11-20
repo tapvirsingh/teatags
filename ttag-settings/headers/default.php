@@ -1,0 +1,23 @@
+<?php
+
+return [
+				// 'title'  => $ttag_Title,
+				'title'  => TTAG_TITLE,
+				'meta' => [
+					[
+						'name' => 'viewport',
+						'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no'
+					],
+					[
+						'http-equiv'=>'X-UA-Compatible',
+						'content'=>'IE=edge'
+					],
+
+					// 'keywords' => 'CSS Framework, PHP Framework, Bootstrap Helper',
+					// 'description' => $ttag_Lead,
+					// // Add the author's name.
+					// // 'author' => $ttag_Author,
+					// 'author' => $ttag_Author,
+					// 'viewport' => 'width=device-width, initial-scale=1, shrink-to-fit=no'
+				],
+		];
