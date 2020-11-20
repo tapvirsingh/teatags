@@ -1,4 +1,6 @@
 <?php
+
+// JQuery CDN Configuration
 return  [
 			'ver' => '3.5.1',
 			'js'=> 'slim.min',
