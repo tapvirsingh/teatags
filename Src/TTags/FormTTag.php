@@ -293,6 +293,11 @@ class FormTTag extends TapvirTagContainer{
 
 	protected function createLink(){
 
+		$explodedValue = explode('=>',$this->field);
+
+		$this->field = $explodedValue[0];
+		$this->linkHref = $explodedValue[1];
+
 		$id = 'id = "'.$this->getUnique().'"';
 		$name = 'name = "'.$this->getUnique().'"';
 
@@ -338,34 +343,14 @@ class FormTTag extends TapvirTagContainer{
 			// None at the moment.
 			$this->typeCalledFrom = LINK_ELEMENT_CALL;
 			$this->disintegrate();
-
-			$explodedValue = explode('=>',$this->field);
-
-			$this->field = $explodedValue[0];
-			$this->linkHref = $explodedValue[1];
-
 			return $this->createLink();
-		}elseif(contains('textarea',$this->cValue)){
 
-			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
-			$this->disintegrate();
-
-			// $this->attributeValue = ttag_SpaceToDash($this->field);
-			// $this->lowerCaption = $this->field;
-			// $this->caption = ucfirst($this->field);
-			// debugTTag($this->field);
-			// debugTTag($this->attributeValue);
-			// debugTTag($this->lowerCaption);
-			// debugTTag($this->caption);
-			// debugTTag($this->modifiers);
-			return $this->createTextArea();
-				
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.
 			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
 			$this->disintegrate();
-			return $this->createInput();
+			return contains('textarea',$this->cValue) ? $this->createTextArea() : $this->createInput();
 		}
 	}
 
