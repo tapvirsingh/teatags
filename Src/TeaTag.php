@@ -59,7 +59,6 @@ class TeaTag{
         return new DivsTTags($this,$parameters );
     }
 
-    
 
         // Set / get authorisation.
         // Use this function to set / get the current 
@@ -72,6 +71,10 @@ class TeaTag{
         //else set the value.
         self::$authorised = $val;
     }  
+
+    static function loadConfig(){
+       require_once('../ttag-config.php');
+    }
 
     // // Set / get user.
     // // Use this function to set / get the current 

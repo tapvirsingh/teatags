@@ -3,10 +3,12 @@
 return [
 	// 'first name',
 	// 'last name',
-	'name-required',
-	'email-required',
+	'name|required|autofocus',
+	'email|required',
 	'phone',
-	'query-required',
-	'message-required',
-	'send',
+	'Query|combo|required' => [
+		'Business' => 'biz',
+	],
+	'message|textarea|required',
+	'Send|submit',
 ];

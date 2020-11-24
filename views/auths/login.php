@@ -4,19 +4,8 @@ require_once('../ttag-config.php');
 
 use Src\TTags\{FormTTag, HtmlTTag};
 
-/*
-	Username or Email or Phone => type=text (default)
-
-	Password => type=password
-
-	Login => type=button
-
-*/
-
-// By default if nothing is passed, 
-// then it will take the current file's name.
-// in this case test.php
-$form = new FormTTag('contact');
+// Load login form.
+$form = new FormTTag('login');
 
 $div = $form->divs([
 	'col' => 4, 'offset'=>4
