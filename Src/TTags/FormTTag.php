@@ -154,6 +154,9 @@ class FormTTag extends TapvirTagContainer{
 			'radios','checks',
 			
 			'link',
+
+			//textarea
+			'textarea',
 		];
 
 		
@@ -301,6 +304,31 @@ class FormTTag extends TapvirTagContainer{
 		return $href->get();
 	}
 
+
+	private function createTextArea(){
+		$attrib = $explodedValue = null;
+		foreach ($this->modifiers as $key) {
+			$explodedValue  = explode('=', $key);
+
+			if(isset($explodedValue[1])){
+				$attrib[] = $explodedValue[0].' = "'.$explodedValue[1].'" ';
+			}else{
+				$attrib[] = $explodedValue[0].' ';
+			}
+		}
+
+		$form = ' form = "'.$this->formId.'" ';
+		$id = ' id = "'.$this->getUnique().'" ';
+		$name = ' name = "'.$this->getUnique().'" ';
+
+		$combinedAttrib = ttag_getCombinedHtml($attrib);
+
+		$additionalAttrib = $id.$name.$form.$combinedAttrib;
+
+		$textarea = new TeaCTag('textarea','form-control',null,$additionalAttrib);
+		return $textarea->get();
+	}
+
 	protected function nonArrayElement(){
 
 		// If not an array proceed to check 
@@ -317,6 +345,21 @@ class FormTTag extends TapvirTagContainer{
 			$this->linkHref = $explodedValue[1];
 
 			return $this->createLink();
+		}elseif(contains('textarea',$this->cValue)){
+
+			$this->typeCalledFrom = SINGLE_ELEMENT_CALL;
+			$this->disintegrate();
+
+			// $this->attributeValue = ttag_SpaceToDash($this->field);
+			// $this->lowerCaption = $this->field;
+			// $this->caption = ucfirst($this->field);
+			// debugTTag($this->field);
+			// debugTTag($this->attributeValue);
+			// debugTTag($this->lowerCaption);
+			// debugTTag($this->caption);
+			// debugTTag($this->modifiers);
+			return $this->createTextArea();
+				
 		}else{
 			// Create non reserved fields.
 			// but check for other reservations.
