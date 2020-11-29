@@ -308,7 +308,14 @@ class FormTTag extends TapvirTagContainer{
 		$href = new AnchorTTag($this->linkHref, $this->caption, $class, $attr);
 		return $href->get();
 	}
+ 
+ 	private function getFormIdName(){
+		$form = ' form = "'.$this->formId.'" ';
+		$id = ' id = "'.$this->getUnique().'" ';
+		$name = ' name = "'.$this->getUnique().'" ';
 
+		return [$form,$id,$name]; 		
+ 	}
 
 	private function createTextArea(){
 		$attrib = $explodedValue = null;
@@ -322,9 +329,11 @@ class FormTTag extends TapvirTagContainer{
 			}
 		}
 
-		$form = ' form = "'.$this->formId.'" ';
-		$id = ' id = "'.$this->getUnique().'" ';
-		$name = ' name = "'.$this->getUnique().'" ';
+		// $form = ' form = "'.$this->formId.'" ';
+		// $id = ' id = "'.$this->getUnique().'" ';
+		// $name = ' name = "'.$this->getUnique().'" ';
+
+		list($form,$id,$name) = $this->getFormIdName();
 
 		$combinedAttrib = ttag_getCombinedHtml($attrib);
 
