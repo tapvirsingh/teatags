@@ -217,6 +217,9 @@ class FormTTag extends TapvirTagContainer{
 		}
 	}
 
+	/*
+		Prepare initial input attribute values.
+	*/
 	protected function prepInpAttrVals($field,$value = null){
 
 		$this->modifiers = null;
@@ -258,6 +261,9 @@ class FormTTag extends TapvirTagContainer{
 
 	}
 
+	/*
+		Disintegrate the values to set placeholder, input type, and modifiers.
+	*/
 	protected function disintegrate(){
 
 		$explodeValue = is_int($this->cKey) ? $this->cValue : $this->cKey;
@@ -309,6 +315,9 @@ class FormTTag extends TapvirTagContainer{
 		return $href->get();
 	}
  
+ 	/*
+ 		Gets unique form, id and name attributes.
+ 	*/
  	private function getFormIdName(){
 		$form = ' form = "'.$this->formId.'" ';
 		$id = ' id = "'.$this->getUnique().'" ';
@@ -317,6 +326,9 @@ class FormTTag extends TapvirTagContainer{
 		return [$form,$id,$name]; 		
  	}
 
+ 	/*
+ 		Creates textarea.
+ 	*/
 	private function createTextArea(){
 		$attrib = $explodedValue = null;
 		foreach ($this->modifiers as $key) {
