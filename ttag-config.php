@@ -26,6 +26,7 @@ define("NAVBRAND_SETTINGS", SETTINGS_ROOT."navbrand/");
 define("SCRIPTS_SETTINGS", SETTINGS_ROOT."scripts/");
 define("STYLES_SETTINGS", SETTINGS_ROOT."styles/");
 define("GOOGLE_SETTINGS", SETTINGS_ROOT."google/");
+define("AFFILIATE_ROOT", SETTINGS_ROOT."affiliates/");
 
 // Form settings
 define("FORMS_SETTINGS", SETTINGS_ROOT."forms/");

@@ -23,11 +23,11 @@ $beta = new TeaCTag('sup','ttag-beta','&beta;');
 
 $ver = new SpanTTag('ttag-show-version-style',$verNum->get().$beta->get());
 
-
 // Set the bootstrap's jumbotron
 $jumbo = new JumboTTag(
 							[
 							'head' => "Tea Tags ".$ver->get(),
+							// 'lead' =>$ttag_Lead,
 							// Buttons 
 							'buttons' => [
 							$infoIco->get().' Read Docs' => [
@@ -58,7 +58,6 @@ $article = new ArticleTTag($ttag_PageName);
 $div = $article->divs([ 'col' =>8,  'offset' => 2,
 						// 'extra-container-class' => 'text-justify', 
 						'extra-row-class' => 'mt-4']);
-
 
 
 // Creates the page with default page headers, array composed of

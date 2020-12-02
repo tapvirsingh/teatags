@@ -162,6 +162,20 @@ function ttag_MdFile($file, $doNotPrependDir = false){
 		return $file.$ttag_MDFileExtention;
 }
 
+// Loads the affiliate file
+function ttag_Affiliate($file){
+	$fileContents = file_get_contents(AFFILIATE_ROOT.$file);
+	if($fileContents === false){
+		return null;
+	}
+	return $fileContents; 
+}
+
+// Loads the affiliate file
+function ttag_LoadRegisteredAffiliates(){
+	return AFFILIATE_ROOT.'/register.php';
+}
+
 // Loads the file at root
 function ttag_RootView($file){
 	global $ttag_PHPFileExtention;
