@@ -102,9 +102,9 @@ function ttag_RootSettings($file){
 
 // Google Settings.
 function ttag_GoogleSettings($file){
-	if($file == 'analytics')
-		return GOOGLE_SETTINGS.$file.'.js';
-	else
+	// if($file == 'analytics')
+	// 	return GOOGLE_SETTINGS.$file.'.js';
+	// else
 		return GOOGLE_SETTINGS.$file.'.php';
 }
 
@@ -185,7 +185,8 @@ function ttag_RootView($file){
 // Loads the index file
 function ttag_IndexView(){
 	global $ttag_PHPFileExtention;
-	return ROOT.'index'.$ttag_PHPFileExtention;
+	// return ROOT.'index'.$ttag_PHPFileExtention;
+	return ROOT;
 }
 
 // Returns the current theme's directory

@@ -87,11 +87,12 @@ class HeadTapvirTagContainer extends TapvirTagContainer{
 
         $analytics = file_get_contents(ttag_GoogleSettings('analytics'));
 
-        if($analytics != false){
+       /* if($analytics != false){
             $script = new ScriptTapvirTagContainer(null,$analytics);
             $this->appendHtml($script->get());
-        }
-
+        }*/
+        $this->appendHtml($analytics);
+        // return $analytics;
     }
 
     private function linkGoogleFonts_op(){
