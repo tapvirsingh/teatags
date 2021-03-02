@@ -45,6 +45,7 @@ class FooterTTag extends TapvirTagContainer{
 
 			$this->company = include ttag_RootSettings('company');
 			$this->socialLinks = include ttag_RootSettings('social');
+       
 			$footerClasses = include ttag_FooterSettings('classes');
 
 			$this->calculateLinks(include ttag_FooterSettings('links'));

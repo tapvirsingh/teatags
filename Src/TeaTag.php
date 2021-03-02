@@ -73,7 +73,7 @@ class TeaTag{
     }  
 
     static function loadConfig(){
-       require_once('../ttag-config.php');
+       require_once('ttag-config.php');
     }
 
     // // Set / get user.

@@ -30,8 +30,8 @@ class HtmlTTag extends TapvirTagContainer{
         $head = new HeadTapvirTagContainer($pageHeaders);
 
         $htmlData = $head->get();
+
         $htmlData .= $this->createBody($data);
-      
 		// echos <!DOCTYPE>
 		new DOCTYPE();
 
@@ -43,8 +43,10 @@ class HtmlTTag extends TapvirTagContainer{
 
         if($this->autoCreateBody){
             $body = new BodyTTag($data); 
+            
             return  $body->get();
         }
+
         return $data;
     }
 

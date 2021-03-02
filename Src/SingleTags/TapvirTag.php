@@ -107,6 +107,7 @@ class TapvirTag extends TeaTag{
      */
     protected function createTagElement($element, $space = false,$conditionForShowingElement = true){
         if($conditionForShowingElement){
+
             if($space !== false){
                 $element = $this->addSpace($element, $space);
             }

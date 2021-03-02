@@ -8,6 +8,7 @@ class BodyTTag extends BodyTapvirTagContainer{
     private $bodyInnerHtml = null;
 
     function __construct($bodyInnerHtml,$class = null, $extraAttributes = null) {
+
         global $ttag_BS_BG_Class;
 
         $this->bodyInnerHtml = ttag_getData($bodyInnerHtml);
@@ -37,6 +38,7 @@ class BodyTTag extends BodyTapvirTagContainer{
 
     protected function createFooter(){
         // global $ttag_Footer;
+        
         $footer = new FooterTTag();
         $this->bodyInnerHtml .= $footer->get();
          // $this->bodyInnerHtml .= $ttag_Footer->get();
