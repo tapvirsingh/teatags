@@ -28,13 +28,13 @@ Following is TTag code for the page with the same desired output to print *"The 
 ```php
 <?php
 // Include the global TTag's configuration file.
-require_once('../TTagConfig.php');
+require_once('../ttag-config.php');
 
 // Use HtmlTTag.
 use Src\TTags\{HtmlTTag};
 
 // Displays The World Loves Tea!.
-New HtmlTTag('The World Loves Tea!');
+new HtmlTTag('The World Loves Tea!');
 
 ```
 <p class = "ttag-code-caption text-muted"><b>world_loves_tea.php</b> is a PHP code with TTag’s HtmlTTag class.</p>
