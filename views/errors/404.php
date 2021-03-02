@@ -1,7 +1,7 @@
 <?php
 
 // Include the global TTag's configuration file.
-require_once('../../tta-config.php');
+require_once('../../ttag-config.php');
 
 use Src\TTags\{JumboTTag,  HtmlTTag};
 

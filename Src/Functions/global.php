@@ -102,9 +102,9 @@ function ttag_RootSettings($file){
 
 // Google Settings.
 function ttag_GoogleSettings($file){
-	// if($file == 'analytics')
-	// 	return GOOGLE_SETTINGS.$file.'.js';
-	// else
+	if($file == 'analytics')
+		return GOOGLE_SETTINGS.$file.'.html';
+	else
 		return GOOGLE_SETTINGS.$file.'.php';
 }
 

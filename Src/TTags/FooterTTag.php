@@ -221,9 +221,20 @@ class FooterTTag extends TapvirTagContainer{
                 $html = $icon->get().$html;
         }
 
-        $link = isset($value['ttag-link']) ? $value['ttag-link'] : $value;
+        // $link = isset($value['ttag-link']) ? $value['ttag-link'] : $value;
+		// return new AnchorTTag( $link, $html , $this->footerClass ,' target = "_blank"');
 
-		return new AnchorTTag( $link, $html , $this->footerClass ,' target = "_blank"');
+      	$link = isset($value['ttag-link']) ? $value['ttag-link'] : $value;
+
+        // If the link is on the same domain do not add the target attribute.
+        $parsedUrl = parse_url($link);
+
+        $onSameServer = ($parsedUrl['host'] == $_SERVER['HTTP_HOST']);
+
+        $addAttribute = $onSameServer || $parsedUrl['host'] === null ? null : ' target = "_blank"';
+
+		return new AnchorTTag( $link, $html , $this->footerClass , $addAttribute);
+
 	}
 
 	protected function createListItem($aD){

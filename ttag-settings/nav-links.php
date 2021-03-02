@@ -28,6 +28,11 @@ if(!Src\TeaTag::authorised()){
 		'Blogs' => [
 			'ttag-icon' => 'external-link',
 			'ttag-link'=>'https://blazehattech.blogspot.com/',
+		],	
+
+		'Blazehat Tech' => [
+			'ttag-icon' => 'external-link',
+			'ttag-link'=>'https://blazehattech.com/',
 		],
 
 		// ttag-social here in lowercase is a keyword, it will pick up the 
