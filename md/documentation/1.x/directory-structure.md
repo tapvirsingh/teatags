@@ -27,7 +27,7 @@ This directory contains the dependences TTags requires. TTags uses **Parsedown**
 
 <p class = "ttag-dir">/javascript/</p>
 
-Although TTags does not force you to keep your javascript in this directory and you may keep yours in a different one, however **/Javascript/** is the directory where you should ideally keep.
+Although TTags does not force you to keep your javascript in this directory and you may keep yours in a different one, however **/javascript/** is the directory where you should ideally keep.
 
 <p class = "ttag-dir">/md/</p>
 
