@@ -1,0 +1,14 @@
+ErrorDocument 404 /views/errors/404.php
+
+RewriteEngine On
+
+
+# redirect http to https all domain
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteRule ^docs/$ views/documentation.php [NC]
+RewriteRule ^docs/([0-9a-zA-z_-]+)$ views/documentation.php?article=$1 [NC,L]
+
+
+RewriteRule ^/ index.php [NC,L]
