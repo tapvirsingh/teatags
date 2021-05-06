@@ -44,6 +44,16 @@ $articles_docFiles = [
 								'js-scripts'
 							],
 					], 
+
+					'forms/' => [
+
+							// frm is suffix for form.
+							'example'=>'frm-example',
+							'contact'=>'frm-contact',
+							'login'=>'frm-login',
+							'signup'=>'frm-signup',
+
+					],
 					'constants.php' =>	'constants',
 					// 'brand-navbar.php' => 'brand-navbar',
 					// 'footer.php' => 'footer',
