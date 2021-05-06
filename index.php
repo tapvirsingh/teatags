@@ -15,8 +15,9 @@ $pageHeaders = [ 'meta' => [
 // Activate the Home link in the navigation bar.
 $navbar = new NavBarTTag($ttag_PageName);
 
-$githubIco = new FontAwsmTTag('github');
-$infoIco = new FontAwsmTTag('book');
+$githubIco = new FontAwsmTTag('github',['fa-class'=>FA_BRAND]);
+
+$infoIco = new FontAwsmTTag('book-open',['fa-class'=>FA_SOLID]);
 
 $verNum = new TeaCTag('sup','ttag-ver','2');
 $beta = new TeaCTag('sup','ttag-beta','&beta;');

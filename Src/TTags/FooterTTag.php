@@ -212,11 +212,14 @@ class FooterTTag extends TapvirTagContainer{
         	($value['ttag-icon'] !== null) && 
         	is($this->config['show-icons'],true)
         ){
+
+        	  $faClass = isNot($value['fa-class'] , null, true ); 
                 $icon = new FontAwsmTTag(
                 	$value['ttag-icon'],
                 	[
-                	'fa-size'=>$this->config['icons-size'],
-                	'class' => $this->classes['icons-class'],
+	                	'fa-size'=>$this->config['icons-size'],
+	                	'class' => $this->classes['icons-class'],
+	                	'fa-class' => $faClass,
                 	] );
 
                 $html = $icon->get().$html;
@@ -403,7 +406,11 @@ class FooterTTag extends TapvirTagContainer{
 
 		$retLinks = null;
 		foreach ($this->socialLinks as $key => $value) {
-			$i = new TeaCTag('i','fa fa-'.$value['icon'].' fa-2x');
+
+			$faClass = isNot($value['fa-class'],null,true);
+			$class = $faClass.' fa-'.$value['icon'].' fa-2x';
+
+			$i = new TeaCTag('i',$class);
 			$a = new AnchorTTag($value['link'],$i->get(),$this->classes['social-link-class'], 'target = "_blank"');
 			$retLinks[] = $a->get();
 		}

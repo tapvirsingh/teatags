@@ -2,9 +2,18 @@
 
 return [
 
+		'blogger'=>[
+			// Fontawesome class ie. 'fab fa-'
+			'fa-class' => FNTAWSM_BRAND,
+			// social icon
+	  	 	'icon'=>'blogger-b',
+	  	 	// Link to the social page.
+	  		'link'=> 'https://blazehattech.blogspot.com/'
+	  	],
+
 		'facebook'=>[
 			// Fontawesome class ie. 'fab fa-'
-			'className' => FNTAWSM_BRAND,
+			'fa-class' => FNTAWSM_BRAND,
 			// social icon
 	  	 	'icon'=>'facebook-f',
 	  	 	// Link to the social page.
@@ -12,25 +21,25 @@ return [
 	  	],
 
 		'twitter'=>[
-			'className' => FNTAWSM_BRAND,
+			'fa-class' => FNTAWSM_BRAND,
 			'icon'=>'twitter',
 			'link'=> 'https://twitter.com/BlazingTeaTags'
 		],
 
 		'youtube'=>[
-			'className' => FNTAWSM_BRAND,
+			'fa-class' => FNTAWSM_BRAND,
 			'icon'=>'youtube',
 			'link'=> 'https://www.youtube.com/channel/UCRXchFZDXjW4YQKVsGI75_w'
 		],
 
 		'linkedin'=>[
-			'className' => FNTAWSM_BRAND,
-			'icon'=>'linkedin',
+			'fa-class' => FNTAWSM_BRAND,
+			'icon'=>'linkedin-in',
 			'link'=> 'https://www.linkedin.com/company/blazehattech'
 		],
 		
 		'github'=>[
-			'className' => FNTAWSM_BRAND,
+			'fa-class' => FNTAWSM_BRAND,
 			'icon'=>'github',
 			'link'=> 'https://github.com/tapvirsingh/teatags'
 		],

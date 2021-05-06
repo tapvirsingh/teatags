@@ -327,16 +327,20 @@ $ttag_NavigationLinks = [
         if(isNot($address['ttag-icon'],null) && is($this->navbar['show-icons'],true)){
             // $icon = faIcon($address['ttag-icon']);
 
+                // if fa-class is set then return the value.
+                $faClass = isNot($address['fa-class'] , null, true ); 
+
                 $icon = new FontAwsmTTag($address['ttag-icon'], 
-                    [
-                        'fa-size'=> $this->navbar['icons']['size'],
-                        'class'=> $this->navbar['icons']['class'],
-                    ] );
+                [
+                    'fa-size'=> $this->navbar['icons']['size'],
+                    'class'=> $this->navbar['icons']['class'],
+                    'fa-class' => $faClass,
+                ] );    
                 $html = $icon->get().$html;
         }
 
 
-        $clickableButton = new AnchorTTag($address['ttag-link'], $html, 'nav-link');
+        $clickableButton = new AnchorTTag($address['ttag-link'], $html, 'nav-link','title = "'.$nav.'"');
 
         //  Add the button and dropdown list html into the list item.
         $li = new TeaCTag('li', $class,  $clickableButton->get(), false);

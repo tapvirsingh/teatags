@@ -12,6 +12,7 @@ use Src\ContainerTags\TapvirTagContainer;
 class FounderTTag extends TapvirTagContainer{
 
 	protected $founder;
+	protected $social;
 	private $name;
 	private $website;
 	private $websiteName;
@@ -24,6 +25,7 @@ class FounderTTag extends TapvirTagContainer{
 	function __construct(){
 		// Setters
 		$this->founder = include ttag_RootSettings('founder');
+		$this->social = include ttag_RootSettings('social');
 
 		$this->name = $this->founder['name'];
 		$this->text = $this->founder['text'];
@@ -42,7 +44,11 @@ class FounderTTag extends TapvirTagContainer{
 		$socialLinks = null;
 		foreach($this->founder['social'] as $social => $link){
 			if($link !== null){
-				$socialLink = new TeaCTag('i', 'fa fa-'.$social);
+
+				$faClass = isNot($this->social[$social]['fa-class'],null,true);
+
+				$class = $faClass.' fa-'.$social;
+				$socialLink = new TeaCTag('i',$class );
 				$anchor = new AnchorTTag($link, $socialLink, $this->founder['social-link-class'],'target="_blank"');
 				$socialLinks[] = $anchor->get(); 
 			}

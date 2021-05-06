@@ -85,6 +85,19 @@ function cleanedUrl($url = null){
 		return ROOT;	
 }
 
+// Loads the javascript from javascript folder.
+
+// Loads the dependencies
+function ttag_Depend(){
+	return ROOT.'Dependences';
+}
+// fontawesome
+// fontawesome
+// Load FontAwesome
+function ttag_FontAwesome($filename){
+	return ttag_Depend().'/fontawesome/js/'.$filename;
+}
+
 // Loads the Image file.
 function ttag_Image($file){
 	return ttag_Theme().'/'.'images/'.$file;
@@ -201,8 +214,10 @@ function is($value,$condition){
 }
 
 // Check value if its not
-function isNot($value,$condition){
-	return (isset($value) && $value !== $condition);    
+function isNot($value,$condition,$returnValue = false){
+	$return = (isset($value) && $value !== $condition);    
+	// if return value is set, then return value else return boolean.
+	return $returnValue === true? $value : $return;
 }
 
 // Checks if a substring exists in a string. Returns boolean 

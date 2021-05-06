@@ -21,7 +21,7 @@ return [
 	'social-link-size' => '1x',
 
 	'icons' => [
-		'class'=>	'mr-1',
+		'class'=> 'mr-1',
 		'size' =>'1x',
 	],
 

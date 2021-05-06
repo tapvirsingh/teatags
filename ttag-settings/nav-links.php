@@ -17,7 +17,7 @@ if(!Src\TeaTag::authorised()){
 
 		// 'Documentation' => 'https://teatags.blazehattechnologies.com/Views/documentation.php',
 		'Documentation' => [
-			'ttag-icon' => 'book',
+			'ttag-icon' => 'book-open',
 			// 'ttag-link'=>ttag_View('documentation'),
 			'ttag-link'=> cleanedUrl('docs'),
 		],
@@ -25,19 +25,22 @@ if(!Src\TeaTag::authorised()){
 
 		// 'Downloads' => ttag_View('download-themes'),
 		
-		'Blogs' => [
-			'ttag-icon' => 'external-link',
-			'ttag-link'=>'https://blazehattech.blogspot.com/',
-		],	
+		// 'Blogs' => [
+		// 	'ttag-icon' => 'blogger-b',
+		// 	'fa-class' => 'fab',
+		// 	'ttag-link'=>'https://blazehattech.blogspot.com/',
+		// ],	
 
 		'Blazehat Tech' => [
-			'ttag-icon' => 'external-link',
+			'ttag-icon' => 'external-link-alt',
+			'fa-class' => 'fas',
 			'ttag-link'=>'https://blazehattech.com/',
 		],
 
 		// ttag-social here in lowercase is a keyword, it will pick up the 
 		// social links to show on navbar.
 		'ttag-social' =>[
+			'blogger',
 			'facebook',
 			'twitter',
 			'linkedin',

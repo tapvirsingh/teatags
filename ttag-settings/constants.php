@@ -54,10 +54,18 @@ const SOCIALLINKS = 'Social';
 const BLAZEHATLINKS = 'BlazehatTech';
 
 const FONTAWESOME = 'fontawesome';
-const FNTAWSM_REGULAR = 'far fa-';
-const FNTAWSM_BRAND = 'fab fa-';
-const FNTAWSM_SOLID = 'fas fa-';
-const FNTAWSM_LIGHT = 'fal fa-';
-const FNTAWSM_DUOTONE = 'fad fa-';
+
+const FNTAWSM_REGULAR = 'far';
+const FNTAWSM_BRAND = 'fab';
+const FNTAWSM_SOLID = 'fas';
+const FNTAWSM_LIGHT = 'fal';
+const FNTAWSM_DUOTONE = 'fad';
+
+
+const FA_REGULAR = 'far';
+const FA_BRAND = 'fab';
+const FA_SOLID = 'fas';
+const FA_LIGHT = 'fal';
+const FA_DUOTONE = 'fad';
 
 const NAVTAGG_INDENT = 3;

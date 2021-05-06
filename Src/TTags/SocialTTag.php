@@ -23,9 +23,14 @@ class SocialTTag extends TapvirTagContainer{
 		foreach ($list as $key) {
 			// Get the icon from social settings and create the 
 			// font awesome icon in <i> tags. 
+   			// if fa-class is set then return the value.
+
+            $faClass = isNot($social[$key]['fa-class'] , null, true ); 
+
 			 $ico = new FontAwsmTTag($social[$key]['icon'], 
 			 	[
 				 	'fa-size' => $size,
+				 	'fa-class' => $faClass,
 				 	'title' => ucfirst($key),
 			 	]
 			 );
