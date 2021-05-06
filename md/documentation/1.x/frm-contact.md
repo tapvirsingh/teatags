@@ -2,7 +2,7 @@
 
 **Form: contact**
 
-To understand the complete structure of Form Settings directory, read [FormTTag class](http://localhost/tag/docs/FormTTag) and [example form](http://localhost/tag/docs/frm-example) documentation. This document shows the structure of contact form.
+To understand the complete structure of Form Settings directory, read [FormTTag class](https://teatags.blazehattech.com/docs/FormTTag) and [example form](https://teatags.blazehattech.com/docs/frm-example) documentation. This document shows the structure of contact form.
 
 Let us look into the file <span class = "ttag-file"><i class="fas fa-file-code"></i> contact.php</span> in these directories.
 
